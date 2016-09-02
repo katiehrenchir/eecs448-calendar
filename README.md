@@ -1,2 +1,2 @@
-# eecs448-calendar
+# Calendar
 Class Project: A calendar web app 
