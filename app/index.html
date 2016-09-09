@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>eecs448 calendar</title>
+    <title>ESAP Calendar</title>
 
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <!-- Place favicon.ico in the root directory -->
@@ -26,36 +26,825 @@
     
     <div class="container">
       <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-        <h3 class="text-muted">eecs448 calendar</h3>
+        <h1>ESAP Calendar</h1>
       </div>
 
-      <div class="jumbotron">
-        <h1>'Allo, 'Allo!</h1>
-        <p class="lead">Always a pleasure scaffolding your apps.</p>
-        <p><a class="btn btn-lg btn-success" href="#">Splendid!</a></p>
+      <div class="sidebar">
+      	<h3>Display</h3>
+            <ul>
+            	<li>Month</li>
+                <li>Week</li>
+                <li>Day</li>
+            </ul>
+        <h3>Edit Event</h3>
+            <ul>
+            	<li>Create Event</li>
+                <!--<li>Modify Event</li>-->
+            	<li>Remove Event</li>
+           	</ul>
       </div>
 
-      <div class="row marketing">
-        <div class="col-lg-6">
-          <h4>HTML5 Boilerplate</h4>
-          <p>HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.</p>
-          
-          <h4>Sass</h4>
-          <p>Sass is the most mature, stable, and powerful professional grade CSS extension language in the world.</p>
-          
-          <h4>Bootstrap</h4>
-          <p>Sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.</p>
+      <div class="content">
+      	<!--Year view of all months-->
+        <!--All months are linked to closer inspection-->
+      	<div class="year">
+        	<a href="#"><div class="month">
+            	<p>August</p>
+                	<h4>S</h4><h4>M</h4><h4>T</h4><h4>W</h4><h4>T</h4><h4>F</h4><h4>S</h4>
+                	<div class="day_square"> </div>
+            		<div class="day_square">1</div>
+                    <div class="day_square">2</div>
+                    <div class="day_square">3</div>
+                    <div class="day_square">4</div>
+                    <div class="day_square">5</div>
+                    <div class="day_square">6</div>
+                    <div class="day_square">7</div>
+                    <div class="day_square">8</div>
+                    <div class="day_square">9</div>
+                    <div class="day_square">10</div>
+                    <div class="day_square">11</div>
+                    <div class="day_square">12</div>
+                    <div class="day_square">13</div>
+                    <div class="day_square">14</div>
+                    <div class="day_square">15</div>
+                    <div class="day_square">16</div>
+                    <div class="day_square">17</div>
+                    <div class="day_square">18</div>
+                    <div class="day_square">19</div>
+                    <div class="day_square">20</div>
+                    <div class="day_square">21</div>
+                    <div class="day_square">22</div>
+                    <div class="day_square">23</div>
+                    <div class="day_square">24</div>
+                    <div class="day_square">25</div>
+                    <div class="day_square">26</div>
+                    <div class="day_square">27</div>
+                    <div class="day_square">28</div>
+                    <div class="day_square">29</div>
+                    <div class="day_square">30</div>
+                    <div class="day_square">31</div>
+            </div></a>
+        	<a href="#"><div class="month">
+            	<p>September</p>
+                	<h4>S</h4><h4>M</h4><h4>T</h4><h4>W</h4><h4>T</h4><h4>F</h4><h4>S</h4>
+                	<div class="day_square"> </div>
+                    <div class="day_square"> </div>
+                    <div class="day_square"> </div>
+                    <div class="day_square"> </div>
+                	<div class="day_square">1</div>
+                    <div class="day_square">2</div>
+                    <div class="day_square">3</div>
+                    <div class="day_square">4</div>
+                    <div class="day_square">5</div>
+                    <div class="day_square">6</div>
+                    <div class="day_square">7</div>
+                    <div class="day_square">8</div>
+                    <div class="day_square">9</div>
+                    <div class="day_square">10</div>
+                    <div class="day_square">11</div>
+                    <div class="day_square">12</div>
+                    <div class="day_square">13</div>
+                    <div class="day_square">14</div>
+                    <div class="day_square">15</div>
+                    <div class="day_square">16</div>
+                    <div class="day_square">17</div>
+                    <div class="day_square">18</div>
+                    <div class="day_square">19</div>
+                    <div class="day_square">20</div>
+                    <div class="day_square">21</div>
+                    <div class="day_square">22</div>
+                    <div class="day_square">23</div>
+                    <div class="day_square">24</div>
+                    <div class="day_square">25</div>
+                    <div class="day_square">26</div>
+                    <div class="day_square">27</div>
+                    <div class="day_square">28</div>
+                    <div class="day_square">29</div>
+                    <div class="day_square">30</div>
+            </div></a>
+        	<a href="#"><div class="month">
+            	<p>October</p>
+                	<h4>S</h4><h4>M</h4> <h4>T</h4><h4>W</h4><h4>T</h4><h4>F</h4><h4>S</h4>
+                	<div class="day_square"> </div>
+                    <div class="day_square"> </div>
+                    <div class="day_square"> </div>
+                    <div class="day_square"> </div>
+                    <div class="day_square"> </div>
+                    <div class="day_square"> </div>
+                	<div class="day_square">1</div>
+                    <div class="day_square">2</div>
+                    <div class="day_square">3</div>
+                    <div class="day_square">4</div>
+                    <div class="day_square">5</div>
+                    <div class="day_square">6</div>
+                    <div class="day_square">7</div>
+                    <div class="day_square">8</div>
+                    <div class="day_square">9</div>
+                    <div class="day_square">10</div>
+                    <div class="day_square">11</div>
+                    <div class="day_square">12</div>
+                    <div class="day_square">13</div>
+                    <div class="day_square">14</div>
+                    <div class="day_square">15</div>
+                    <div class="day_square">16</div>
+                    <div class="day_square">17</div>
+                    <div class="day_square">18</div>
+                    <div class="day_square">19</div>
+                    <div class="day_square">20</div>
+                    <div class="day_square">21</div>
+                    <div class="day_square">22</div>
+                    <div class="day_square">23</div>
+                    <div class="day_square">24</div>
+                    <div class="day_square">25</div>
+                    <div class="day_square">26</div>
+                    <div class="day_square">27</div>
+                    <div class="day_square">28</div>
+                    <div class="day_square">29</div>
+                    <div class="day_square">30</div>
+                    <div class="day_square">31</div>
+            </div></a>
+        	<a href="#"><div class="month">
+            	<p>November</p>
+                	<h4>S</h4><h4>M</h4><h4>T</h4><h4>W</h4><h4>T</h4><h4>F</h4><h4>S</h4>
+                	<div class="day_square"> </div>
+                    <div class="day_square"> </div>
+                	<div class="day_square">1</div>
+                    <div class="day_square">2</div>
+                    <div class="day_square">3</div>
+                    <div class="day_square">4</div>
+                    <div class="day_square">5</div>
+                    <div class="day_square">6</div>
+                    <div class="day_square">7</div>
+                    <div class="day_square">8</div>
+                    <div class="day_square">9</div>
+                    <div class="day_square">10</div>
+                    <div class="day_square">11</div>
+                    <div class="day_square">12</div>
+                    <div class="day_square">13</div>
+                    <div class="day_square">14</div>
+                    <div class="day_square">15</div>
+                    <div class="day_square">16</div>
+                    <div class="day_square">17</div>
+                    <div class="day_square">18</div>
+                    <div class="day_square">19</div>
+                    <div class="day_square">20</div>
+                    <div class="day_square">21</div>
+                    <div class="day_square">22</div>
+                    <div class="day_square">23</div>
+                    <div class="day_square">24</div>
+                    <div class="day_square">25</div>
+                    <div class="day_square">26</div>
+                    <div class="day_square">27</div>
+                    <div class="day_square">28</div>
+                    <div class="day_square">29</div>
+                    <div class="day_square">30</div>
+            </div></a>
+        	<a href="#"><div class="month">
+            	<p>December</p>
+                	<h4>S</h4><h4>M</h4> <h4>T</h4><h4>W</h4><h4>T</h4><h4>F</h4><h4>S</h4>
+                	<div class="day_square"> </div>
+                    <div class="day_square"> </div>
+                    <div class="day_square"> </div>
+                    <div class="day_square"> </div>
+                	<div class="day_square">1</div>
+                    <div class="day_square">2</div>
+                    <div class="day_square">3</div>
+                    <div class="day_square">4</div>
+                    <div class="day_square">5</div>
+                    <div class="day_square">6</div>
+                    <div class="day_square">7</div>
+                    <div class="day_square">8</div>
+                    <div class="day_square">9</div>
+                    <div class="day_square">10</div>
+                    <div class="day_square">11</div>
+                    <div class="day_square">12</div>
+                    <div class="day_square">13</div>
+                    <div class="day_square">14</div>
+                    <div class="day_square">15</div>
+                    <div class="day_square">16</div>
+                    <div class="day_square">17</div>
+                    <div class="day_square">18</div>
+                    <div class="day_square">19</div>
+                    <div class="day_square">20</div>
+                    <div class="day_square">21</div>
+                    <div class="day_square">22</div>
+                    <div class="day_square">23</div>
+                    <div class="day_square">24</div>
+                    <div class="day_square">25</div>
+                    <div class="day_square">26</div>
+                    <div class="day_square">27</div>
+                    <div class="day_square">28</div>
+                    <div class="day_square">29</div>
+                    <div class="day_square">30</div>
+                    <div class="day_square">31</div>
+            </div></a>
+        	<a href="#"><div class="month">
+            	<p>January</p>
+                	<h4>S</h4><h4>M</h4><h4>T</h4><h4>W</h4><h4>T</h4><h4>F</h4><h4>S</h4>
+                	<div class="day_square">1</div>
+                    <div class="day_square">2</div>
+                    <div class="day_square">3</div>
+                    <div class="day_square">4</div>
+                    <div class="day_square">5</div>
+                    <div class="day_square">6</div>
+                    <div class="day_square">7</div>
+                    <div class="day_square">8</div>
+                    <div class="day_square">9</div>
+                    <div class="day_square">10</div>
+                    <div class="day_square">11</div>
+                    <div class="day_square">12</div>
+                    <div class="day_square">13</div>
+                    <div class="day_square">14</div>
+                    <div class="day_square">15</div>
+                    <div class="day_square">16</div>
+                    <div class="day_square">17</div>
+                    <div class="day_square">18</div>
+                    <div class="day_square">19</div>
+                    <div class="day_square">20</div>
+                    <div class="day_square">21</div>
+                    <div class="day_square">22</div>
+                    <div class="day_square">23</div>
+                    <div class="day_square">24</div>
+                    <div class="day_square">25</div>
+                    <div class="day_square">26</div>
+                    <div class="day_square">27</div>
+                    <div class="day_square">28</div>
+                    <div class="day_square">29</div>
+                    <div class="day_square">30</div>
+                    <div class="day_square">31</div>
+            </div></a>
+        	<a href="#"><div class="month">
+            	<p>February</p>
+                	<h4>S</h4><h4>M</h4> <h4>T</h4><h4>W</h4><h4>T</h4><h4>F</h4><h4>S</h4>
+                	<div class="day_square"> </div>
+                    <div class="day_square"> </div>
+                    <div class="day_square"> </div>
+                	<div class="day_square">1</div>
+                    <div class="day_square">2</div>
+                    <div class="day_square">3</div>
+                    <div class="day_square">4</div>
+                    <div class="day_square">5</div>
+                    <div class="day_square">6</div>
+                    <div class="day_square">7</div>
+                    <div class="day_square">8</div>
+                    <div class="day_square">9</div>
+                    <div class="day_square">10</div>
+                    <div class="day_square">11</div>
+                    <div class="day_square">12</div>
+                    <div class="day_square">13</div>
+                    <div class="day_square">14</div>
+                    <div class="day_square">15</div>
+                    <div class="day_square">16</div>
+                    <div class="day_square">17</div>
+                    <div class="day_square">18</div>
+                    <div class="day_square">19</div>
+                    <div class="day_square">20</div>
+                    <div class="day_square">21</div>
+                    <div class="day_square">22</div>
+                    <div class="day_square">23</div>
+                    <div class="day_square">24</div>
+                    <div class="day_square">25</div>
+                    <div class="day_square">26</div>
+                    <div class="day_square">27</div>
+                    <div class="day_square">28</div>
+            </div></a>
+        	<a href="#"><div class="month">
+            	<p>March</p>
+                	<h4>S</h4><h4>M</h4><h4>T</h4><h4>W</h4><h4>T</h4><h4>F</h4><h4>S</h4>
+                    <div class="day_square"> </div>
+                    <div class="day_square"> </div>
+                    <div class="day_square"> </div>
+                	<div class="day_square">1</div>
+                    <div class="day_square">2</div>
+                    <div class="day_square">3</div>
+                    <div class="day_square">4</div>
+                    <div class="day_square">5</div>
+                    <div class="day_square">6</div>
+                    <div class="day_square">7</div>
+                    <div class="day_square">8</div>
+                    <div class="day_square">9</div>
+                    <div class="day_square">10</div>
+                    <div class="day_square">11</div>
+                    <div class="day_square">12</div>
+                    <div class="day_square">13</div>
+                    <div class="day_square">14</div>
+                    <div class="day_square">15</div>
+                    <div class="day_square">16</div>
+                    <div class="day_square">17</div>
+                    <div class="day_square">18</div>
+                    <div class="day_square">19</div>
+                    <div class="day_square">20</div>
+                    <div class="day_square">21</div>
+                    <div class="day_square">22</div>
+                    <div class="day_square">23</div>
+                    <div class="day_square">24</div>
+                    <div class="day_square">25</div>
+                    <div class="day_square">26</div>
+                    <div class="day_square">27</div>
+                    <div class="day_square">28</div>
+                    <div class="day_square">29</div>
+                    <div class="day_square">30</div>
+                    <div class="day_square">31</div>
+            </div></a>
+        	<a href="#"><div class="month">
+            	<p>April</p>
+                	<h4>S</h4><h4>M</h4> <h4>T</h4><h4>W</h4><h4>T</h4><h4>F</h4><h4>S</h4>
+                    <div class="day_square"> </div>
+                    <div class="day_square"> </div>
+                    <div class="day_square"> </div>
+                    <div class="day_square"> </div>
+                    <div class="day_square"> </div>
+                    <div class="day_square"> </div>
+                	<div class="day_square">1</div>
+                    <div class="day_square">2</div>
+                    <div class="day_square">3</div>
+                    <div class="day_square">4</div>
+                    <div class="day_square">5</div>
+                    <div class="day_square">6</div>
+                    <div class="day_square">7</div>
+                    <div class="day_square">8</div>
+                    <div class="day_square">9</div>
+                    <div class="day_square">10</div>
+                    <div class="day_square">11</div>
+                    <div class="day_square">12</div>
+                    <div class="day_square">13</div>
+                    <div class="day_square">14</div>
+                    <div class="day_square">15</div>
+                    <div class="day_square">16</div>
+                    <div class="day_square">17</div>
+                    <div class="day_square">18</div>
+                    <div class="day_square">19</div>
+                    <div class="day_square">20</div>
+                    <div class="day_square">21</div>
+                    <div class="day_square">22</div>
+                    <div class="day_square">23</div>
+                    <div class="day_square">24</div>
+                    <div class="day_square">25</div>
+                    <div class="day_square">26</div>
+                    <div class="day_square">27</div>
+                    <div class="day_square">28</div>
+                    <div class="day_square">29</div>
+                    <div class="day_square">30</div>
+            </div></a>
+        	<a href="#"><div class="month">
+            	<p>May</p>
+                	<h4>S</h4><h4>M</h4> <h4>T</h4><h4>W</h4><h4>T</h4><h4>F</h4><h4>S</h4>
+                    <div class="day_square"> </div>
+                	<div class="day_square">1</div>
+                    <div class="day_square">2</div>
+                    <div class="day_square">3</div>
+                    <div class="day_square">4</div>
+                    <div class="day_square">5</div>
+                    <div class="day_square">6</div>
+                    <div class="day_square">7</div>
+                    <div class="day_square">8</div>
+                    <div class="day_square">9</div>
+                    <div class="day_square">10</div>
+                    <div class="day_square">11</div>
+                    <div class="day_square">12</div>
+                    <div class="day_square">13</div>
+                    <div class="day_square">14</div>
+                    <div class="day_square">15</div>
+                    <div class="day_square">16</div>
+                    <div class="day_square">17</div>
+                    <div class="day_square">18</div>
+                    <div class="day_square">19</div>
+                    <div class="day_square">20</div>
+                    <div class="day_square">21</div>
+                    <div class="day_square">22</div>
+                    <div class="day_square">23</div>
+                    <div class="day_square">24</div>
+                    <div class="day_square">25</div>
+                    <div class="day_square">26</div>
+                    <div class="day_square">27</div>
+                    <div class="day_square">28</div>
+                    <div class="day_square">29</div>
+                    <div class="day_square">30</div>
+                    <div class="day_square">31</div>
+            </div></a>
+        </div>
+        <div class="monthly">
+        	<!--August-->
+            <div class="indiv_month">
+            	<h2>August</h2>
+                <h5>S</h5><h5>M</h5><h5>T</h5><h5>W</h5><h5>T</h5><h5>F</h5><h5>S</h5>
+                <div class="day_square"> </div>
+                <a href="#"><div class="day_square">1</div></a>
+                <a href="#"><div class="day_square">2</div></a>
+                <a href="#"><div class="day_square">3</div></a>
+                <a href="#"><div class="day_square">4</div></a>
+                <a href="#"><div class="day_square">5</div></a>
+                <a href="#"><div class="day_square">6</div></a>
+                <a href="#"><div class="day_square">7</div></a>
+                <a href="#"><div class="day_square">8</div></a>
+                <a href="#"><div class="day_square">9</div></a>
+                <a href="#"><div class="day_square">10</div></a>
+                <a href="#"><div class="day_square">11</div></a>
+                <a href="#"><div class="day_square">12</div></a>
+                <a href="#"><div class="day_square">13</div></a>
+                <a href="#"><div class="day_square">14</div></a>
+                <a href="#"><div class="day_square">15</div></a>
+                <a href="#"><div class="day_square">16</div></a>
+                <a href="#"><div class="day_square">17</div></a>
+                <a href="#"><div class="day_square">18</div></a>
+                <a href="#"><div class="day_square">19</div></a>
+                <a href="#"><div class="day_square">20</div></a>
+                <a href="#"><div class="day_square">21</div></a>
+                <a href="#"><div class="day_square">22</div></a>
+                <a href="#"><div class="day_square">23</div></a>
+                <a href="#"><div class="day_square">24</div></a>
+                <a href="#"><div class="day_square">25</div></a>
+                <a href="#"><div class="day_square">26</div></a>
+                <a href="#"><div class="day_square">27</div></a>
+                <a href="#"><div class="day_square">28</div></a>
+                <a href="#"><div class="day_square">29</div></a>
+                <a href="#"><div class="day_square">30</div></a>
+                <a href="#"><div class="day_square">31</div></a>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+            </div>
+            <!--September-->
+            <div class="indiv_month">
+            	<h2>September</h2>
+                <h5>S</h5><h5>M</h5><h5>T</h5><h5>W</h5><h5>T</h5><h5>F</h5><h5>S</h5>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+                <div class="day_square">1</div>
+                <div class="day_square">2</div>
+                <div class="day_square">3</div>
+                <div class="day_square">4</div>
+                <div class="day_square">5</div>
+                <div class="day_square">6</div>
+                <div class="day_square">7</div>
+                <div class="day_square">8</div>
+                <div class="day_square">9</div>
+                <div class="day_square">10</div>
+                <div class="day_square">11</div>
+                <div class="day_square">12</div>
+                <div class="day_square">13</div>
+                <div class="day_square">14</div>
+                <div class="day_square">15</div>
+                <div class="day_square">16</div>
+                <div class="day_square">17</div>
+                <div class="day_square">18</div>
+                <div class="day_square">19</div>
+                <div class="day_square">20</div>
+                <div class="day_square">21</div>
+                <div class="day_square">22</div>
+                <div class="day_square">23</div>
+                <div class="day_square">24</div>
+                <div class="day_square">25</div>
+                <div class="day_square">26</div>
+                <div class="day_square">27</div>
+                <div class="day_square">28</div>
+                <div class="day_square">29</div>
+                <div class="day_square">30</div>
+                <div class="day_square"> </div>
+            </div>
+            <!--October-->
+            <div class="indiv_month">
+            	<h2>October</h2>
+                <h5>S</h5><h5>M</h5><h5>T</h5><h5>W</h5><h5>T</h5><h5>F</h5><h5>S</h5>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+                <div class="day_square">1</div>
+                <div class="day_square">2</div>
+                <div class="day_square">3</div>
+                <div class="day_square">4</div>
+                <div class="day_square">5</div>
+                <div class="day_square">6</div>
+                <div class="day_square">7</div>
+                <div class="day_square">8</div>
+                <div class="day_square">9</div>
+                <div class="day_square">10</div>
+                <div class="day_square">11</div>
+                <div class="day_square">12</div>
+                <div class="day_square">13</div>
+                <div class="day_square">14</div>
+                <div class="day_square">15</div>
+                <div class="day_square">16</div>
+                <div class="day_square">17</div>
+                <div class="day_square">18</div>
+                <div class="day_square">19</div>
+                <div class="day_square">20</div>
+                <div class="day_square">21</div>
+                <div class="day_square">22</div>
+                <div class="day_square">23</div>
+                <div class="day_square">24</div>
+                <div class="day_square">25</div>
+                <div class="day_square">26</div>
+                <div class="day_square">27</div>
+                <div class="day_square">28</div>
+                <div class="day_square">29</div>
+                <div class="day_square">30</div>
+                <div class="day_square">31</div>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+            </div>
+            <!--November-->
+            <div class="indiv_month">
+            	<h2>November</h2>
+                <h5>S</h5><h5>M</h5><h5>T</h5><h5>W</h5><h5>T</h5><h5>F</h5><h5>S</h5>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+                <div class="day_square">1</div>
+                <div class="day_square">2</div>
+                <div class="day_square">3</div>
+                <div class="day_square">4</div>
+                <div class="day_square">5</div>
+                <div class="day_square">6</div>
+                <div class="day_square">7</div>
+                <div class="day_square">8</div>
+                <div class="day_square">9</div>
+                <div class="day_square">10</div>
+                <div class="day_square">11</div>
+                <div class="day_square">12</div>
+                <div class="day_square">13</div>
+                <div class="day_square">14</div>
+                <div class="day_square">15</div>
+                <div class="day_square">16</div>
+                <div class="day_square">17</div>
+                <div class="day_square">18</div>
+                <div class="day_square">19</div>
+                <div class="day_square">20</div>
+                <div class="day_square">21</div>
+                <div class="day_square">22</div>
+                <div class="day_square">23</div>
+                <div class="day_square">24</div>
+                <div class="day_square">25</div>
+                <div class="day_square">26</div>
+                <div class="day_square">27</div>
+                <div class="day_square">28</div>
+                <div class="day_square">29</div>
+                <div class="day_square">30</div>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+            </div>
+            <!--December-->
+            <div class="indiv_month">
+            	<h2>December</h2>
+                <h5>S</h5><h5>M</h5><h5>T</h5><h5>W</h5><h5>T</h5><h5>F</h5><h5>S</h5>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+                <div class="day_square">1</div>
+                <div class="day_square">2</div>
+                <div class="day_square">3</div>
+                <div class="day_square">4</div>
+                <div class="day_square">5</div>
+                <div class="day_square">6</div>
+                <div class="day_square">7</div>
+                <div class="day_square">8</div>
+                <div class="day_square">9</div>
+                <div class="day_square">10</div>
+                <div class="day_square">11</div>
+                <div class="day_square">12</div>
+                <div class="day_square">13</div>
+                <div class="day_square">14</div>
+                <div class="day_square">15</div>
+                <div class="day_square">16</div>
+                <div class="day_square">17</div>
+                <div class="day_square">18</div>
+                <div class="day_square">19</div>
+                <div class="day_square">20</div>
+                <div class="day_square">21</div>
+                <div class="day_square">22</div>
+                <div class="day_square">23</div>
+                <div class="day_square">24</div>
+                <div class="day_square">25</div>
+                <div class="day_square">26</div>
+                <div class="day_square">27</div>
+                <div class="day_square">28</div>
+                <div class="day_square">29</div>
+                <div class="day_square">30</div>
+                <div class="day_square">31</div>
+            </div>
+            <!--January-->
+            <div class="indiv_month">
+            	<h2>January</h2>
+                <h5>S</h5><h5>M</h5><h5>T</h5><h5>W</h5><h5>T</h5><h5>F</h5><h5>S</h5>
+                <div class="day_square">1</div>
+                <div class="day_square">2</div>
+                <div class="day_square">3</div>
+                <div class="day_square">4</div>
+                <div class="day_square">5</div>
+                <div class="day_square">6</div>
+                <div class="day_square">7</div>
+                <div class="day_square">8</div>
+                <div class="day_square">9</div>
+                <div class="day_square">10</div>
+                <div class="day_square">11</div>
+                <div class="day_square">12</div>
+                <div class="day_square">13</div>
+                <div class="day_square">14</div>
+                <div class="day_square">15</div>
+                <div class="day_square">16</div>
+                <div class="day_square">17</div>
+                <div class="day_square">18</div>
+                <div class="day_square">19</div>
+                <div class="day_square">20</div>
+                <div class="day_square">21</div>
+                <div class="day_square">22</div>
+                <div class="day_square">23</div>
+                <div class="day_square">24</div>
+                <div class="day_square">25</div>
+                <div class="day_square">26</div>
+                <div class="day_square">27</div>
+                <div class="day_square">28</div>
+                <div class="day_square">29</div>
+                <div class="day_square">30</div>
+                <div class="day_square">31</div>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+            </div>
+            <!--February-->
+            <div class="indiv_month">
+            	<h2>February</h2>
+                <h5>S</h5><h5>M</h5><h5>T</h5><h5>W</h5><h5>T</h5><h5>F</h5><h5>S</h5>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+                <div class="day_square">1</div>
+                <div class="day_square">2</div>
+                <div class="day_square">3</div>
+                <div class="day_square">4</div>
+                <div class="day_square">5</div>
+                <div class="day_square">6</div>
+                <div class="day_square">7</div>
+                <div class="day_square">8</div>
+                <div class="day_square">9</div>
+                <div class="day_square">10</div>
+                <div class="day_square">11</div>
+                <div class="day_square">12</div>
+                <div class="day_square">13</div>
+                <div class="day_square">14</div>
+                <div class="day_square">15</div>
+                <div class="day_square">16</div>
+                <div class="day_square">17</div>
+                <div class="day_square">18</div>
+                <div class="day_square">19</div>
+                <div class="day_square">20</div>
+                <div class="day_square">21</div>
+                <div class="day_square">22</div>
+                <div class="day_square">23</div>
+                <div class="day_square">24</div>
+                <div class="day_square">25</div>
+                <div class="day_square">26</div>
+                <div class="day_square">27</div>
+                <div class="day_square">28</div>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+            </div>
+            <!--March-->
+            <div class="indiv_month">
+            	<h2>March</h2>
+                <h5>S</h5><h5>M</h5><h5>T</h5><h5>W</h5><h5>T</h5><h5>F</h5><h5>S</h5>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+                <div class="day_square">1</div>
+                <div class="day_square">2</div>
+                <div class="day_square">3</div>
+                <div class="day_square">4</div>
+                <div class="day_square">5</div>
+                <div class="day_square">6</div>
+                <div class="day_square">7</div>
+                <div class="day_square">8</div>
+                <div class="day_square">9</div>
+                <div class="day_square">10</div>
+                <div class="day_square">11</div>
+                <div class="day_square">12</div>
+                <div class="day_square">13</div>
+                <div class="day_square">14</div>
+                <div class="day_square">15</div>
+                <div class="day_square">16</div>
+                <div class="day_square">17</div>
+                <div class="day_square">18</div>
+                <div class="day_square">19</div>
+                <div class="day_square">20</div>
+                <div class="day_square">21</div>
+                <div class="day_square">22</div>
+                <div class="day_square">23</div>
+                <div class="day_square">24</div>
+                <div class="day_square">25</div>
+                <div class="day_square">26</div>
+                <div class="day_square">27</div>
+                <div class="day_square">28</div>
+                <div class="day_square">29</div>
+                <div class="day_square">30</div>
+                <div class="day_square">31</div>
+                <div class="day_square"> </div>
+            </div>
+            <!--April-->
+            <div class="indiv_month">
+            	<h2>April</h2>
+                <h5>S</h5><h5>M</h5><h5>T</h5><h5>W</h5><h5>T</h5><h5>F</h5><h5>S</h5>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+                <div class="day_square">1</div>
+                <div class="day_square">2</div>
+                <div class="day_square">3</div>
+                <div class="day_square">4</div>
+                <div class="day_square">5</div>
+                <div class="day_square">6</div>
+                <div class="day_square">7</div>
+                <div class="day_square">8</div>
+                <div class="day_square">9</div>
+                <div class="day_square">10</div>
+                <div class="day_square">11</div>
+                <div class="day_square">12</div>
+                <div class="day_square">13</div>
+                <div class="day_square">14</div>
+                <div class="day_square">15</div>
+                <div class="day_square">16</div>
+                <div class="day_square">17</div>
+                <div class="day_square">18</div>
+                <div class="day_square">19</div>
+                <div class="day_square">20</div>
+                <div class="day_square">21</div>
+                <div class="day_square">22</div>
+                <div class="day_square">23</div>
+                <div class="day_square">24</div>
+                <div class="day_square">25</div>
+                <div class="day_square">26</div>
+                <div class="day_square">27</div>
+                <div class="day_square">28</div>
+                <div class="day_square">29</div>
+                <div class="day_square">30</div>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+            </div>
+            <!--May-->
+            <div class="indiv_month">
+            	<h2>May</h2>
+                <h5>S</h5><h5>M</h5><h5>T</h5><h5>W</h5><h5>T</h5><h5>F</h5><h5>S</h5>
+                <div class="day_square"> </div>
+                <div class="day_square">1</div>
+                <div class="day_square">2</div>
+                <div class="day_square">3</div>
+                <div class="day_square">4</div>
+                <div class="day_square">5</div>
+                <div class="day_square">6</div>
+                <div class="day_square">7</div>
+                <div class="day_square">8</div>
+                <div class="day_square">9</div>
+                <div class="day_square">10</div>
+                <div class="day_square">11</div>
+                <div class="day_square">12</div>
+                <div class="day_square">13</div>
+                <div class="day_square">14</div>
+                <div class="day_square">15</div>
+                <div class="day_square">16</div>
+                <div class="day_square">17</div>
+                <div class="day_square">18</div>
+                <div class="day_square">19</div>
+                <div class="day_square">20</div>
+                <div class="day_square">21</div>
+                <div class="day_square">22</div>
+                <div class="day_square">23</div>
+                <div class="day_square">24</div>
+                <div class="day_square">25</div>
+                <div class="day_square">26</div>
+                <div class="day_square">27</div>
+                <div class="day_square">28</div>
+                <div class="day_square">29</div>
+                <div class="day_square">30</div>
+                <div class="day_square">31</div>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+                <div class="day_square"> </div>
+            </div>
         </div>
       </div>
 
       <div class="footer">
-        <p>♥ from the Yeoman team</p>
+		
       </div>
+      
     </div>
     
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
