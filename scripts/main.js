@@ -29,22 +29,28 @@ $.each(months, function(index, month) {
               + '<th>Sa</th>'
               + '</tr>';
 
-  var count = 1;
+  var cellCount = 1;
+
+  for (var j = 0; j < month.firstDay; j++) {
+      dates += '<td></td>';
+      cellCount++;
+  }
+
   for (var i = 1; i <= month.days; i++) {
-    if (count === 1) {
+    if (cellCount === 1) {
       dates += '<tr>';
     }
 
     dates += '<td>' + i + '</td>';
-    count++;
+    cellCount++;
 
-    if (count === 8) {
+    if (cellCount === 8) {
       dates += '</tr>';
-      count = 1;
+      cellCount = 1;
     }
   }
+  
   dates += '</table>'
-
   yearGrid += '<div class="month"><h3 class="monthName">' +
                month.month + '</h3>' + dates + '</div>';
 });
