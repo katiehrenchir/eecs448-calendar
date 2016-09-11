@@ -1,27 +1,28 @@
-@charset "utf-8";
-/* CSS Document */
-h1 {
+html, body {
+	background-color: #FBFBFB;
 	font-family: Verdana, Geneva, sans-serif;
-	font-size: xx-large;
+	margin: 0;
+	padding: 0;
+}
+
+ul {
+	list-style: none;
 }
 
 h2 {
-	font-family: Verdana, Geneva, sans-serif;
 	font-size: x-large;
 	font-weight: bold;
 	text-align: center;
 }
 
 h3 {
-	font-family: Verdana, Geneva, sans-serif;
 	font-size: medium;
-	font-weight: bold;	
+	font-weight: bold;
 }
 
 h4 {
 	float: left;
 	width: 28.5px;
-	font-family: Verdana, Geneva, sans-serif;
 	text-align: center;
 	border-bottom: .5px solid #999;
 	margin-top: -10px;
@@ -31,15 +32,10 @@ h4 {
 h5 {
 	float: left;
 	width: 14%;
-	font-family: Verdana, Geneva, sans-serif;
 	font-size: large;
 	text-align: center;
 	border-bottom: .5px solid #999;
 	font-weight: normal;
-}
-
-.container {
-	margin-left: -1px;
 }
 
 .header {
@@ -49,43 +45,24 @@ h5 {
 	box-shadow: 0px 2px 5px rgba(0,0,0,.15);
 	padding-left: 15px;
 	padding-bottom: 1px;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 	background-color: #FFF;
+	font-size: xx-large;
 	top: 0px;
 }
 
 .sidebar {
-	width: 15%;
-	float: left;
-	clear: both;
 	background-color: #FFF;
 	border-radius: 20px;
 	border: .5px solid #CCC;
 	box-shadow: 0px 5px 5px rgba(0,0,0,.25);
+	margin-bottom: 20px;
 	padding-left: 15px;
-	padding-top: 5px;
-	margin: 10px;
-	position: fixed;
-	font-family: Verdana, Geneva, sans-serif;
-	font-size: small;
-}
-
-.content {
-	float: right;
-	padding-left: 20%;
-}
-
-.footer {
-	background-color: #666;
-}
-
-ul {
-	list-style: none;
 }
 
 .month {
-	width: 200px;
-	height: 204px;
+	width: 220px;
+	height: 200px;
 	border-radius: 5px;
 	border: 1px solid #000;
 	margin: 5px;
@@ -93,34 +70,35 @@ ul {
 	background-color: #FFFFFF;
 }
 
-.month p {
-	width: 100%;
-	font-family: Verdana, Geneva, sans-serif;
-	font-size: medium;
-	font-weight: bold;
-	text-align: center;
-	border-bottom: 1px solid #999;
-}
-body {
-	background-color: #FBFBFB;
-}
-
-
-a .month {
-	color: #000;
-	text-decoration: none;
-}
-
-a:hover .month {
+.month:hover {
 	box-shadow: 2px 2px 5px rgba(0,153,204,.35);
 }
 
-.day_square {
-	float: left;
-	width: 26.5px;
-	border: thin solid #666;
+.monthName {
+	margin-top: 10px;
+	padding-left: 10px;
+}
+
+.day_container {
+	width: 100%;
+	margin: 0 auto;
+	padding: 10px;
+}
+
+.day_container th {
+	width: 26px;
+	border-top: thin solid #999;
+	border-bottom: thin solid #999;
 	text-align: center;
-	vertical-align: middle;
+	font-weight: normal;
+}
+
+.day_container td {
+ width: 26px;
+ border-bottom: thin solid #999;
+ border-right: thin solid #999;
+ text-align: center;
+ font-weight: normal;
 }
 
 .monthly .day_square {
