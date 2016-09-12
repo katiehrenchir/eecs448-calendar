@@ -56,3 +56,15 @@ $.each(months, function(index, month) {
 });
 
 $('.calendar').append(yearGrid);
+
+$(document).ready(function(){
+    $("#month").click(function(){
+        $("#year").hide();
+    });
+    $("#week").click(function(){
+        $("#year").hide();
+    });
+	$("#day").click(function(){
+		$("#year").hide();
+	});
+});
