@@ -3,14 +3,11 @@
 	Handles sidebar methods
 */
 
-$("#month").click(function(){
-  $("#year").hide();
-});
+var currentView = 'year';
+$("#" + currentView).show();
 
-$("#week").click(function(){
-  $("#year").hide();
-});
-
-$("#day").click(function(){
-  $("#year").hide();
-});
+var changeView = function(view) {
+  $("#" + currentView).hide();
+  $("#" + view).show();
+  currentView = view;
+}
