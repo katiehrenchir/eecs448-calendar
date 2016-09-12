@@ -1,6 +1,6 @@
 /*
   Created by Sharynne Azhar - 9/9/2016
-  Dynamically load the calendar view
+  Handles calendar methods
 */
 
 var months = [
@@ -49,22 +49,10 @@ $.each(months, function(index, month) {
       cellCount = 1;
     }
   }
-  
+
   dates += '</table>'
   yearGrid += '<div class="month"><h3 class="monthName">' +
                month.month + '</h3>' + dates + '</div>';
 });
 
 $('.calendar').append(yearGrid);
-
-$(document).ready(function(){
-    $("#month").click(function(){
-        $("#year").hide();
-    });
-    $("#week").click(function(){
-        $("#year").hide();
-    });
-	$("#day").click(function(){
-		$("#year").hide();
-	});
-});
