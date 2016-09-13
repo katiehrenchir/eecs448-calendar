@@ -33,15 +33,15 @@
 }
 
 #year .day_container td {
- width: 26px;
- border-bottom: thin solid #999;
- border-right: thin solid #999;
- text-align: center;
- font-weight: normal;
+	width: 26px;
+	border-bottom: thin solid #999;
+	border-right: thin solid #999;
+	text-align: center;
+	font-weight: normal;
 }
 
 #year .day_container td:hover {
- background-color: #fff1f1;
+	background-color: #fff1f1;
 }
 
 #year .day_container td > button {
