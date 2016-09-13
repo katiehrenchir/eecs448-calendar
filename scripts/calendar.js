@@ -17,56 +17,105 @@ const months = [
 ];
 
 let currentDate = new Date();
-class Calendar {
-  constructor() {}
+let selectedDate = currentDate;
 
-  createYearCalendar() {
-    $('.calendar').append('<div id="year"><div>');
+class Calendar {
+  init() {
+    this.createCalendar('year');
+    this.populateYearCalendar();
+
+    this.createCalendar('month');
+    this.populateMonthCalendar();
+    $('#month').hide();
+  }
+
+  createCalendar(view) {
+    $('.calendar').append('<div id="' + view + '"><div>');
   }
 
   populateYearCalendar() {
     $.each(months, function(index, month) {
-      var dates = '<table class="day_container"><tr>'
-                  + '<th>Su</th>'
-                  + '<th>M</th>'
-                  + '<th>Tu</th>'
-                  + '<th>W</th>'
-                  + '<th>Th</th>'
-                  + '<th>F</th>'
-                  + '<th>Sa</th>'
-                  + '</tr>';
+      let calendar = '<table class="day_container"><tr>' +
+                  '<th>Su</th>' +
+                  '<th>M</th>' +
+                  '<th>Tu</th>' +
+                  '<th>W</th>' +
+                  '<th>Th</th>' +
+                  '<th>F</th>' +
+                  '<th>Sa</th>' +
+                  '</tr>';
 
-      var cellCount = 1;
-
-      for (var j = 0; j < month.firstDay; j++) {
-          dates += '<td></td>';
+      let cellCount = 1;
+      for (let j = 0; j < month.firstDay; j++) {
+          calendar += '<td></td>';
           cellCount++;
       }
 
-      for (var i = 1; i <= month.days; i++) {
-        var highlight = '';
+      for (let i = 1; i <= month.days; i++) {
+        let highlight = '';
         if (currentDate.getMonth() + 1 === month.numeric && currentDate.getDate() === i) {
           highlight = 'currentDate';
         }
 
         if (cellCount === 1) {
-          dates += '<tr>';
+          calendar += '<tr>';
         }
 
-        dates += '<td class="' + highlight + '"><button onclick="popUp(' + i + ')">' + i + '</button></td>';
+        calendar += '<td class="' + highlight + '"><button onclick="popUp(' + i + ')">' + i + '</button></td>';
         cellCount++;
 
         if (cellCount === 8) {
-          dates += '</tr>';
+          calendar += '</tr>';
           cellCount = 1;
         }
       }
 
-      dates += '</table>'
-      $('#year').append(
-        '<div class="month"><h3 class="monthName">' + month.month + '</h3>' + dates + '</div>'
-      );
+      calendar += '</table>';
+      $('#year').append('<div class="month"><h3 class="monthName">' + month.month + '</h3>' + calendar + '</div>');
     });
+  }
 
+  populateMonthCalendar() {
+    let calendar = '<table class="day_container"><tr>' +
+                   '<th>Su</th>' +
+                   '<th>M</th>' +
+                   '<th>Tu</th>' +
+                   '<th>W</th>' +
+                   '<th>Th</th>' +
+                   '<th>F</th>' +
+                   '<th>Sa</th>' +
+                   '</tr>';
+
+    let month = months.filter(function(m) {
+      return m.numeric === currentDate.getMonth() + 1;
+    })[0];
+
+    let cellCount = 1;
+    for (let j = 0; j < month.firstDay; j++) {
+        calendar += '<td></td>';
+        cellCount++;
+    }
+
+    for (let i = 1; i <= month.days; i++) {
+      let highlight = '';
+      if (currentDate.getMonth() + 1 === month.numeric && currentDate.getDate() === i) {
+        highlight = 'currentDate';
+      }
+
+      if (cellCount === 1) {
+        calendar += '<tr>';
+      }
+
+      calendar += '<td class="' + highlight + '"><button onclick="popUp(' + i + ')">' + i + '</button></td>';
+      cellCount++;
+
+      if (cellCount === 8) {
+        calendar += '</tr>';
+        cellCount = 1;
+      }
+    }
+
+    calendar += '</table>';
+    $('#month').html('<div class="month"><h3 class="monthName">' + month.month + '</h3>' + calendar + '</div>');
   }
 }

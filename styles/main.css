@@ -48,6 +48,11 @@ button {
 	outline: none;
 }
 
+.col-center {
+   margin-right: auto;
+   margin-left: auto;
+ }
+
 .header {
 	width: 100%;
 	border-bottom-right-radius: 15px;
@@ -82,74 +87,4 @@ button {
 
 .currentDate {
 	background-color: #abcdef;
-}
-
-.month {
-	width: 220px;
-	height: 200px;
-	border-radius: 5px;
-	border: 1px solid #000;
-	padding: 1px;
-	margin: 5px;
-	float: left;
-	background-color: #F3F3F3;
-}
-
-.month:hover {
-	box-shadow: 2px 2px 5px rgba(0,153,204,.35);
-}
-
-.monthName {
-	margin-top: 10px;
-	padding-left: 10px;
-}
-
-.day_container {
-	width: 100%;
-	margin: 0 auto;
-	padding: 10px;
-}
-
-.day_container th {
-	width: 26px;
-	border-top: thin solid #999;
-	border-bottom: thin solid #999;
-	text-align: center;
-	font-weight: normal;
-}
-
-.day_container td {
- width: 26px;
- border-bottom: thin solid #999;
- border-right: thin solid #999;
- text-align: center;
- font-weight: normal;
-}
-
-.day_container td:hover {
- background-color: #fff1f1;
-}
-
-.day_container td > button {
-	border: none;
-	background-color: transparent;
-	margin: 0;
-	padding: 0;
-}
-
-.monthly .day_square {
-	width: 14%;
-	height: 50px;
-	text-align: center;
-	vertical-align: middle;
-	padding-top: 10px;
-}
-
-a .monthly .day_square {
-	color: #000;
-	text-decoration: none;
-}
-
-a:hover .monthly .day_square {
-	border: 3px solid #666;
 }

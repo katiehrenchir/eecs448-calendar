@@ -7,6 +7,12 @@ function popUp(date) {
   this.alert("DATE: " + date);
 }
 
-var calendar = new Calendar();
-calendar.createYearCalendar();
-calendar.populateYearCalendar();
+let currentView = 'year';
+
+const display = new Display();
+function changeView(view) {
+  display.changeView(view);
+}
+
+const calendar = new Calendar();
+calendar.init();

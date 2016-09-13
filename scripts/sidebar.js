@@ -3,11 +3,14 @@
 	Handles sidebar methods
 */
 
-var currentView = 'year';
-$("#" + currentView).show();
+class Display {
+  constructor() {
+    this.currentView = 'year';
+  }
 
-var changeView = function(view) {
-  $("#" + currentView).hide();
-  $("#" + view).show();
-  currentView = view;
+  changeView(view) {
+    $("#" + this.currentView).hide();
+    $("#" + view).show();
+    this.currentView = view;
+  }
 }
