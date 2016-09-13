@@ -15,21 +15,22 @@
     <div class="header" align="center">ESAP Calendar 2016-2017</div>
     <div class="row center-block">
       <div class="col-md-2 sidebar">
-        <h3>Display</h3>
-        <ul>
-          <li><button id="month">Month</button></li>
-          <li><button id="week">Week</button></li>
-          <li><button id="day">Day</button></li>
-        </ul>
-        <h3>Edit Event</h3>
-        <ul>
-          <li>Create Event</li>
-          <!--<li>Modify Event</li>-->
-          <li>Remove Event</li>
-        </ul>
+        <div class="affix">
+          <h3>Display</h3>
+          <ul>
+            <li><button id="month">Month</button></li>
+            <li><button id="week">Week</button></li>
+            <li><button id="day">Day</button></li>
+          </ul>
+          <h3>Edit Event</h3>
+          <ul>
+            <li>Create Event</li>
+            <!--<li>Modify Event</li>-->
+            <li>Remove Event</li>
+          </ul>
+        </div>
       </div>
-      <div class="col-md-10 calendar pull-right" id="year">
-      </div>
+      <div class="col-md-10 calendar no-padding-right pull-right"></div>
     </div>
 
   </div>
@@ -40,5 +41,6 @@
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <script src="scripts/sidebar.js"></script>
 <script src="scripts/calendar.js"></script>
+<script src="scripts/main.js"></script>
 </body>
 </html>
