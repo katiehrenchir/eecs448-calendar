@@ -61,7 +61,7 @@ class Calendar {
           calendar += '<tr>';
         }
 
-        calendar += '<td class="' + highlight + '"><button onclick="popUp(' + i + ')">' + i + '</button></td>';
+        calendar += '<td class="' + highlight + '" onclick="popUp(' + i + ')">' + i + '</td>';
         cellCount++;
 
         if (cellCount === 8) {
@@ -106,7 +106,7 @@ class Calendar {
         calendar += '<tr>';
       }
 
-      calendar += '<td class="' + highlight + '"><button onclick="popUp(' + i + ')">' + i + '</button></td>';
+      calendar += '<td class="' + highlight + '" onclick="popUp(' + i + ')">' + i + '</td>';
       cellCount++;
 
       if (cellCount === 8) {

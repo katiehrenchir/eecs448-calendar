@@ -41,10 +41,3 @@
 #month .day_container td:hover {
  background-color: #fff1f1;
 }
-
-#month .day_container td > button {
-	border: none;
-	background-color: transparent;
-	margin: 0;
-	padding: 0;
-}
