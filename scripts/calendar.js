@@ -3,6 +3,9 @@
   Handles calendar methods
 */
 
+// This global variable will remember the month that is currently being displayed.
+var displayedMonth=0;
+
 const months = [
   { 'month': 'August', 'numeric': 8, 'days': 31, 'firstDay': 1 },
   { 'month': 'September', 'numeric': 9, 'days': 30, 'firstDay': 4 },
@@ -25,18 +28,57 @@ class Calendar {
   * Initializes the calendar views. Default view - Yearly
   */
   init() {
+  	//this.globalSetup();
+
     this.createCalendar('year');
     this.populateYearCalendar();
-
-    this.createCalendar('month');
-    this.populateMonthCalendar();
-    $('#month').hide();
 
     this.createCalendar('week');
     this.populateWeekCalendar();
     $('#week').hide();
+
+    let current_month = months.filter(function(m) {
+      return m.numeric === currentDate.getMonth() + 1;
+    })[0];
+    
+
+    this.createCalendar('month');
+    this.populateMonthCalendar(current_month);
+    $('#month').hide();
+
+    /* Remembers the index of the currently displayed month inside of the months object
+     * NOTE -> Get rid of the alerts.
+    */
+    displayedMonth = function(current_month){
+    	for(var i=0; i<10; i++){
+    		if(current_month.numeric == months[i].numeric){
+    			//alert("Matched!" + months[i].numeric + " and the index is : "+ i);
+    			return i;
+    		}else{
+    			//alert("Not matching" + months[i].numeric);
+    		}
+    	}
+    	// DO ERROR HANDLING HERE 
+    	// Ran out of available calendar months
+    	return -1;
+    }(current_month);
   }
 
+  /**
+  * sets up the initial global variables and remembers the current view.
+  * @param : none
+  
+
+  globalSetup(){
+  	 let month = months.filter(function(m) {
+      return m.numeric === currentDate.getMonth() + 1;
+    })[0];
+    displayedMonth= month.numeric;
+
+    
+  }
+
+  */
   /**
   * Creates a calendar element
   * @param {string} view - The calendar view type.
@@ -93,7 +135,7 @@ class Calendar {
   /**
   * Populates the monthly calendar view with dates
   */
-  populateMonthCalendar() {
+  populateMonthCalendar(month) {
     let calendar = '<table class="day_container"><tr>' +
                    '<th>Su</th>' +
                    '<th>M</th>' +
@@ -103,10 +145,6 @@ class Calendar {
                    '<th>F</th>' +
                    '<th>Sa</th>' +
                    '</tr>';
-
-    let month = months.filter(function(m) {
-      return m.numeric === currentDate.getMonth() + 1;
-    })[0];
 
     let cellCount = 1;
     for (let j = 0; j < month.firstDay; j++) {
@@ -134,8 +172,33 @@ class Calendar {
     }
 
     calendar += '</table>';
-    $('#month').html('<div class="month"><h3 class="monthName">' + month.month + '</h3>' + calendar + '</div>');
+    $('#month').html('<div class="month"><h3 class="monthName" align="center">' + month.month + '</h3>' + calendar + '</div>');
+    $('#month .month').prepend('<a id= "nxt_btn" class="btn btn-danger" style="float:right;" onclick="calendar.nextMonth()">NEXT</a>');
+    $('#month .month').prepend('<a id= "prv_btn" class="btn btn-danger" style="float:left;" onclick="calendar.prevMonth()">PREV</a>');
   }
+
+  nextMonth(){
+  	//alert("currently displaying index "+ displayedMonth + " and intending to show index = "+ (displayedMonth+1)+ "which is : "+months[displayedMonth+1].month);
+    if(displayedMonth != 9){
+      calendar.populateMonthCalendar(months[displayedMonth+1]);
+      displayedMonth+=1;
+      if(displayedMonth==9){
+        document.getElementById("nxt_btn").className = "btn btn-danger disabled";
+      }
+    }
+  }
+
+  prevMonth(){
+  	//alert("currently displaying index "+ displayedMonth + " and intending to show index = "+ (displayedMonth+1)+ "which is : "+months[displayedMonth+1].month);
+    if(displayedMonth != 0){
+      calendar.populateMonthCalendar(months[displayedMonth-1]);
+      displayedMonth-=1;
+      if(displayedMonth==0){
+        document.getElementById("prv_btn").className = "btn btn-danger disabled";
+      }
+    }
+  }
+
 
   /**
   * Populates the weekly calendar view with dates
