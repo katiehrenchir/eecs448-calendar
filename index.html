@@ -28,7 +28,7 @@
           </ul>
           <h3>Edit Event</h3>
           <ul>
-            <li>Create Event</li>
+            <li><button id="addButton">Create Event</button></li>
             <!--<li>Modify Event</li>-->
             <li>Remove Event</li>
           </ul>
@@ -38,6 +38,28 @@
     </div>
 
   </div>
+</div>
+
+
+<div class="modal" id="create">
+
+<div class="modal-content">
+   <span class="close">x</span>
+   <span class="popuptext"><form>
+        <h3> Create an Event: </h3>
+        Event Title <input type="text" id="eventTitle"> <br /><br    />
+        Date Range <input type="date" name="startDate" min="2016-08-01" max="2017-05-31">
+        to <input type="date" name="endDate" min="2016-08-01" max="2017-05-31">
+        <br  /><br    />
+        Time <input type="time" name"startTime"> to <input type="time" name="endTime">
+        <br    /><br    />
+        Description <textarea id="eventDesc"></textarea>
+        <br /><br />
+        <input type="submit" value="Create" id="creating">
+  </form>
+    </span>
+ </div>
+
 </div>
 
 
