@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: calendar.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: calendar.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/*
+  Created by Sharynne Azhar - 9/9/2016
+  Handles calendar methods
+*/
+
+const months = [
+  { 'month': 'August', 'numeric': 8, 'days': 31, 'firstDay': 1 },
+  { 'month': 'September', 'numeric': 9, 'days': 30, 'firstDay': 4 },
+  { 'month': 'October', 'numeric': 10, 'days': 31, 'firstDay': 6 },
+  { 'month': 'November', 'numeric': 11, 'days': 30, 'firstDay': 2 },
+  { 'month': 'December', 'numeric': 12, 'days': 31, 'firstDay': 4 },
+  { 'month': 'January', 'numeric': 1, 'days': 30, 'firstDay': 0 },
+  { 'month': 'February', 'numeric': 2, 'days': 28, 'firstDay': 3 },
+  { 'month': 'March', 'numeric': 3, 'days': 31, 'firstDay': 3 },
+  { 'month': 'April', 'numeric': 4, 'days': 30, 'firstDay': 6 },
+  { 'month': 'May', 'numeric': 5, 'days': 30, 'firstDay': 1 }
+];
+
+let currentDate = new Date();
+let selectedDate = currentDate;
+
+/** Class representing a calendar. */
+class Calendar {
+  /**
+  * Initializes the calendar views. Default view - Yearly
+  */
+  init() {
+    this.createCalendar('year');
+    this.populateYearCalendar();
+
+    this.createCalendar('month');
+    this.populateMonthCalendar();
+    $('#month').hide();
+
+    this.createCalendar('week');
+    this.populateWeekCalendar();
+    $('#week').hide();
+  }
+
+  /**
+  * Creates a calendar element
+  * @param {string} view - The calendar view type.
+  */
+  createCalendar(view) {
+    $('.calendar').append('&lt;div id="' + view + '">&lt;div>');
+  }
+
+  /**
+  * Populates the yearly calendar view with months and dates
+  */
+  populateYearCalendar() {
+    $.each(months, function(index, month) {
+      let calendar = '&lt;table class="day_container">&lt;tr>' +
+                  '&lt;th>Su&lt;/th>' +
+                  '&lt;th>M&lt;/th>' +
+                  '&lt;th>Tu&lt;/th>' +
+                  '&lt;th>W&lt;/th>' +
+                  '&lt;th>Th&lt;/th>' +
+                  '&lt;th>F&lt;/th>' +
+                  '&lt;th>Sa&lt;/th>' +
+                  '&lt;/tr>';
+
+      let cellCount = 1;
+      for (let j = 0; j &lt; month.firstDay; j++) {
+          calendar += '&lt;td>&lt;/td>';
+          cellCount++;
+      }
+
+      for (let i = 1; i &lt;= month.days; i++) {
+        let highlight = '';
+        if (currentDate.getMonth() + 1 === month.numeric &amp;&amp; currentDate.getDate() === i) {
+          highlight = 'currentDate';
+        }
+
+        if (cellCount === 1) {
+          calendar += '&lt;tr>';
+        }
+
+        calendar += '&lt;td class="' + highlight + '" onclick="popUp(' + i + ')">' + i + '&lt;/td>';
+        cellCount++;
+
+        if (cellCount === 8) {
+          calendar += '&lt;/tr>';
+          cellCount = 1;
+        }
+      }
+
+      calendar += '&lt;/table>';
+      $('#year').append('&lt;div class="month">&lt;h3 class="monthName">' + month.month + '&lt;/h3>' + calendar + '&lt;/div>');
+    });
+  }
+
+  /**
+  * Populates the monthly calendar view with dates
+  */
+  populateMonthCalendar() {
+    let calendar = '&lt;table class="day_container">&lt;tr>' +
+                   '&lt;th>Su&lt;/th>' +
+                   '&lt;th>M&lt;/th>' +
+                   '&lt;th>Tu&lt;/th>' +
+                   '&lt;th>W&lt;/th>' +
+                   '&lt;th>Th&lt;/th>' +
+                   '&lt;th>F&lt;/th>' +
+                   '&lt;th>Sa&lt;/th>' +
+                   '&lt;/tr>';
+
+    let month = months.filter(function(m) {
+      return m.numeric === currentDate.getMonth() + 1;
+    })[0];
+
+    let cellCount = 1;
+    for (let j = 0; j &lt; month.firstDay; j++) {
+        calendar += '&lt;td>&lt;/td>';
+        cellCount++;
+    }
+
+    for (let i = 1; i &lt;= month.days; i++) {
+      let highlight = '';
+      if (currentDate.getMonth() + 1 === month.numeric &amp;&amp; currentDate.getDate() === i) {
+        highlight = 'currentDate';
+      }
+
+      if (cellCount === 1) {
+        calendar += '&lt;tr>';
+      }
+
+      calendar += '&lt;td class="' + highlight + '" onclick="popUp(' + i + ')">' + i + '&lt;/td>';
+      cellCount++;
+
+      if (cellCount === 8) {
+        calendar += '&lt;/tr>';
+        cellCount = 1;
+      }
+    }
+
+    calendar += '&lt;/table>';
+    $('#month').html('&lt;div class="month">&lt;h3 class="monthName">' + month.month + '&lt;/h3>' + calendar + '&lt;/div>');
+  }
+
+  /**
+  * Populates the weekly calendar view with dates
+  */
+  populateWeekCalendar() {
+    let calendar = '&lt;table class="day_container">&lt;tr>' +
+                   '&lt;th>Su&lt;/th>' +
+                   '&lt;th>M&lt;/th>' +
+                   '&lt;th>Tu&lt;/th>' +
+                   '&lt;th>W&lt;/th>' +
+                   '&lt;th>Th&lt;/th>' +
+                   '&lt;th>F&lt;/th>' +
+                   '&lt;th>Sa&lt;/th>' +
+                   '&lt;/tr>';
+
+    let date = currentDate.getDate() + 1;
+    let dayOfWeek = currentDate.getDay() + 1;
+    let month = months.filter(function(m) {
+      return m.numeric === currentDate.getMonth() + 1;
+    })[0];
+
+    let cellCount = 1;
+    let startOfWeek = date - dayOfWeek;
+    let endOfWeek = date + (7 - dayOfWeek);
+    for (let i = startOfWeek; i &lt; endOfWeek; i++) {
+      let highlight = '';
+      if (currentDate.getMonth() + 1 === month.numeric &amp;&amp; currentDate.getDate() === i) {
+        highlight = 'currentDate';
+      }
+
+      if (cellCount === 1) {
+        calendar += '&lt;tr>';
+      }
+
+      calendar += '&lt;td class="' + highlight + '" onclick="popUp(' + i + ')">' + i + '&lt;/td>';
+      cellCount++;
+
+      if (cellCount === 8) {
+        calendar += '&lt;/tr>';
+        cellCount = 1;
+      }
+    }
+
+    calendar += '&lt;/table>';
+    $('#week').html('&lt;div class="week">&lt;h3 class="monthName">' + month.month + '&lt;/h3>' + calendar + '&lt;/div>');
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Calendar.html">Calendar</a></li><li><a href="Display.html">Display</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.1</a> on Tue Sep 13 2016 19:09:48 GMT-0500 (CDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
