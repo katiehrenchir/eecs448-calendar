@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="styles/monthView.css">
   <link rel="stylesheet" href="styles/weekView.css">
   <link rel="stylesheet" href="styles/main.css">
-</head>
+<script type="text/javascript" src="https://gc.kis.scr.kaspersky-labs.com/1B74BD89-2A22-4B93-B451-1C9E1052A0EC/main.js" charset="UTF-8"></script></head>
 <body>
 
   <div class="container">
@@ -21,16 +21,16 @@
         <div class="affix">
           <h3>Display</h3>
           <ul>
-            <li><button onclick="changeView('year')">Year</button></li>
-            <li><button onclick="changeView('month')">Month</button></li>
-            <li><button onclick="changeView('week')">Week</button></li>
-            <li><button onclick="changeView('day')">Day</button></li>
+            <li><a class="btn btn-danger btn-block" style="margin:2px;" onclick="changeView('year')">Year</a></li>
+            <li><a class="btn btn-danger btn-block" style="margin:2px;" onclick="changeView('month')">Month</a></li>
+            <li><a class="btn btn-danger btn-block" style="margin:2px;" onclick="changeView('week')">Week</a></li>
+            <li><a class="btn btn-danger btn-block" style="margin:2px;" onclick="changeView('day')">Day</a></li>
           </ul>
           <h3>Edit Event</h3>
           <ul>
-            <li><button id="addButton">Create Event</button></li>
-            <!--<li>Modify Event</li>-->
-            <li>Remove Event</li>
+            <li><a class="btn btn-primary btn-block" id="addButton" style="margin:2px;">Create Event</a></li>
+            <li><a class="btn btn-primary btn-block" id="addButton" style="margin:2px;">Modify Event</a></li>
+            <li><a class="btn btn-primary btn-block" id="addButton" style="margin:2px;">Remove Event</a></li>
           </ul>
         </div>
       </div>

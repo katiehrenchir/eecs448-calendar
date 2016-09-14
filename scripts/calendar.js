@@ -6,6 +6,9 @@
 // This global variable will remember the month that is currently being displayed.
 var displayedMonth=0;
 
+// This global variable remembers the current week view
+var displayedWeek= {};
+
 const months = [
   { 'month': 'August', 'numeric': 8, 'days': 31, 'firstDay': 1 },
   { 'month': 'September', 'numeric': 9, 'days': 30, 'firstDay': 4 },
@@ -30,21 +33,15 @@ class Calendar {
   init() {
   	//this.globalSetup();
 
-    this.createCalendar('year');
-    this.populateYearCalendar();
-
-    this.createCalendar('week');
-    this.populateWeekCalendar();
-    $('#week').hide();
-
-    let current_month = months.filter(function(m) {
+  	// The "current_month" value is to be used for both the month
+  	// and the week view. Hence this bit was pulled out of both the
+  	// methods to avoid repetition.
+  	let current_month = months.filter(function(m) {
       return m.numeric === currentDate.getMonth() + 1;
     })[0];
-    
 
-    this.createCalendar('month');
-    this.populateMonthCalendar(current_month);
-    $('#month').hide();
+    let current_date = currentDate.getDate();
+    let current_dayOfWeek = currentDate.getDay();
 
     /* Remembers the index of the currently displayed month inside of the months object
      * NOTE -> Get rid of the alerts.
@@ -62,23 +59,25 @@ class Calendar {
     	// Ran out of available calendar months
     	return -1;
     }(current_month);
-  }
 
-  /**
-  * sets up the initial global variables and remembers the current view.
-  * @param : none
-  
+    displayedWeek= {mnth: current_month, dt: current_date, dy: current_dayOfWeek};
 
-  globalSetup(){
-  	 let month = months.filter(function(m) {
-      return m.numeric === currentDate.getMonth() + 1;
-    })[0];
-    displayedMonth= month.numeric;
+    this.createCalendar('year');
+    this.populateYearCalendar();
+
+    this.createCalendar('week');
+    this.populateWeekCalendar(current_month, current_date, current_dayOfWeek);
+    $('#week').hide();
+
+    this.createCalendar('month');
+    this.populateMonthCalendar(current_month);
+    $('#month').hide();
 
     
+
   }
 
-  */
+
   /**
   * Creates a calendar element
   * @param {string} view - The calendar view type.
@@ -198,12 +197,10 @@ class Calendar {
       }
     }
   }
-
-
   /**
   * Populates the weekly calendar view with dates
   */
-  populateWeekCalendar() {
+  populateWeekCalendar(month, date, dayOfWeek) {
     let calendar = '<table class="day_container"><tr>' +
                    '<th>Su</th>' +
                    '<th>M</th>' +
@@ -212,37 +209,47 @@ class Calendar {
                    '<th>Th</th>' +
                    '<th>F</th>' +
                    '<th>Sa</th>' +
-                   '</tr>';
+                   '</tr><tr>';
 
-    let date = currentDate.getDate() + 1;
-    let dayOfWeek = currentDate.getDay() + 1;
-    let month = months.filter(function(m) {
-      return m.numeric === currentDate.getMonth() + 1;
-    })[0];
-
-    let cellCount = 1;
     let startOfWeek = date - dayOfWeek;
     let endOfWeek = date + (7 - dayOfWeek);
+    
     for (let i = startOfWeek; i < endOfWeek; i++) {
-      let highlight = '';
-      if (currentDate.getMonth() + 1 === month.numeric && currentDate.getDate() === i) {
-        highlight = 'currentDate';
-      }
-
-      if (cellCount === 1) {
-        calendar += '<tr>';
-      }
-
-      calendar += '<td class="' + highlight + '" onclick="popUp(' + i + ')">' + i + '</td>';
-      cellCount++;
-
-      if (cellCount === 8) {
-        calendar += '</tr>';
-        cellCount = 1;
-      }
+    	if(i < 1 || i > month.days){
+    		calendar += "<td></td>";
+    	}else {
+    		let highlight = '';
+    		if (currentDate.getMonth() + 1 === month.numeric && currentDate.getDate() === i) highlight = 'currentDate';
+    		calendar += '<td class="' + highlight + '" onclick="popUp(' + i + ')">' + i + '</td>';
+    	}
     }
 
-    calendar += '</table>';
-    $('#week').html('<div class="week"><h3 class="monthName">' + month.month + '</h3>' + calendar + '</div>');
+    calendar += '</tr></table>';
+    $('#week').html('<div class="week"><h3 class="monthName" align="center">' + month.month + '</h3>' + calendar + '</div>');
+    $('#week .week').prepend('<a id= "nxt_btn_week" class="btn btn-danger" style="float:right;" onclick="calendar.nextWeek()">NEXT</a>');
+    $('#week .week').prepend('<a id= "prv_btn_week" class="btn btn-danger" style="float:left;" onclick="calendar.prevWeek()">PREV</a>');
+  }
+
+  /* THE ERRORS HERE ARE NOT HANDLED - SETTING UP THE FOUNDATION!!!!
+  *		WORK IN PROGRESS
+  */
+  nextWeek(){
+  	let month = displayedWeek.mnth;
+  	let date = displayedWeek.dt- displayedWeek.dy;
+  	let dayOfWeek = 0;
+  	
+    calendar.populateWeekCalendar(month, date + 7, dayOfWeek);
+	displayedWeek= {mnth: month, dt: date+7, dy: dayOfWeek};
+
+  }
+
+  prevWeek(){
+  	let month = displayedWeek.mnth;
+  	let date = displayedWeek.dt- displayedWeek.dy;
+  	let dayOfWeek = 0;
+  	
+    calendar.populateWeekCalendar(month, date - 7, dayOfWeek);
+	displayedWeek= {mnth: month, dt: date-7, dy: dayOfWeek};
+
   }
 }
