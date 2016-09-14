@@ -7,6 +7,9 @@
   <title>ESAP Calendar</title>
 
   <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/yearView.css">
+  <link rel="stylesheet" href="styles/monthView.css">
+  <link rel="stylesheet" href="styles/weekView.css">
   <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
@@ -15,29 +18,55 @@
     <div class="header" align="center">ESAP Calendar 2016-2017</div>
     <div class="row center-block">
       <div class="col-md-2 sidebar">
-        <h3>Display</h3>
-        <ul>
-          <li><button id="month">Month</button></li>
-          <li><button id="week">Week</button></li>
-          <li><button id="day">Day</button></li>
-        </ul>
-        <h3>Edit Event</h3>
-        <ul>
-          <li>Create Event</li>
-          <!--<li>Modify Event</li>-->
-          <li>Remove Event</li>
-        </ul>
+        <div class="affix">
+          <h3>Display</h3>
+          <ul>
+            <li><button onclick="changeView('year')">Year</button></li>
+            <li><button onclick="changeView('month')">Month</button></li>
+            <li><button onclick="changeView('week')">Week</button></li>
+            <li><button onclick="changeView('day')">Day</button></li>
+          </ul>
+          <h3>Edit Event</h3>
+          <ul>
+            <li><button id="addButton">Create Event</button></li>
+            <!--<li>Modify Event</li>-->
+            <li>Remove Event</li>
+          </ul>
+        </div>
       </div>
-      <div class="col-md-10 calendar pull-right" id="year">
-      </div>
+      <div class="col-md-10 calendar col-center"></div>
     </div>
 
   </div>
 </div>
 
 
+<div class="modal" id="create">
+
+<div class="modal-content">
+   <span class="close">x</span>
+   <span class="popuptext"><form>
+        <h3> Create an Event: </h3>
+        Event Title <input type="text" id="eventTitle"> <br /><br    />
+        Date Range <input type="date" name="startDate" min="2016-08-01" max="2017-05-31">
+        to <input type="date" name="endDate" min="2016-08-01" max="2017-05-31">
+        <br  /><br    />
+        Time <input type="time" name"startTime"> to <input type="time" name="endTime">
+        <br    /><br    />
+        Description <textarea id="eventDesc"></textarea>
+        <br /><br />
+        <input type="submit" value="Create" id="creating">
+  </form>
+    </span>
+ </div>
+
+</div>
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="scripts/sidebar.js"></script>
+<script src="scripts/calendar.js"></script>
 <script src="scripts/main.js"></script>
 </body>
 </html>
