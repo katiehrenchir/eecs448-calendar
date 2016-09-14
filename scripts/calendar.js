@@ -19,7 +19,11 @@ const months = [
 let currentDate = new Date();
 let selectedDate = currentDate;
 
+/** Class representing a calendar. */
 class Calendar {
+  /**
+  * Initializes the calendar views. Default view - Yearly
+  */
   init() {
     this.createCalendar('year');
     this.populateYearCalendar();
@@ -33,10 +37,17 @@ class Calendar {
     $('#week').hide();
   }
 
+  /**
+  * Creates a calendar element
+  * @param {string} view - The calendar view type.
+  */
   createCalendar(view) {
     $('.calendar').append('<div id="' + view + '"><div>');
   }
 
+  /**
+  * Populates the yearly calendar view with months and dates
+  */
   populateYearCalendar() {
     $.each(months, function(index, month) {
       let calendar = '<table class="day_container"><tr>' +
@@ -79,6 +90,9 @@ class Calendar {
     });
   }
 
+  /**
+  * Populates the monthly calendar view with dates
+  */
   populateMonthCalendar() {
     let calendar = '<table class="day_container"><tr>' +
                    '<th>Su</th>' +
@@ -123,6 +137,9 @@ class Calendar {
     $('#month').html('<div class="month"><h3 class="monthName">' + month.month + '</h3>' + calendar + '</div>');
   }
 
+  /**
+  * Populates the weekly calendar view with dates
+  */
   populateWeekCalendar() {
     let calendar = '<table class="day_container"><tr>' +
                    '<th>Su</th>' +
