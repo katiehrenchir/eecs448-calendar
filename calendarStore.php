@@ -42,14 +42,16 @@ if (!$eventData) {
     die('Could not get data: '. mysql_error());
 }
 
-$rowDisplay = '<table><tr><th>Name</th><th>Description</th><th>Date</th></tr></table>';
-// while ($row = mysql_fetch_array($eventData)) {
-//     $rowDisplay += '<tr>'
-//     $rowDisplay += '<td>' . $row{'event_name'} . '<td>';
-//     $rowDisplay += '<td>' . $row{'event_desc'} . '<td>';
-//     $rowDisplay += '<td>' . $row{'start_date'} . " - " . $row{'end_date'}  . '<td>';
-//     $rowDisplay += '</tr>';
-// }
+$rowDisplay = '<table style="border: thin solid black; text-align: left;"><tr><th>Name</th><th>Description</th><th>Start Date</th><th>End Date</th></tr>';
+while ($row = mysql_fetch_array($eventData)) {
+    $rowDisplay .= '<tr">';
+    $rowDisplay .= '<td>' . $row{'event_name'} . '</td>';
+    $rowDisplay .= '<td>' . $row{'event_desc'} . '</td>';
+    $rowDisplay .= '<td>' . $row{'start_date'} . '</td>';
+    $rowDisplay .= '<td>' . $row{'end_date'} . '</td>';
+    $rowDisplay .= '</tr>';
+}
+$rowDisplay .= '</table>';
 
 echo $rowDisplay;
 
