@@ -13,20 +13,22 @@ class Form {
   * Creates a new event
   */
   createEvent() {
-    var name = $('input[name="eventName"]').val();
-    var startDate = $('input[name="startDate"]').val();
-    var endDate = $('input[name="endDate"]').val();
-    var startTime = $('input[name="startTime"]').val();
-    var endTime = $('input[name="endTime"]').val();
-    var description = $('input[name="eventDesc"]').val();
-    this.events.push({
-      'name': name,
-      'startDate': startDate,
-      'endDate': endDate,
-      'startTime': startTime,
-      'endTime': endTime,
-      'description': description
-    });
-    console.log(JSON.stringify(this.events, null, "  "));
+    var data = {
+      "eventName": $('input[name="eventName"]').val(),
+      "startDate": $('input[name="startDate"]').val(),
+      "endDate": $('input[name="endDate"]').val(),
+      "startTime": $('input[name="startTime"]').val(),
+      "endTime": $('input[name="endTime"]').val(),
+      "eventDesc": $('input[name="eventDesc"]').val()
+    }
+
+    $.ajax({
+      url: 'api/createEvent.php',
+      type: 'POST',
+      data: data,
+      success: function(data, status, xhr) {
+        console.log(data);
+      }
+    })
   }
 }
