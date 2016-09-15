@@ -9,10 +9,16 @@ function popUp(date) {
 
 let currentView = 'year';
 
+const calendar = new Calendar();
 const display = new Display();
+const form = new Form();
+
 function changeView(view) {
   display.changeView(view);
 }
 
-const calendar = new Calendar();
+$('form').submit(function(e) {
+  form.createEvent();
+});
+
 calendar.init();

@@ -55,7 +55,7 @@ class Calendar {
     			//alert("Not matching" + months[i].numeric);
     		}
     	}
-    	// DO ERROR HANDLING HERE 
+    	// DO ERROR HANDLING HERE
     	// Ran out of available calendar months
     	return -1;
     }(current_month);
@@ -73,8 +73,8 @@ class Calendar {
     this.populateMonthCalendar(current_month);
     $('#month').hide();
 
-    
-
+    // Set default date in create event form
+    $('input[type="date"]').val(moment().format('YYYY-MM-DD'));
   }
 
 
@@ -213,7 +213,7 @@ class Calendar {
 
     let startOfWeek = date - dayOfWeek;
     let endOfWeek = date + (7 - dayOfWeek);
-    
+
     for (let i = startOfWeek; i < endOfWeek; i++) {
     	if(i < 1 || i > month.days){
     		calendar += "<td></td>";
@@ -237,7 +237,7 @@ class Calendar {
   	let month = displayedWeek.mnth;
   	let date = displayedWeek.dt- displayedWeek.dy;
   	let dayOfWeek = 0;
-  	
+
     calendar.populateWeekCalendar(month, date + 7, dayOfWeek);
 	displayedWeek= {mnth: month, dt: date+7, dy: dayOfWeek};
 
@@ -247,7 +247,7 @@ class Calendar {
   	let month = displayedWeek.mnth;
   	let date = displayedWeek.dt- displayedWeek.dy;
   	let dayOfWeek = 0;
-  	
+
     calendar.populateWeekCalendar(month, date - 7, dayOfWeek);
 	displayedWeek= {mnth: month, dt: date-7, dy: dayOfWeek};
 

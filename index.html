@@ -21,16 +21,16 @@
         <div class="affix">
           <h3>Display</h3>
           <ul>
-            <li><a class="btn btn-danger btn-block" style="margin:2px;" onclick="changeView('year')">Year</a></li>
-            <li><a class="btn btn-danger btn-block" style="margin:2px;" onclick="changeView('month')">Month</a></li>
-            <li><a class="btn btn-danger btn-block" style="margin:2px;" onclick="changeView('week')">Week</a></li>
-            <li><a class="btn btn-danger btn-block" style="margin:2px;" onclick="changeView('day')">Day</a></li>
+            <li><button class="btn btn-danger btn-block" style="margin:2px;" onclick="changeView('year')">Year</button></li>
+            <li><button class="btn btn-danger btn-block" style="margin:2px;" onclick="changeView('month')">Month</button></li>
+            <li><button class="btn btn-danger btn-block" style="margin:2px;" onclick="changeView('week')">Week</button></li>
+            <li><button class="btn btn-danger btn-block" style="margin:2px;" onclick="changeView('day')">Day</button></li>
           </ul>
           <h3>Edit Event</h3>
           <ul>
-            <li><a class="btn btn-primary btn-block" id="addButton" style="margin:2px;">Create Event</a></li>
-            <li><a class="btn btn-primary btn-block" id="addButton" style="margin:2px;">Modify Event</a></li>
-            <li><a class="btn btn-primary btn-block" id="addButton" style="margin:2px;">Remove Event</a></li>
+            <li><button class="btn btn-primary btn-block" data-toggle="modal" data-target="#create" style="margin:2px;">Create Event</button></li>
+            <li><button class="btn btn-primary btn-block" id="addButton" style="margin:2px;">Modify Event</button></li>
+            <li><button class="btn btn-primary btn-block" id="addButton" style="margin:2px;">Remove Event</button></li>
           </ul>
         </div>
       </div>
@@ -38,29 +38,42 @@
     </div>
   </div>
 
-
-  <div class="modal" id="create">
+  <div id="create" class="modal fade">
     <div class="modal-content">
-      <span class="close">x</span>
-      <span class="popuptext">
+      <div class="modal-header">
+        <span class="close" data-dismiss="modal">&times;</span>
+        <h3 class="modal-title">Create an Event:</h3>
+      </div>
+      <div class="modal-body">
         <form>
-          <h3>Create an Event:</h3>
-          Event Title <input type="text" id="eventTitle"> <br /><br    />
-          Date Range <input type="date" name="startDate" min="2016-08-01" max="2017-05-31">
-          to <input type="date" name="endDate" min="2016-08-01" max="2017-05-31">
-          <br><br>
-          Time <input type="time" name"startTime"> to <input type="time" name="endTime">
-          <br><br>
-          Description <textarea id="eventDesc"></textarea>
-          <br><br>
-          <input type="submit" value="Create" id="creating">
+          <div class="form-group">
+            <label for="eventName" class="control-label">Event Name</label>
+            <input type="text" class="form-control" name="eventName">
+          </div>
+          <div class="form-group form-inline">
+            <label for="startDate" class="control-label">From</label>
+            <input type="date" class="form-control" name="startDate" min="2016-08-01" max="2017-05-31">
+            <input type="time" class="form-control" name"startTime">
+          </div>
+          <div class="form-group form-inline">
+            <label for="endDate" class="control-label">To</label>
+            <input type="date" class="form-control" name="endDate" min="2016-08-01" max="2017-05-31">
+            <input type="time" class="form-control" name="endTime">
+          </div>
+          <div class="form-group">
+            <label for="eventDesc" class="control-label">Description</label>
+            <textarea class="form-control" rows="5" id="eventDesc"></textarea>
+          </div>
+          <input type="submit" value="Create" class="btn btn-primary btn-block">
         </form>
-      </span>
+      </div>
     </div>
   </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.0/moment.min.js"></script>
   <script src="bootstrap/js/bootstrap.min.js"></script>
+  <script src="scripts/form.js"></script>
   <script src="scripts/sidebar.js"></script>
   <script src="scripts/calendar.js"></script>
   <script src="scripts/main.js"></script>
