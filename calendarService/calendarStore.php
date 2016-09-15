@@ -1,5 +1,8 @@
 <?php
 
+include "calendarEvent.php";
+include "calendarService.php";
+
 $server = 'mysql.eecs.ku.edu';
 $username = 'sazhar';
 $password = 'dVBaGrGUnJ24e6uJ';
@@ -44,19 +47,32 @@ if (!$eventData) {
     die('Could not get data: '. mysql_error());
 }
 
-$rowDisplay = '<table style="border: thin solid black; text-align: left;"><tr><th>Name</th><th>Description</th><th>Start Date</th><th>End Date</th></tr>';
+$rowDisplay = '<table style="border: thin solid black; text-align: left;">
+               <tr>
+               <th>Name</th>
+               <th>Description</th>
+               <th>Start Date</th>
+               <th>End Date</th>
+               <th>Start Time</th>
+               <th>End Time</th>
+               </tr>';
 while ($row = mysql_fetch_array($eventData)) {
     $rowDisplay .= '<tr">';
     $rowDisplay .= '<td>' . $row{'event_name'} . '</td>';
     $rowDisplay .= '<td>' . $row{'event_desc'} . '</td>';
     $rowDisplay .= '<td>' . $row{'start_date'} . '</td>';
     $rowDisplay .= '<td>' . $row{'end_date'} . '</td>';
+    $rowDisplay .= '<td>' . $row{'start_time'} . '</td>';
+    $rowDisplay .= '<td>' . $row{'end_time'} . '</td>';
     $rowDisplay .= '</tr>';
 }
 $rowDisplay .= '</table>';
 
 echo $rowDisplay;
 echo '<br>Fetched successfully<br>';
+$event = new Event('test', 'testdesc', '2016-09-14', '2016-09-14', '01:00:00', '14:00:00');
+$calendarService = new CalendarService;
+$calendarService->addEvent($event);
 
 mysql_close($conn);
 
