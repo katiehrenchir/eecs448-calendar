@@ -11,17 +11,20 @@ class Form {
 
   /**
   * Creates a new event
+  * @param {String} name - Event name
+  * @param {String} desc - Event description
+  * @param {Object} date - Event start date and end date
+  * @param {Object} time - Event start time and end time
   */
-  createEvent() {
+  createEvent(name, desc, date, time) {
     var data = {
-      "eventName": $('input[name="eventName"]').val(),
-      "startDate": $('input[name="startDate"]').val(),
-      "endDate": $('input[name="endDate"]').val(),
-      "startTime": $('input[name="startTime"]').val(),
-      "endTime": $('input[name="endTime"]').val(),
-      "eventDesc": $('input[name="eventDesc"]').val()
+      "eventName": name,
+      "eventDesc": desc,
+      "startDate": date.start,
+      "endDate": date.end,
+      "startTime": time.start,
+      "endTime": time.end
     }
-
     $.ajax({
       url: 'api/createEvent.php',
       type: 'POST',
@@ -48,18 +51,22 @@ class Form {
 
   /**
   * Modify an event
+  * @param {Number} id - Event id
+  * @param {String} name - Event name
+  * @param {String} desc - Event description
+  * @param {Object} date - Event start date and end date
+  * @param {Object} time - Event start time and end time
   */
-  modifyEvent() {
+  modifyEvent(id, name, desc, date, time) {
     var data = {
-      "eventId": $('input[name="eventId"]').val(),
-      "eventName": $('input[name="eventName"]').val(),
-      "startDate": $('input[name="startDate"]').val(),
-      "endDate": $('input[name="endDate"]').val(),
-      "startTime": $('input[name="startTime"]').val(),
-      "endTime": $('input[name="endTime"]').val(),
-      "eventDesc": $('input[name="eventDesc"]').val()
+      "eventId": id,
+      "eventName": name,
+      "eventDesc": desc,
+      "startDate": date.start,
+      "endDate": date.end,
+      "startTime": time.start,
+      "endTime": time.end
     }
-
     $.ajax({
       url: 'api/editEvent.php',
       type: 'POST',

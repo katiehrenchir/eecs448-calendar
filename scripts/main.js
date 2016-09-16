@@ -17,8 +17,18 @@ function changeView(view) {
   display.changeView(view);
 }
 
-$('form').submit(function(e) {
-  form.createEvent();
+$('#create form').submit(function(e) {
+  let eventName =  $('input[name="eventName"]').val();
+  let eventDesc = $('#eventDesc').val();
+  let date = {
+    "start": $('input[name="startDate"]').val(),
+    "end": $('input[name="endDate"]').val()
+  };
+  let time = {
+    "start": $('input[name="startTime"]').val(),
+    "end": $('input[name="endTime"]').val()
+  };
+  form.createEvent(eventName, eventDesc, date, time);
 });
 
 calendar.init();

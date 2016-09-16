@@ -2,12 +2,12 @@
 include 'dbSetup.php';
 
 $eventId = $_POST['eventId'];
-$eventName = $_POST['eventName'];
+$eventName = mysql_real_escape_string($_POST['eventName']);
+$eventDesc = mysql_real_escape_string($_POST['eventDesc']);
 $startDate = $_POST['startDate'];
 $endDate = $_POST['endDate'];
 $startTime = $_POST['startTime'];
 $endTime = $_POST['endTime'];
-$eventDesc = $_POST['eventDesc'];
 
 $sql = 'UPDATE events
         SET eventName = "' . $eventName . '",
