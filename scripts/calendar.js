@@ -252,7 +252,7 @@ class Calendar {
       dataType: 'json',
       success: function(data) {
         $.each(data, function(index, event) {
-          if (event.start_date > currentDate.toISOString().slice(0,10)) {
+          if (event.start_date >= currentDate.toISOString().slice(0,10)) {
             $('#agenda .list-group').append(
               '<li class="list-group-item ' + event.event_id + '">' +
               '<div class="">' + event.event_name + '</div>' +
