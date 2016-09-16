@@ -169,7 +169,7 @@ class Calendar {
       calendar.populateMonthCalendar(months[displayedMonth + 1]);
       displayedMonth += 1;
       if (displayedMonth == 9) {
-        document.getElementById("prv_btn").className = "btn btn-danger disabled";
+        document.getElementById("nxt_btn").className = "btn btn-danger disabled";
       }
     }
   }

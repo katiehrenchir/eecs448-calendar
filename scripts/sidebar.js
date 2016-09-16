@@ -17,8 +17,28 @@ class Display {
   * @param {String} view - The view type to display
   */
   changeView(view) {
-    $("#" + this.currentView).hide();
-    $("#" + view).show();
-    this.currentView = view;
+	  //if(view == 'today'){
+		//if(this.currentView == 'month'){
+			//$("#" + this.currentView).hide();
+			//$("#" + 'month').show();
+			//this.currentView = 'month';
+		//}
+		//else if(this.currentView == 'week'){
+			//$("#" + this.currentView).hide();
+			//$("#" + 'week').show();
+			//this.currentView = 'week';
+		//}
+		//else if(this.currentView == 'day'){
+			//$("#" + this.currentView).hide();
+			//$("#" + 'day').show();
+			//this.currentView = 'day';
+		//}
+		//else{}
+	  //}
+	  //else{
+	    $("#" + this.currentView).hide();
+	    $("#" + view).show();
+	    this.currentView = view;
+	  //}
   }
 }
