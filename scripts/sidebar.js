@@ -14,7 +14,7 @@ class Display {
 
   /**
   * Hides the current view and display the new
-  * @param {string} view - The view type to display
+  * @param {String} view - The view type to display
   */
   changeView(view) {
     $("#" + this.currentView).hide();

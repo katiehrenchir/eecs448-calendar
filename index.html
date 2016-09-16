@@ -5,7 +5,7 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ESAP Calendar</title>
-
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
   <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="styles/yearView.css">
   <link rel="stylesheet" href="styles/monthView.css">
@@ -15,57 +15,71 @@
 <body>
 
   <div class="container">
-    <div class="header" align="center">ESAP Calendar 2016-2017</div>
+    <!-- Mobile view navbar  -->
+    <div class="navbar navbar-default" role="navigation">
+      <div class="navbar-header">
+        <div class="navbar-brand">ESAP Calendar 2016-2017</div>
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+    </div>
+
     <div class="row center-block">
-      <div class="col-md-2 sidebar">
+      <!-- Sidebar -->
+      <div class="col-md-2 sidebar collapse navbar-collapse">
         <div class="affix">
           <h3>Display</h3>
           <ul>
-            <li><button class="btn btn-danger btn-block" style="margin:2px;" onclick="changeView('year')">Year</button></li>
-            <li><button class="btn btn-danger btn-block" style="margin:2px;" onclick="changeView('month')">Month</button></li>
-            <li><button class="btn btn-danger btn-block" style="margin:2px;" onclick="changeView('week')">Week</button></li>
-            <li><button class="btn btn-danger btn-block" style="margin:2px;" onclick="changeView('day')">Day</button></li>
+            <li><button class="btn btn-danger btn-block" onclick="changeView('year')">Year</button></li>
+            <li><button class="btn btn-danger btn-block" onclick="changeView('month')">Month</button></li>
+            <li><button class="btn btn-danger btn-block" onclick="changeView('week')">Week</button></li>
+            <li><button class="btn btn-danger btn-block" onclick="changeView('day')">Day</button></li>
           </ul>
-          <h3>Edit Event</h3>
+          <hr>
+          <h3>Events</h3>
           <ul>
-            <li><button class="btn btn-primary btn-block" data-toggle="modal" data-target="#create" style="margin:2px;">Create Event</button></li>
-            <li><button class="btn btn-primary btn-block" id="addButton" style="margin:2px;">Modify Event</button></li>
-            <li><button class="btn btn-primary btn-block" id="addButton" style="margin:2px;">Remove Event</button></li>
+            <li><button class="btn btn-primary btn-block" onclick="changeView('agenda')">View Agenda</button></li>
+            <li><button class="btn btn-primary btn-block" data-toggle="modal" data-target="#create">Create Event</button></li>
           </ul>
         </div>
       </div>
-      <div class="col-md-10 calendar col-center"></div>
+      <!-- Calendar view -->
+      <div class="col-md-10 col-md-offset-2 calendar"></div>
     </div>
-  </div>
 
-  <div id="create" class="modal fade">
-    <div class="modal-content">
-      <div class="modal-header">
-        <span class="close" data-dismiss="modal">&times;</span>
-        <h3 class="modal-title">Create an Event:</h3>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="eventName" class="control-label">Event Name</label>
-            <input type="text" class="form-control" name="eventName">
-          </div>
-          <div class="form-group form-inline">
-            <label for="startDate" class="control-label">From</label>
-            <input type="date" class="form-control" name="startDate" min="2016-08-01" max="2017-05-31">
-            <input type="time" class="form-control" name"startTime">
-          </div>
-          <div class="form-group form-inline">
-            <label for="endDate" class="control-label">To</label>
-            <input type="date" class="form-control" name="endDate" min="2016-08-01" max="2017-05-31">
-            <input type="time" class="form-control" name="endTime">
-          </div>
-          <div class="form-group">
-            <label for="eventDesc" class="control-label">Description</label>
-            <textarea class="form-control" rows="5" id="eventDesc"></textarea>
-          </div>
-          <input type="submit" value="Create" class="btn btn-primary btn-block">
-        </form>
+    <!-- Create Event modal -->
+    <div id="create" class="modal fade">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="close" data-dismiss="modal">&times;</span>
+          <h3 class="modal-title">Create an Event:</h3>
+        </div>
+        <div class="modal-body">
+          <form method="post">
+            <div class="form-group">
+              <label for="eventName" class="control-label">Event Name</label>
+              <input type="text" class="form-control" name="eventName">
+            </div>
+            <div class="form-group form-inline">
+              <label for="startDate" class="control-label">From</label>
+              <input type="date" class="form-control" name="startDate" min="2016-08-01" max="2017-05-31">
+              <input type="time" class="form-control" name="startTime">
+            </div>
+            <div class="form-group form-inline">
+              <label for="endDate" class="control-label">To</label>
+              <input type="date" class="form-control" name="endDate" min="2016-08-01" max="2017-05-31">
+              <input type="time" class="form-control" name="endTime">
+            </div>
+            <div class="form-group">
+              <label for="eventDesc" class="control-label">Description</label>
+              <textarea class="form-control" rows="5" id="eventDesc"></textarea>
+            </div>
+            <input type="submit" value="Create" class="btn btn-primary btn-block">
+          </form>
+        </div>
       </div>
     </div>
   </div>
