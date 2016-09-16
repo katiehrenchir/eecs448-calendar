@@ -23,7 +23,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Calendar.html">Calendar</a><ul class='methods'><li data-type='method'><a href="Calendar.html#createCalendar">createCalendar</a></li><li data-type='method'><a href="Calendar.html#init">init</a></li><li data-type='method'><a href="Calendar.html#nextMonth">nextMonth</a></li><li data-type='method'><a href="Calendar.html#nextWeek">nextWeek</a></li><li data-type='method'><a href="Calendar.html#populateMonthCalendar">populateMonthCalendar</a></li><li data-type='method'><a href="Calendar.html#populateWeekCalendar">populateWeekCalendar</a></li><li data-type='method'><a href="Calendar.html#populateYearCalendar">populateYearCalendar</a></li><li data-type='method'><a href="Calendar.html#prevMonth">prevMonth</a></li><li data-type='method'><a href="Calendar.html#prevWeek">prevWeek</a></li></ul></li><li><a href="Display.html">Display</a><ul class='methods'><li data-type='method'><a href="Display.html#changeView">changeView</a></li></ul></li><li><a href="Form.html">Form</a><ul class='methods'><li data-type='method'><a href="Form.html#createEvent">createEvent</a></li><li data-type='method'><a href="Form.html#deleteEvent">deleteEvent</a></li><li data-type='method'><a href="Form.html#modifyEvent">modifyEvent</a></li></ul></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Calendar.html">Calendar</a><ul class='methods'><li data-type='method'><a href="Calendar.html#createCalendar">createCalendar</a></li><li data-type='method'><a href="Calendar.html#init">init</a></li><li data-type='method'><a href="Calendar.html#nextMonth">nextMonth</a></li><li data-type='method'><a href="Calendar.html#nextWeek">nextWeek</a></li><li data-type='method'><a href="Calendar.html#populateMonthCalendar">populateMonthCalendar</a></li><li data-type='method'><a href="Calendar.html#populateWeekCalendar">populateWeekCalendar</a></li><li data-type='method'><a href="Calendar.html#populateYearCalendar">populateYearCalendar</a></li><li data-type='method'><a href="Calendar.html#prevMonth">prevMonth</a></li><li data-type='method'><a href="Calendar.html#prevWeek">prevWeek</a></li><li data-type='method'><a href="Calendar.html#showAgenda">showAgenda</a></li></ul></li><li><a href="Display.html">Display</a><ul class='methods'><li data-type='method'><a href="Display.html#changeView">changeView</a></li></ul></li><li><a href="Form.html">Form</a><ul class='methods'><li data-type='method'><a href="Form.html#createEvent">createEvent</a></li><li data-type='method'><a href="Form.html#deleteEvent">deleteEvent</a></li><li data-type='method'><a href="Form.html#modifyEvent">modifyEvent</a></li></ul></li></ul>
 </nav>
 
 <div id="main">
@@ -101,6 +101,10 @@ class Calendar {
     this.createCalendar('month');
     this.populateMonthCalendar(current_month);
     $('#month').hide();
+
+    this.createCalendar('agenda');
+    this.showAgenda();
+    $('#agenda').hide();
 
     // Set default date in create event form
     $('input[type="date"]').val(moment().format('YYYY-MM-DD'));
@@ -273,6 +277,58 @@ class Calendar {
     calendar.populateWeekCalendar(month, date - 7, dayOfWeek);
     displayedWeek= {mnth: month, dt: date-7, dy: dayOfWeek};
   }
+
+  /**
+  * Shows the Agenda view with a list of events
+  */
+  showAgenda() {
+    let agenda = '&lt;div class="panel panel-default" style="background-color: #FFF">' +
+                 '&lt;div class="panel-heading" style="background-color: #FFF">' +
+                 '&lt;h2 class="text-left">Agenda&lt;/h2>&lt;/div>' +
+                 '&lt;ul class="list-group">';
+    $.ajax({
+      url: 'api/dbSetup.php',
+      data: '',
+      dataType: 'json',
+      success: function(data) {
+        $.each(data, function(index, event) {
+          if (event.start_date > currentDate.toISOString().slice(0,10)) {
+            $('#agenda .list-group').append(
+              '&lt;li class="list-group-item ' + event.event_id + '">' +
+              '&lt;div class="">' + event.event_name + '&lt;/div>' +
+              '&lt;div class="">' + event.event_desc + '&lt;/div>' +
+              '&lt;/li>'
+            );
+            if (event.start_date != '0000-00-00') {
+              $('.' + event.event_id).append(
+                '&lt;div class="">' +
+                moment(event.start_date, "YYYY-MM-DD").format("ddd, MMM D YYYY") +
+                '&lt;/div>'
+              );
+            }
+            if (event.end_date != '0000-00-00') {
+              $('.' + event.event_id).append(
+                '&lt;div class="">' +
+                moment(event.end_date, "YYYY-MM-DD").format("ddd, MMM D YYYY") +
+                '&lt;/div>');
+            }
+            $('.' + event.event_id).append(
+              '&lt;div class="">' +
+              moment(event.start_time, "HH-mm-ss").format("h:mm A") +
+              '&lt;/div>');
+            if (event.start_time != event.end_time) {
+              $('.' + event.event_id).append(
+                '&lt;div class="">' +
+                moment(event.end_time, "HH-mm-ss").format("h:mm A") +
+                '&lt;/div>');
+            }
+          }
+        });
+      }
+    });
+    agenda += '&lt;/ul>&lt;/div>';
+    $('#agenda').html(agenda);
+  }
 }
 </code></pre>
         </article>
@@ -286,7 +342,7 @@ class Calendar {
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.1</a> on Fri Sep 16 2016 00:23:29 GMT-0500 (CDT) using the Minami theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.1</a> on Fri Sep 16 2016 02:07:27 GMT-0500 (CDT) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>

@@ -41,7 +41,7 @@
           <hr>
           <h3>Events</h3>
           <ul>
-            <li><button class="btn btn-primary btn-block" data-toggle="modal" data-target="#view">View Agenda</button></li>
+            <li><button class="btn btn-primary btn-block" onclick="changeView('agenda')">View Agenda</button></li>
             <li><button class="btn btn-primary btn-block" data-toggle="modal" data-target="#create">Create Event</button></li>
           </ul>
         </div>
@@ -58,7 +58,7 @@
           <h3 class="modal-title">Create an Event:</h3>
         </div>
         <div class="modal-body">
-          <form>
+          <form method="post">
             <div class="form-group">
               <label for="eventName" class="control-label">Event Name</label>
               <input type="text" class="form-control" name="eventName">

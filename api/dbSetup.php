@@ -26,12 +26,12 @@
   if (empty($queryResult)) {
     $sql = 'CREATE TABLE IF NOT EXISTS events (
             event_id INT AUTO_INCREMENT PRIMARY KEY,
-            event_name VARCHAR(20) NOT NULL,
+            event_name VARCHAR(140) NOT NULL,
             event_desc TINYTEXT NOT NULL,
             start_date DATE NOT NULL,
-            end_date DATE,
-            start_time TIME,
-            end_time TIME)';
+            end_date DATE NOT NULL,
+            start_time TIME NOT NULL,
+            end_time TIME NOT NULL)';
     $queryResult = mysql_query($sql, $con);
     if (!$queryResult) {
       die('Could not create table: ' . mysql_error());
