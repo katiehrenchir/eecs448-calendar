@@ -2,22 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: calendar.js</title>
+    <title>calendar.js - Documentation</title>
 
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
     <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
 </head>
-
 <body>
 
-<div id="main">
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
 
-    <h1 class="page-title">Source: calendar.js</h1>
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Calendar.html">Calendar</a><ul class='methods'><li data-type='method'><a href="Calendar.html#createCalendar">createCalendar</a></li><li data-type='method'><a href="Calendar.html#init">init</a></li><li data-type='method'><a href="Calendar.html#nextMonth">nextMonth</a></li><li data-type='method'><a href="Calendar.html#nextWeek">nextWeek</a></li><li data-type='method'><a href="Calendar.html#populateMonthCalendar">populateMonthCalendar</a></li><li data-type='method'><a href="Calendar.html#populateWeekCalendar">populateWeekCalendar</a></li><li data-type='method'><a href="Calendar.html#populateYearCalendar">populateYearCalendar</a></li><li data-type='method'><a href="Calendar.html#prevMonth">prevMonth</a></li><li data-type='method'><a href="Calendar.html#prevWeek">prevWeek</a></li><li data-type='method'><a href="Calendar.html#showAgenda">showAgenda</a></li></ul></li><li><a href="Display.html">Display</a><ul class='methods'><li data-type='method'><a href="Display.html#changeView">changeView</a></li></ul></li><li><a href="Form.html">Form</a><ul class='methods'><li data-type='method'><a href="Form.html#createEvent">createEvent</a></li><li data-type='method'><a href="Form.html#deleteEvent">deleteEvent</a></li><li data-type='method'><a href="Form.html#modifyEvent">modifyEvent</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">calendar.js</h1>
+    
 
     
 
@@ -31,13 +43,16 @@
   Handles calendar methods
 */
 
+var displayedMonth = 0;
+var displayedWeek= {};
+
 const months = [
   { 'month': 'August', 'numeric': 8, 'days': 31, 'firstDay': 1 },
   { 'month': 'September', 'numeric': 9, 'days': 30, 'firstDay': 4 },
   { 'month': 'October', 'numeric': 10, 'days': 31, 'firstDay': 6 },
   { 'month': 'November', 'numeric': 11, 'days': 30, 'firstDay': 2 },
   { 'month': 'December', 'numeric': 12, 'days': 31, 'firstDay': 4 },
-  { 'month': 'January', 'numeric': 1, 'days': 30, 'firstDay': 0 },
+  { 'month': 'January', 'numeric': 1, 'days': 31, 'firstDay': 0 },
   { 'month': 'February', 'numeric': 2, 'days': 28, 'firstDay': 3 },
   { 'month': 'March', 'numeric': 3, 'days': 31, 'firstDay': 3 },
   { 'month': 'April', 'numeric': 4, 'days': 30, 'firstDay': 6 },
@@ -53,21 +68,52 @@ class Calendar {
   * Initializes the calendar views. Default view - Yearly
   */
   init() {
+  	//this.globalSetup();
+
+  	// The "current_month" value is to be used for both the month
+  	// and the week view. Hence this bit was pulled out of both the
+  	// methods to avoid repetition.
+  	let current_month = months.filter(function(m) {
+      return m.numeric === currentDate.getMonth() + 1;
+    })[0];
+
+    let current_date = currentDate.getDate();
+    let current_dayOfWeek = currentDate.getDay();
+
+    displayedMonth = function(current_month) {
+    	for (var i = 0; i &lt; 10; i++) {
+    		if (current_month.numeric == months[i].numeric) {
+    			return i;
+    		}
+    	}
+    	return -1;
+    }(current_month);
+
+    displayedWeek= {mnth: current_month, dt: current_date, dy: current_dayOfWeek};
+
     this.createCalendar('year');
     this.populateYearCalendar();
 
+    this.createCalendar('week');
+    this.populateWeekCalendar(current_month, current_date, current_dayOfWeek);
+    $('#week').hide();
+
     this.createCalendar('month');
-    this.populateMonthCalendar();
+    this.populateMonthCalendar(current_month);
     $('#month').hide();
 
-    this.createCalendar('week');
-    this.populateWeekCalendar();
-    $('#week').hide();
+    this.createCalendar('agenda');
+    this.showAgenda();
+    $('#agenda').hide();
+
+    // Set default date in create event form
+    $('input[type="date"]').val(moment().format('YYYY-MM-DD'));
   }
+
 
   /**
   * Creates a calendar element
-  * @param {string} view - The calendar view type.
+  * @param {String} view - The calendar view type.
   */
   createCalendar(view) {
     $('.calendar').append('&lt;div id="' + view + '">&lt;div>');
@@ -79,14 +125,10 @@ class Calendar {
   populateYearCalendar() {
     $.each(months, function(index, month) {
       let calendar = '&lt;table class="day_container">&lt;tr>' +
-                  '&lt;th>Su&lt;/th>' +
-                  '&lt;th>M&lt;/th>' +
-                  '&lt;th>Tu&lt;/th>' +
-                  '&lt;th>W&lt;/th>' +
-                  '&lt;th>Th&lt;/th>' +
-                  '&lt;th>F&lt;/th>' +
-                  '&lt;th>Sa&lt;/th>' +
-                  '&lt;/tr>';
+                     '&lt;th>Su&lt;/th>' + '&lt;th>M&lt;/th>' +
+                     '&lt;th>Tu&lt;/th>' + '&lt;th>W&lt;/th>' +
+                     '&lt;th>Th&lt;/th>' + '&lt;th>F&lt;/th>' +
+                     '&lt;th>Sa&lt;/th>' + '&lt;/tr>';
 
       let cellCount = 1;
       for (let j = 0; j &lt; month.firstDay; j++) {
@@ -121,20 +163,12 @@ class Calendar {
   /**
   * Populates the monthly calendar view with dates
   */
-  populateMonthCalendar() {
+  populateMonthCalendar(month) {
     let calendar = '&lt;table class="day_container">&lt;tr>' +
-                   '&lt;th>Su&lt;/th>' +
-                   '&lt;th>M&lt;/th>' +
-                   '&lt;th>Tu&lt;/th>' +
-                   '&lt;th>W&lt;/th>' +
-                   '&lt;th>Th&lt;/th>' +
-                   '&lt;th>F&lt;/th>' +
-                   '&lt;th>Sa&lt;/th>' +
-                   '&lt;/tr>';
-
-    let month = months.filter(function(m) {
-      return m.numeric === currentDate.getMonth() + 1;
-    })[0];
+                   '&lt;th>Su&lt;/th>' + '&lt;th>M&lt;/th>' +
+                   '&lt;th>Tu&lt;/th>' + '&lt;th>W&lt;/th>' +
+                   '&lt;th>Th&lt;/th>' + '&lt;th>F&lt;/th>' +
+                   '&lt;th>Sa&lt;/th>' + '&lt;/tr>';
 
     let cellCount = 1;
     for (let j = 0; j &lt; month.firstDay; j++) {
@@ -162,53 +196,138 @@ class Calendar {
     }
 
     calendar += '&lt;/table>';
-    $('#month').html('&lt;div class="month">&lt;h3 class="monthName">' + month.month + '&lt;/h3>' + calendar + '&lt;/div>');
+    $('#month').html('&lt;div class="month">&lt;h3 class="monthName" align="center">' + month.month + '&lt;/h3>' + calendar + '&lt;/div>');
+    $('#month .month').prepend('&lt;button id= "nxt_btn" class="btn btn-danger" style="float:right;" onclick="calendar.nextMonth()">NEXT&lt;/button>');
+    $('#month .month').prepend('&lt;button id= "prv_btn" class="btn btn-danger" style="float:left;" onclick="calendar.prevMonth()">PREV&lt;/button>');
+  }
+
+  /**
+  * Displays the next month in monthly calendar view
+  */
+  nextMonth() {
+    if (displayedMonth != 9) {
+      calendar.populateMonthCalendar(months[displayedMonth + 1]);
+      displayedMonth += 1;
+      if (displayedMonth == 9) {
+        document.getElementById("prv_btn").className = "btn btn-danger disabled";
+      }
+    }
+  }
+
+  /**
+  * Displays the previous month in monthly calendar view
+  */
+  prevMonth(){
+    if (displayedMonth != 0) {
+      calendar.populateMonthCalendar(months[displayedMonth - 1]);
+      displayedMonth -= 1;
+      if (displayedMonth == 0) {
+        document.getElementById("prv_btn").className = "btn btn-danger disabled";
+      }
+    }
   }
 
   /**
   * Populates the weekly calendar view with dates
   */
-  populateWeekCalendar() {
+  populateWeekCalendar(month, date, dayOfWeek) {
     let calendar = '&lt;table class="day_container">&lt;tr>' +
-                   '&lt;th>Su&lt;/th>' +
-                   '&lt;th>M&lt;/th>' +
-                   '&lt;th>Tu&lt;/th>' +
-                   '&lt;th>W&lt;/th>' +
-                   '&lt;th>Th&lt;/th>' +
-                   '&lt;th>F&lt;/th>' +
-                   '&lt;th>Sa&lt;/th>' +
-                   '&lt;/tr>';
+                   '&lt;th>Su&lt;/th>' + '&lt;th>M&lt;/th>' +
+                   '&lt;th>Tu&lt;/th>' + '&lt;th>W&lt;/th>' +
+                   '&lt;th>Th&lt;/th>' + '&lt;th>F&lt;/th>' +
+                   '&lt;th>Sa&lt;/th>' + '&lt;/tr>&lt;tr>';
 
-    let date = currentDate.getDate() + 1;
-    let dayOfWeek = currentDate.getDay() + 1;
-    let month = months.filter(function(m) {
-      return m.numeric === currentDate.getMonth() + 1;
-    })[0];
-
-    let cellCount = 1;
     let startOfWeek = date - dayOfWeek;
     let endOfWeek = date + (7 - dayOfWeek);
+
     for (let i = startOfWeek; i &lt; endOfWeek; i++) {
-      let highlight = '';
-      if (currentDate.getMonth() + 1 === month.numeric &amp;&amp; currentDate.getDate() === i) {
-        highlight = 'currentDate';
-      }
-
-      if (cellCount === 1) {
-        calendar += '&lt;tr>';
-      }
-
-      calendar += '&lt;td class="' + highlight + '" onclick="popUp(' + i + ')">' + i + '&lt;/td>';
-      cellCount++;
-
-      if (cellCount === 8) {
-        calendar += '&lt;/tr>';
-        cellCount = 1;
-      }
+    	if (i &lt; 1 || i > month.days) {
+    		calendar += "&lt;td>&lt;/td>";
+    	} else {
+    		let highlight = '';
+    		if (currentDate.getMonth() + 1 === month.numeric &amp;&amp; currentDate.getDate() === i) highlight = 'currentDate';
+    		calendar += '&lt;td class="' + highlight + '" onclick="popUp(' + i + ')">' + i + '&lt;/td>';
+    	}
     }
 
-    calendar += '&lt;/table>';
-    $('#week').html('&lt;div class="week">&lt;h3 class="monthName">' + month.month + '&lt;/h3>' + calendar + '&lt;/div>');
+    calendar += '&lt;/tr>&lt;/table>';
+    $('#week').html('&lt;div class="week">&lt;h3 class="monthName" align="center">' + month.month + '&lt;/h3>' + calendar + '&lt;/div>');
+    $('#week .week').prepend('&lt;button id="nxt_btn_week" class="btn btn-danger" style="float:right;" onclick="calendar.nextWeek()">NEXT&lt;/button>');
+    $('#week .week').prepend('&lt;button id="prv_btn_week" class="btn btn-danger" style="float:left;" onclick="calendar.prevWeek()">PREV&lt;/button>');
+  }
+
+  /**
+  * Displays the next week in weekly calendar view
+  */
+  nextWeek() {
+    let month = displayedWeek.mnth;
+    let date = displayedWeek.dt- displayedWeek.dy;
+    let dayOfWeek = 0;
+    calendar.populateWeekCalendar(month, date + 7, dayOfWeek);
+    displayedWeek= {mnth: month, dt: date+7, dy: dayOfWeek};
+  }
+
+  /**
+  * Displays the previous week in weekly calendar view
+  */
+  prevWeek() {
+    let month = displayedWeek.mnth;
+    let date = displayedWeek.dt- displayedWeek.dy;
+    let dayOfWeek = 0;
+    calendar.populateWeekCalendar(month, date - 7, dayOfWeek);
+    displayedWeek= {mnth: month, dt: date-7, dy: dayOfWeek};
+  }
+
+  /**
+  * Shows the Agenda view with a list of events
+  */
+  showAgenda() {
+    let agenda = '&lt;div class="panel panel-default" style="background-color: #FFF">' +
+                 '&lt;div class="panel-heading" style="background-color: #FFF">' +
+                 '&lt;h2 class="text-left">Agenda&lt;/h2>&lt;/div>' +
+                 '&lt;ul class="list-group">';
+    $.ajax({
+      url: 'api/dbSetup.php',
+      data: '',
+      dataType: 'json',
+      success: function(data) {
+        $.each(data, function(index, event) {
+          if (event.start_date > currentDate.toISOString().slice(0,10)) {
+            $('#agenda .list-group').append(
+              '&lt;li class="list-group-item ' + event.event_id + '">' +
+              '&lt;div class="">' + event.event_name + '&lt;/div>' +
+              '&lt;div class="">' + event.event_desc + '&lt;/div>' +
+              '&lt;/li>'
+            );
+            if (event.start_date != '0000-00-00') {
+              $('.' + event.event_id).append(
+                '&lt;div class="">' +
+                moment(event.start_date, "YYYY-MM-DD").format("ddd, MMM D YYYY") +
+                '&lt;/div>'
+              );
+            }
+            if (event.end_date != '0000-00-00') {
+              $('.' + event.event_id).append(
+                '&lt;div class="">' +
+                moment(event.end_date, "YYYY-MM-DD").format("ddd, MMM D YYYY") +
+                '&lt;/div>');
+            }
+            $('.' + event.event_id).append(
+              '&lt;div class="">' +
+              moment(event.start_time, "HH-mm-ss").format("h:mm A") +
+              '&lt;/div>');
+            if (event.start_time != event.end_time) {
+              $('.' + event.event_id).append(
+                '&lt;div class="">' +
+                moment(event.end_time, "HH-mm-ss").format("h:mm A") +
+                '&lt;/div>');
+            }
+          }
+        });
+      }
+    });
+    agenda += '&lt;/ul>&lt;/div>';
+    $('#agenda').html(agenda);
   }
 }
 </code></pre>
@@ -220,17 +339,13 @@ class Calendar {
 
 </div>
 
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Calendar.html">Calendar</a></li><li><a href="Display.html">Display</a></li></ul>
-</nav>
-
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.1</a> on Tue Sep 13 2016 19:21:32 GMT-0500 (CDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.1</a> on Fri Sep 16 2016 02:07:27 GMT-0500 (CDT) using the Minami theme.
 </footer>
 
-<script> prettyPrint(); </script>
-<script src="scripts/linenumber.js"> </script>
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
 </body>
 </html>
