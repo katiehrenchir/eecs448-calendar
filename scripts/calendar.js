@@ -17,6 +17,7 @@ const months = [
 
 let currentDate = new Date();
 let selectedDate = currentDate;
+
 let current_month = months.filter(function(m) {
       return m.numeric === currentDate.getMonth() + 1;
     })[0];
@@ -54,7 +55,7 @@ class Calendar {
   	// The "current_month" value is to be used for both the month
   	// and the week view. Hence this bit was pulled out of both the
   	// methods to avoid repetition.
-  	
+
 
     /* Remembers the index of the currently displayed month inside of the months object
      * NOTE -> Get rid of the alerts.
@@ -266,7 +267,7 @@ class Calendar {
   		let month = displayedWeek.mnth;
 	  	let date = displayedWeek.dt- displayedWeek.dy;
 	  	let dayOfWeek = 0;
-	  	
+
 	    calendar.populateWeekCalendar(month, date + 7, dayOfWeek);
 		displayedWeek= {mnth: month, dt: date+7, dy: dayOfWeek};
   	}else{
@@ -281,7 +282,7 @@ class Calendar {
   		let month = displayedWeek.mnth;
 	  	let date = displayedWeek.dt- displayedWeek.dy;
 	  	let dayOfWeek = 0;
-	  	
+
 	    calendar.populateWeekCalendar(month, date - 7, dayOfWeek);
 		displayedWeek= {mnth: month, dt: date-7, dy: dayOfWeek};
   	}else{
