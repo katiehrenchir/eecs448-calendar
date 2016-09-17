@@ -21,7 +21,7 @@ const months = [
 
 let currentDate = new Date();
 let selectedDate = currentDate;
-
+  
 /** Class representing a calendar. */
 class Calendar {
   /**
