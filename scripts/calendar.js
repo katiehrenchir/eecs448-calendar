@@ -11,6 +11,35 @@ const months = [
   { 'month': 'May', 'numeric': 5, 'days': 30, 'firstDay': 1 }
 ];
 
+var test_event = [
+{   event_id: "1" ,
+    title: "Testing" ,
+    description: "This is just a test" ,
+    startDate: "2016-09-17" ,
+    endDate: "2016-09-17" ,
+    startTime: "21:10:00" ,
+    endTime: "21:20:00"
+},
+{   event_id: "2" ,
+    title: "Testing" ,
+    description: "This is just a test" ,
+    startDate: "2016-09-17" ,
+    endDate: "2016-09-17" ,
+    startTime: "22:10:00" ,
+    endTime: "22:20:00"
+},
+{   event_id: "3" ,
+    title: "Testing" ,
+    description: "This is just a test" ,
+    startDate: "2016-09-17" ,
+    endDate: "2016-09-17" ,
+    startTime: "23:10:00" ,
+    endTime: "23:20:00"
+}
+];
+
+var event_num = 3;
+
 let currentDate = new Date();
 let selectedDate = currentDate;
 
@@ -58,13 +87,31 @@ class Calendar {
     this.createCalendar('year');
     this.populateYearCalendar();
 
+    this.createCalendar('month');
+    this.populateMonthCalendar(current_month);
+    $('#month').hide();
+
     this.createCalendar('week');
     this.populateWeekCalendar(current_month, current_date, current_dayOfWeek);
     $('#week').hide();
 
-    this.createCalendar('month');
-    this.populateMonthCalendar(current_month);
-    $('#month').hide();
+    this.createCalendar('day');
+    this.populateDayCalendar(current_month, current_date);
+    $('#day').hide();
+
+    this.createCalendar('agenda');
+    this.showAgenda();
+    $('#agenda').hide();
+
+    // Set default date in create event form
+    $('input[type="date"]').val(moment().format('YYYY-MM-DD'));
+
+    if (current_month.numeric > 5) {
+      let current_year = 2016;
+    }
+    else {
+      let current_year = 2017;
+    }
   }
 
 
@@ -117,7 +164,7 @@ class Calendar {
     });
   }
 
-  getNextMonth(curr){
+  getNextMonth(curr) {
     for(var i=0; i<10; i++){
       if(months[i] == curr){
         return (months[i+1]);
@@ -125,7 +172,7 @@ class Calendar {
     }
   }
 
-  getPrevMonth(curr){
+  getPrevMonth(curr) {
     for(var i=0; i<10; i++){
       if(months[i] == curr){
         return (months[i-1]);
@@ -133,21 +180,21 @@ class Calendar {
     }
   }
 
-  nextMonth(){
-    if(displayedMonth != 9){
-      calendar.populateMonthCalendar(months[displayedMonth+1]);
-      displayedMonth+=1;
-      if(displayedMonth==9){
+  nextMonth() {
+    if (displayedMonth != 9) {
+      calendar.populateMonthCalendar(months[displayedMonth + 1]);
+      displayedMonth += 1;
+      if (displayedMonth ==9 ) {
         document.getElementById("nxt_btn").className = "btn btn-danger disabled";
       }
     }
   }
 
-  prevMonth(){
-    if(displayedMonth != 0){
+  prevMonth() {
+    if (displayedMonth != 0) {
       calendar.populateMonthCalendar(months[displayedMonth-1]);
-      displayedMonth-=1;
-      if(displayedMonth==0){
+      displayedMonth -= 1;
+      if (displayedMonth == 0) {
         document.getElementById("prv_btn").className = "btn btn-danger disabled";
       }
     }
@@ -192,6 +239,51 @@ class Calendar {
     $('#month').html('<div class="month"><h3 class="monthName" align="center">' + month.month + '</h3>' + calendar + '</div>');
     $('#month .month').prepend('<a id= "nxt_btn" class="btn btn-danger" style="float:right;" onclick="calendar.nextMonth()">NEXT</a>');
     $('#month .month').prepend('<a id= "prv_btn" class="btn btn-danger" style="float:left;" onclick="calendar.prevMonth()">PREV</a>');
+  }
+
+  nextWeek() {
+    if (!chopped_up) {
+      let month = displayedWeek.mnth;
+      let date = displayedWeek.dt - displayedWeek.dy;
+      let dayOfWeek = 0;
+
+      calendar.populateWeekCalendar(month, date + 7, dayOfWeek);
+      displayedWeek= {
+        mnth: month,
+        dt: date + 7,
+        dy: dayOfWeek
+      };
+    } else {
+      calendar.populateWeekCalendar(calendar.getNextMonth(displayedWeek.mnth), newStart, 0);
+      displayedWeek= {
+        mnth: calendar.getNextMonth(displayedWeek.mnth),
+        dt: newStart,
+        dy: 0
+      };
+      chopped_up = false;
+    }
+  }
+
+  prevWeek() {
+    if (!chopped_down) {
+      let month = displayedWeek.mnth;
+      let date = displayedWeek.dt- displayedWeek.dy;
+      let dayOfWeek = 0;
+      calendar.populateWeekCalendar(month, date - 7, dayOfWeek);
+      displayedWeek = {
+        mnth: month,
+        dt: date - 7,
+        dy: dayOfWeek
+      };
+    } else {
+      calendar.populateWeekCalendar(calendar.getPrevMonth(displayedWeek.mnth), newStart, 0);
+      displayedWeek= {
+        mnth: calendar.getPrevMonth(displayedWeek.mnth),
+        dt: newStart,
+        dy: 0
+      };
+      chopped_down = false;
+    }
   }
 
   /**
@@ -244,48 +336,69 @@ class Calendar {
     $('#week .week').prepend('<a id= "prv_btn_week" class="btn btn-danger" style="float:left;" onclick="calendar.prevWeek()">PREV</a>');
   }
 
-  nextWeek() {
-    if (!chopped_up) {
-      let month = displayedWeek.mnth;
-      let date = displayedWeek.dt - displayedWeek.dy;
-      let dayOfWeek = 0;
-
-      calendar.populateWeekCalendar(month, date + 7, dayOfWeek);
-      displayedWeek= {
-        mnth: month,
-        dt: date + 7,
-        dy: dayOfWeek
-      };
-    } else {
-      calendar.populateWeekCalendar(calendar.getNextMonth(displayedWeek.mnth), newStart, 0);
-      displayedWeek= {
-        mnth: calendar.getNextMonth(displayedWeek.mnth),
-        dt: newStart,
-        dy: 0
-      };
-      chopped_up = false;
+  populateDayCalendar(month, date)  {
+    let calendar = '<table class="day_container"><tr>' + '</tr><tr>';
+    let theDate = currentDate.toISOString().slice(0,10);
+    for(let x = 0; x < event_num; x++) {
+      if ("2016-09-17" == test_event[x].startDate) {
+        document.write(test_event[x].title);
+      }
     }
+    calendar += '</tr></table>';
+    $('#day').html('<div class="day"><h3 class="monthName" align="center">' + month.month + ' ' + date + '</h3>' + calendar + '</div>');
   }
 
-  prevWeek() {
-    if (!chopped_down) {
-      let month = displayedWeek.mnth;
-      let date = displayedWeek.dt- displayedWeek.dy;
-      let dayOfWeek = 0;
-      calendar.populateWeekCalendar(month, date - 7, dayOfWeek);
-      displayedWeek = {
-        mnth: month,
-        dt: date - 7,
-        dy: dayOfWeek
-      };
-    } else {
-      calendar.populateWeekCalendar(calendar.getPrevMonth(displayedWeek.mnth), newStart, 0);
-      displayedWeek= {
-        mnth: calendar.getPrevMonth(displayedWeek.mnth),
-        dt: newStart,
-        dy: 0
-      };
-      chopped_down = false;
-    }
+  /**
+  * Shows the Agenda view with a list of 0s .
+  */
+  showAgenda() {
+    let agenda = '<div class="panel panel-default" style="background-color: #FFF">' +
+                 '<div class="panel-heading" style="background-color: #FFF">' +
+                 '<h2 class="text-left">Agenda</h2></div>' +
+                 '<ul class="list-group">';
+    $.ajax({
+      url: 'api/dbSetup.php',
+      data: '',
+      dataType: 'json',
+      success: function(data) {
+        $.each(data, function(index, event) {
+          if (event.start_date >= currentDate.toISOString().slice(0,10)) {
+            $('#agenda .list-group').append(
+              '<li class="list-group-item ' + event.event_id + '">' +
+              '<div class="">' + event.event_name + '</div>' +
+              '<div class="">' + event.event_desc + '</div>' +
+              '</li>'
+            );
+            if (event.start_date != '0000-00-00') {
+              $('.' + event.event_id).append(
+                '<div class="">' +
+                moment(event.start_date, "YYYY-MM-DD").format("ddd, MMM D YYYY") +
+                '</div>'
+              );
+            }
+            if (event.end_date != '0000-00-00') {
+              $('.' + event.event_id).append(
+                '<div class="">' +
+                moment(event.end_date, "YYYY-MM-DD").format("ddd, MMM D YYYY") +
+                '</div>');
+            }
+            $('.' + event.event_id).append(
+              '<div class="">' +
+              moment(event.start_time, "HH-mm-ss").format("h:mm A") +
+              '</div>');
+            if (event.start_time != event.end_time) {
+              $('.' + event.event_id).append(
+                '<div class="">' +
+                moment(event.end_time, "HH-mm-ss").format("h:mm A") +
+                '</div>');
+            }
+          }
+        });
+      }
+    });
+    agenda += '</ul></div>';
+    $('#agenda').html(agenda);
   }
 }
+
+var events = ["Test1", "Test2", "Test3", "Test4", "Test5"];
