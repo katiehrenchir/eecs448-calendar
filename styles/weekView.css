@@ -29,7 +29,7 @@
 }
 
 #week .day_container td {
-  height: 330px;
+  height: 150px;
   padding: 15px;
   border-bottom: thin solid #999;
   border-right: thin solid #999;

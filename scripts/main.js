@@ -1,15 +1,10 @@
-function popUp(date) {
-  this.alert("DATE: " + date);
-}
-
 let currentView = 'year';
 
 const calendar = new Calendar();
-const display = new Display();
 const form = new Form();
 
 function changeView(view) {
-  display.changeView(view);
+  calendar.changeView(view);
 }
 
 $('#set form').submit(function(e) {

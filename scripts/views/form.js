@@ -1,5 +1,8 @@
 /** Class representing event form methods */
 class Form {
+  /**
+  * Initializes the form
+  */
   constructor() {
     this.events = [];
   }
