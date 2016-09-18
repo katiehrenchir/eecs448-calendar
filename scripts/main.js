@@ -19,10 +19,10 @@ $('#set form').submit(function(e) {
 	}
 	else{
 		currentDate.setFullYear(year, month, day);
-		selectedDate = currentDate;
 		$('#year').remove();
 		$('#month').remove();
 		$('#week').remove();
+		$('#day').remove();
 		calendar.init();
 	}
 });
