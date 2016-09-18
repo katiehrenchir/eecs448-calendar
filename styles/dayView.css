@@ -28,8 +28,9 @@
   font-size: 20px;
 }
 
-#day .day_container td {
+#day .day_container tr {
   padding: 15px;
+  width: 95%;
   border-bottom: thin solid #999;
   border-right: thin solid #999;
   text-align: center;
