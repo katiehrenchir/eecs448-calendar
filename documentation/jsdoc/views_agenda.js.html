@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>views/agenda.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Agenda.html">Agenda</a><ul class='methods'><li data-type='method'><a href="Agenda.html#showAgenda">showAgenda</a></li></ul></li><li><a href="Calendar.html">Calendar</a><ul class='methods'><li data-type='method'><a href="Calendar.html#changeView">changeView</a></li><li data-type='method'><a href="Calendar.html#createCalendar">createCalendar</a></li><li data-type='method'><a href="Calendar.html#init">init</a></li></ul></li><li><a href="Day.html">Day</a><ul class='methods'><li data-type='method'><a href="Day.html#populateDayCalendar">populateDayCalendar</a></li></ul></li><li><a href="Form.html">Form</a><ul class='methods'><li data-type='method'><a href="Form.html#createEvent">createEvent</a></li><li data-type='method'><a href="Form.html#deleteEvent">deleteEvent</a></li><li data-type='method'><a href="Form.html#modifyEvent">modifyEvent</a></li></ul></li><li><a href="Month.html">Month</a><ul class='methods'><li data-type='method'><a href="Month.html#getMonth">getMonth</a></li><li data-type='method'><a href="Month.html#populateMonthCalendar">populateMonthCalendar</a></li><li data-type='method'><a href="Month.html#showNextMonth">showNextMonth</a></li><li data-type='method'><a href="Month.html#showPrevMonth">showPrevMonth</a></li></ul></li><li><a href="Week.html">Week</a><ul class='methods'><li data-type='method'><a href="Week.html#getNextMonth">getNextMonth</a></li><li data-type='method'><a href="Week.html#getPrevMonth">getPrevMonth</a></li><li data-type='method'><a href="Week.html#populateWeekCalendar">populateWeekCalendar</a></li><li data-type='method'><a href="Week.html#showNextWeek">showNextWeek</a></li><li data-type='method'><a href="Week.html#showPrevWeek">showPrevWeek</a></li></ul></li><li><a href="Year.html">Year</a><ul class='methods'><li data-type='method'><a href="Year.html#populateYearCalendar">populateYearCalendar</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">views/agenda.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/** Calendar representing the agenda view */
+class Agenda {
+  /**
+  * Shows the Agenda view with a list of 0s .
+  */
+  showAgenda() {
+    let agenda = '&lt;div class="panel panel-default" style="background-color: #FFF">' +
+                 '&lt;div class="panel-heading" style="background-color: #FFF">' +
+                 '&lt;h2 class="text-left">Agenda&lt;/h2>&lt;/div>' +
+                 '&lt;ul class="list-group">';
+    $.ajax({
+      url: 'api/dbSetup.php',
+      data: '',
+      dataType: 'json',
+      success: function(data) {
+        $.each(data, function(index, event) {
+          if (event.start_date >= currentDate.toISOString().slice(0,10)) {
+            $('#agenda .list-group').append(
+              '&lt;li class="list-group-item ' + event.event_id + '">' +
+              '&lt;div class="">' + event.event_name + '&lt;/div>' +
+              '&lt;div class="">' + event.event_desc + '&lt;/div>' +
+              '&lt;/li>'
+            );
+            if (event.start_date != '0000-00-00') {
+              $('.' + event.event_id).append(
+                '&lt;div class="">' +
+                moment(event.start_date, "YYYY-MM-DD").format("ddd, MMM D YYYY") +
+                '&lt;/div>'
+              );
+            }
+            if (event.end_date != '0000-00-00') {
+              $('.' + event.event_id).append(
+                '&lt;div class="">' +
+                moment(event.end_date, "YYYY-MM-DD").format("ddd, MMM D YYYY") +
+                '&lt;/div>');
+            }
+            $('.' + event.event_id).append(
+              '&lt;div class="">' +
+              moment(event.start_time, "HH-mm-ss").format("h:mm A") +
+              '&lt;/div>');
+            if (event.start_time != event.end_time) {
+              $('.' + event.event_id).append(
+                '&lt;div class="">' +
+                moment(event.end_time, "HH-mm-ss").format("h:mm A") +
+                '&lt;/div>');
+            }
+          }
+        });
+      }
+    });
+    agenda += '&lt;/ul>&lt;/div>';
+    $('#agenda').html(agenda);
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.1</a> on Sun Sep 18 2016 00:31:36 GMT-0500 (CDT) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
