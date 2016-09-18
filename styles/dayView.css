@@ -1,0 +1,42 @@
+#day .day {
+  width: 100%;
+  border-radius: 15px;
+  padding: 15px;
+  background-color: #FFF;
+  box-shadow: 0px 5px 5px rgba(0,0,0,.25);
+}
+
+#day .monthName {
+  margin-top: 10px;
+  margin-bottom: 25px;
+  font-size: 24px;
+}
+
+#day .day_container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 10px;
+  border: thin solid #999;
+}
+
+#day .day_container th {
+  padding: 15px;
+  border-top: thin solid #999;
+  border-bottom: thin solid #999;
+  text-align: center;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+#day .day_container td {
+  padding: 15px;
+  border-bottom: thin solid #999;
+  border-right: thin solid #999;
+  text-align: center;
+  font-weight: normal;
+  font-size: 14px;
+}
+
+#day .day_container td:hover {
+  background-color: #fff1f1;
+}

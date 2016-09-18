@@ -19,9 +19,38 @@ const months = [
   { 'month': 'May', 'numeric': 5, 'days': 30, 'firstDay': 1 }
 ];
 
+var test_event = [
+{   event_id: "1" ,
+    title: "Testing" ,
+    description: "This is just a test" ,
+    startDate: "2016-09-17" ,
+    endDate: "2016-09-17" ,
+    startTime: "21:10:00" ,
+    endTime: "21:20:00"
+},
+{   event_id: "2" ,
+    title: "Testing" ,
+    description: "This is just a test" ,
+    startDate: "2016-09-17" ,
+    endDate: "2016-09-17" ,
+    startTime: "22:10:00" ,
+    endTime: "22:20:00"
+},
+{   event_id: "3" ,
+    title: "Testing" ,
+    description: "This is just a test" ,
+    startDate: "2016-09-17" ,
+    endDate: "2016-09-17" ,
+    startTime: "23:10:00" ,
+    endTime: "23:20:00"
+}
+];
+
+var event_num = 3;
+
 let currentDate = new Date();
 let selectedDate = currentDate;
-  
+
 /** Class representing a calendar. */
 class Calendar {
   /**
@@ -54,13 +83,17 @@ class Calendar {
     this.createCalendar('year');
     this.populateYearCalendar();
 
+    this.createCalendar('month');
+    this.populateMonthCalendar(current_month);
+    $('#month').hide();
+
     this.createCalendar('week');
     this.populateWeekCalendar(current_month, current_date, current_dayOfWeek);
     $('#week').hide();
 
-    this.createCalendar('month');
-    this.populateMonthCalendar(current_month);
-    $('#month').hide();
+    this.createCalendar('day');
+    this.populateDayCalendar(current_month, current_date);
+    $('#day').hide();
 
     this.createCalendar('agenda');
     this.showAgenda();
@@ -68,6 +101,13 @@ class Calendar {
 
     // Set default date in create event form
     $('input[type="date"]').val(moment().format('YYYY-MM-DD'));
+
+    if(current_month.numeric > 5)   {
+        let current_year = 2016;
+    }
+    else {
+        let current_year = 2017;
+    }
   }
 
 
@@ -238,8 +278,23 @@ class Calendar {
     displayedWeek= {mnth: month, dt: date-7, dy: dayOfWeek};
   }
 
+  populateDayCalendar(month, date)  {
+      let calendar = '<table class="day_container"><tr>' + '</tr><tr>';
+      let theDate = currentDate.toISOString().slice(0,10);
+      for(let x = 0; x < event_num; x++)
+      {
+          if("2016-09-17" == test_event[x].startDate)
+          {
+              document.write(test_event[x].title);
+          }
+     }
+
+      calendar += '</tr></table>';
+      $('#day').html('<div class="day"><h3 class="monthName" align="center">' + month.month + ' ' + date + '</h3>' + calendar + '</div>');
+  }
+
   /**
-  * Shows the Agenda view with a list of events
+  * Shows the Agenda view with a list of 0s .
   */
   showAgenda() {
     let agenda = '<div class="panel panel-default" style="background-color: #FFF">' +
@@ -289,4 +344,12 @@ class Calendar {
     agenda += '</ul></div>';
     $('#agenda').html(agenda);
   }
+
+
+
+
+
+
 }
+
+var events = ["Test1", "Test2", "Test3", "Test4", "Test5"];
