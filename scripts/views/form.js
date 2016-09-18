@@ -36,11 +36,11 @@ class Form {
   /**
   * Deletes an event
   */
-  deleteEvent() {
+  deleteEvent(eventId) {
     $.ajax({
       url: 'api/deleteEvent.php',
       type: 'POST',
-      data: $('input[name="eventId"]').val(),
+      data: "eventId=" + eventId,
       success: function(data, status, xhr) {
         console.log(data);
       }
@@ -55,15 +55,15 @@ class Form {
   * @param {Object} date - Event start date and end date
   * @param {Object} time - Event start time and end time
   */
-  modifyEvent(id, name, desc, date, time) {
+  editEvent(id, name, desc, date, time) {
     var data = {
-      "eventId": id,
-      "eventName": name,
-      "eventDesc": desc,
-      "startDate": date.start,
-      "endDate": date.end,
-      "startTime": time.start,
-      "endTime": time.end
+      eventId: id,
+      eventName: name,
+      eventDesc: desc,
+      startDate: date.start,
+      endDate: date.end,
+      startTime: time.start,
+      endTime: time.end
     }
     $.ajax({
       url: 'api/editEvent.php',

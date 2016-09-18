@@ -20,7 +20,9 @@ $sql = 'UPDATE events
 
 $result = mysql_query($sql);
 if ($result) {
-  echo 'Record deleted.';
+  echo 'Record edited.';
 }
+
+echo $eventName;
 
 ?>

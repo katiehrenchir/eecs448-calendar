@@ -86,6 +86,43 @@
       </div>
     </div>
 
+    <!-- Edit Event modal -->
+    <div id="edit" class="modal fade">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="close" data-dismiss="modal">&times;</span>
+          <h3 class="modal-title">Edit an Event:</h3>
+        </div>
+        <div class="modal-body">
+          <form method="post">
+            <div class="form-group">
+              <label for="eventName" class="control-label">Event Id</label>
+              <input class="eventId form-control" readonly value="">
+            </div>
+            <div class="form-group">
+              <label for="eventName" class="control-label">Event Name</label>
+              <input type="text" class="form-control" name="eventName">
+            </div>
+            <div class="form-group form-inline">
+              <label for="startDate" class="control-label">From</label>
+              <input type="date" class="form-control" name="startDate" min="2016-08-01" max="2017-05-31">
+              <input type="time" class="form-control" name="startTime">
+            </div>
+            <div class="form-group form-inline">
+              <label for="endDate" class="control-label">To</label>
+              <input type="date" class="form-control" name="endDate" min="2016-08-01" max="2017-05-31">
+              <input type="time" class="form-control" name="endTime">
+            </div>
+            <div class="form-group">
+              <label for="eventDesc" class="control-label">Description</label>
+              <textarea class="form-control" rows="5" id="eventDesc"></textarea>
+            </div>
+            <input type="submit" value="Create" class="btn btn-primary btn-block">
+          </form>
+        </div>
+      </div>
+    </div>
+
     <!-- Set currentDate modal -->
     <div id="set" class="modal fade">
       <div class="modal-content">

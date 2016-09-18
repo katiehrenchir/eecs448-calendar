@@ -41,4 +41,25 @@ $('#create form').submit(function(e) {
   form.createEvent(eventName, eventDesc, date, time);
 });
 
+
+function editEvent(id) {
+  $('#edit').modal('toggle');
+  $('#edit .modal-body .eventId').val(id);
+}
+
+$('#edit form').submit(function(e) {
+  let eventId = $('#edit .modal-body .eventId').val();;
+  let eventName =  $('input[name="eventName"]').val();
+  let eventDesc = $('#eventDesc').val();
+  let date = {
+    "start": $('input[name="startDate"]').val(),
+    "end": $('input[name="endDate"]').val()
+  };
+  let time = {
+    "start": $('input[name="startTime"]').val(),
+    "end": $('input[name="endTime"]').val()
+  };
+  form.editEvent(eventId, eventName, eventDesc, date, time);
+});
+
 calendar.init();
