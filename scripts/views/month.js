@@ -43,6 +43,14 @@ class Month {
       }
     }
   }
+  
+  /**
+  * Displays the current date's month
+  */
+  showCurrentMonth() {
+	displayedMonth = this.getMonth();
+	this.populateMonthCalendar(months[displayedMonth]);
+  }
 
   /**
   * Populates the monthly calendar view with dates
@@ -84,7 +92,8 @@ class Month {
     $('#month').html('<div class="month"><h3 class="monthName" align="center">' + month.month + '</h3>' + calendar + '</div>');
     $('#month .month').prepend(
       '<a id= "prv_btn" class="btn btn-danger" style="float:left;" onclick="calendar.monthView.showPrevMonth()">PREV</a>',
-      '<a id= "nxt_btn" class="btn btn-danger" style="float:right;" onclick="calendar.monthView.showNextMonth()">NEXT</a>'
+      '<a id= "nxt_btn" class="btn btn-danger" style="float:right;" onclick="calendar.monthView.showNextMonth()">NEXT</a>',
+	  '<a id= "cur_btn" class="btn btn-danger" style="float:right; margin-right:50px;" onclick="calendar.monthView.showCurrentMonth()">TODAY</a>'
     );
   }
 

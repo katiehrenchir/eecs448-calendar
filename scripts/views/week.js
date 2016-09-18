@@ -59,6 +59,22 @@ class Week {
       this.chopped_down = false;
     }
   }
+  
+  /**
+  * Displays the current date's month
+  */
+  showCurrentWeek() {
+	let currentMonth = months.filter(function(m) {
+      return m.numeric === currentDate.getMonth() + 1;
+    })[0];
+    this.populateWeekCalendar(currentMonth, currentDate.getDate(), currentDate.getDay());
+    this.displayedWeek = {
+      mnth: currentMonth,
+      dt: currentDate.getDate(),
+      dy: currentDate.getDay()
+    };
+  }
+
 
   /**
   * Retrieves the next month after current
@@ -135,7 +151,8 @@ class Week {
     $('#week').html('<div class="week"><h3 class="monthName" align="center">' + month.month + '</h3>' + calendar + '</div>');
     $('#week .week').prepend(
       '<a id= "prv_btn_week" class="btn btn-danger" style="float:left;" onclick="calendar.weekView.showPrevWeek()">PREV</a>',
-      '<a id= "nxt_btn_week" class="btn btn-danger" style="float:right;" onclick="calendar.weekView.showNextWeek()">NEXT</a>'
+      '<a id= "nxt_btn_week" class="btn btn-danger" style="float:right;" onclick="calendar.weekView.showNextWeek()">NEXT</a>',
+	  '<a id= "cur_btn_week" class="btn btn-danger" style="float:right; margin-right:50px" onclick="calendar.weekView.showCurrentWeek()">TODAY</a>'
     );
   }
 
