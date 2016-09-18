@@ -1,8 +1,3 @@
-/*
-	Created by Ashli Mosiman - 9/14/16
-	Handles form methods
-*/
-
 /** Class representing event form methods */
 class Form {
   constructor() {

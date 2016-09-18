@@ -1,8 +1,3 @@
-/*
-	Created by Erin Coots - 9/12/16
-	Handles sidebar methods
-*/
-
 /** Class representing display methods */
 class Display {
   /**
@@ -36,9 +31,13 @@ class Display {
 		//else{}
 	  //}
 	  //else{
-	    $("#" + this.currentView).hide();
-	    $("#" + view).show();
-	    this.currentView = view;
+	    // $("#" + this.currentView).hide();
+	    // $("#" + view).show();
+	    // this.currentView = view;
 	  //}
+
+    $("#" + this.currentView).hide();
+    $("#" + view).show();
+    this.currentView = view;
   }
 }
