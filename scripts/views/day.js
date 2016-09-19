@@ -1,6 +1,5 @@
 /** Class representing the day */
 class Day {
-
   /**
   * Checks if a date is in range
   * @author http://stackoverflow.com/questions/24246092/checking-if-a-date-falls-between-a-range-of-dates
@@ -10,10 +9,7 @@ class Day {
   * @returns {Boolean} True if the date is in range, false otherwise
   */
   checkDate(currDate, startDate, endDate) {
-    let realEndDate = new Date(endDate.getTime());
-    realEndDate.setDate(realEndDate.getDate() + 1);
-    let inRange = currDate >= startDate && currDate <= endDate;
-    return inRange;
+    return currDate >= startDate && currDate <= endDate;
   }
 
   /**
@@ -21,31 +17,30 @@ class Day {
   */
   populateDayCalendar(month, date)  {
     let calendar = '<table class="day_container">';
-    let theDate = currentDate.toISOString().slice(0,10);
+    let currDate = currentDate.toISOString().slice(0,10);
 
-    let events = [];
     $.ajax({
       url: 'api/dbSetup.php',
       data: '',
       dataType: 'json',
       success: function(data) {
         $.each(data, function(index, event) {
-          if (this.checkDate(date, event.start_date, event.end_date)) {
-            events.push(event);
+          let cDate = new Date(date);
+          let sDate = new Date(event.start_date);
+          let eDate = new Date(event.end_date);
+          let isInRange = new Day().checkDate(cDate, sDate, eDate);
+
+          if (currDate >= event.start_date && currDate <= event.end_date) {
+            let evnt = '<h3>' + event.event_name + '</h3><p>' + event.event_desc + '</p><p>' + event.start_date + ' - ' + event.end_date + '</p';
+            calendar += '<tr>' + evnt + '</tr>';
+          } else {
+            console.log("No events on this day");
           }
         });
+
+        calendar += '</table>';
+        $('#day').html('<div class="day"><h3 class="monthName" align="center">' + month.month + ' ' + date + '</h3>' + calendar + '</div>');
       }
     });
-
-    console.log(events);
-
-    for (let x = 0; x < event_num; x++) {
-      if ("2016-09-18" == test_event[x].startDate) {
-        let evnt = '<h3>' + test_event[x].title + '</h3><p>' + test_event[x].description + '</p><p>' + test_event[x].startTime + ' - ' + test_event[x].endTime + '</p';
-        calendar += '<tr>' + evnt + '</tr>';
-      }
-    }
-    calendar += '</table>';
-    $('#day').html('<div class="day"><h3 class="monthName" align="center">' + month.month + ' ' + date + '</h3>' + calendar + '</div>');
   }
 }
