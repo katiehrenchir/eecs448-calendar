@@ -33,6 +33,6 @@ This project is currently maintained by [Sharynne Azhar][1], [Erin Coots][2], [A
 [6]: http://momentjs.com/
 [7]: http://javascriptissexy.com/oop-in-javascript-what-you-need-to-know/
 [8]: https://www.tutorialspoint.com/php/php_and_mysql.htm
-[9]: http://people.eecs.ku.edu/~sazhar/eecs448-calendar/documentation/index.html
+[9]: http://people.eecs.ku.edu/~sazhar/eecs448-calendar/documentation/jsdoc/index.html
 [10]: https://nodejs.org/en/
 [11]: http://usejsdoc.org/index.html
