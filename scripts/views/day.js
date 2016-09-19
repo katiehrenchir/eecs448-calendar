@@ -1,12 +1,11 @@
 /** Class representing the day */
 class Day {
 
-    constructor()   {
+    constructor(){
         //this.displayedDay = {};
         this.displayNxtDay = true;
         this.currDayNum = currentDate.getDate();
         this.currMonthNum = currentDate.getMonth()+1;
-        this.currMonthName =""; //getMonthName(this.currMonthNum-1);
     }
 
   /**
@@ -28,35 +27,32 @@ class Day {
     //not sure how I would change the currentDate
 
     calendar += '</table>';
-    $('#day').html('<div class="day"><h3 class="monthName" align="center">' + this.currMonthNum + ' ' + this.currDayNum + '</h3>' + calendar + '</div>');
+    $('#day').html('<div class="day"><h3 class="monthName" align="center">' + month.month + ' ' + date + '</h3>' + calendar + '</div>');
     $('#day .day').prepend(
-      '<a id= "prv_btn" class="btn btn-danger" style="float:left;" onclick="calendar.dayView.showPrevDay()">PREV</a>',
-      '<a id= "nxt_btn" class="btn btn-danger" style="float:right;" onclick="calendar.dayView.showNextDay()">NEXT</a>'
+      '<a id= "prv_btn_day" class="btn btn-danger" style="float:left;" onclick="calendar.dayView.showPrevDay()">PREV</a>',
+      '<a id= "nxt_btn_day" class="btn btn-danger" style="float:right;" onclick="calendar.dayView.showNextDay()">NEXT</a>'
     );
-
-    //alert(parseInt(months[this.currMonthNum-1].days));
-    //alert(this.currDayNum+1);
-    //alert(this.displayedDay.mnth);
-    //alert(getNextMonth(currentMonth));
   }
 
   /*
   /Displays the next day, as long as it's not after May 31, 2017
   */
   showNextDay() {
-     // let theDate = currentDate.toISOString().slice(0,10);
-      document.getElementById("nxt_btn").className = "btn btn-danger disabled";
-      //alert(this.currDayNum);
-        if(this.displayNxtDay)    {
-         //reaches May 31st
-         if(this.currMonthNum == 5 && this.currDayNum < month.days) {
-             this.displayNxtDay = false;
-         }
-         else if(this.currDayNum < months[this.currMonthNum-1].days)   {
-             //alert("hello");
-             this.currDayNum++;
-             alert(this.currMonthNum);
-         }
+	if(this.currMonthNum != 5 && this.currDayNum != 31) {
+		this.currDayNum += 1;
+		if(months[this.currMonthNum].days < this.currDayNum){
+			if(this.currMonthNum == 12){
+				this.currMonthNum = 1;
+			}
+			else{
+				this.currMonthNum += 1;
+			}
+			this.currDayNum = 1;
+		}
+    	this.populateDayCalendar(months[this.currMonthNum], this.currDayNum);
+    	if (this.currMonthNum == 5 && this.currDayNum == 31) {
+			document.getElementById("nxt_btn_day").className = "btn btn-danger disabled";
+		}
     }
   }
 
@@ -64,9 +60,22 @@ class Day {
   /Displays the previous day,as long as it's not before Aug 1, 2016
   */
   showPrevDay() {
-     // let theDate = currentDate.toISOString().slice(0,10);
-      document.getElementById("prv_btn").className = "btn btn-danger disabled";
-
+     if (this.currMonthNum != 8 && this.currDayNum != 1) {
+		this.currDayNum -= 1;
+		if(this.currDayNum == 0){
+			if(this.currMonthNum == 1){
+				this.currMonthNum = 12;
+			}
+			else{
+				this.currMonthNum -= 1;
+			}
+			this.currDayNum = 31;
+		}
+    	this.populateDayCalendar(months[this.currMonthNum], this.currDayNum);
+    	if (this.currMonthNum == 8 && this.currDayNum == 1) {
+			document.getElementById("prv_btn_day").className = "btn btn-danger disabled";
+		}
+    }
   }
 
   getMonthName(current_month)   {
