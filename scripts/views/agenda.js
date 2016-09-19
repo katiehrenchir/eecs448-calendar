@@ -6,7 +6,7 @@ class Agenda {
   showAgenda() {
     let agenda = '<div class="panel panel-default" style="background-color: #FFF">' +
                  '<div class="panel-heading" style="background-color: #FFF">' +
-                 '<h2 class="text-left">Agenda</h2></div>' +
+                 '<h2 class="text-left">Upcoming Events</h2></div>' +
                  '<ul class="list-group">';
     $.ajax({
       url: 'api/dbSetup.php',
@@ -14,7 +14,8 @@ class Agenda {
       dataType: 'json',
       success: function(data) {
         $.each(data, function(index, event) {
-          if (event.start_date >= currentDate.toISOString().slice(0,10)) {
+          let currDate = currentDate.toISOString().slice(0,10);
+          if (currDate >= event.start_date) {
             $('#agenda .list-group').append(
               '<li id="' + event.event_id + '" class="list-group-item">' +
               '<div class="">' + event.event_name + '</div>' +
