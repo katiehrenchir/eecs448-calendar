@@ -5,6 +5,7 @@ class Year {
   * Populates the yearly calendar view
   */
   populateYearCalendar() {
+    let yearView = '';
     $.each(months, function(index, month) {
       let calendar = '<table class="day_container"><tr>' +
                   '<th>Su</th>' + '<th>M</th>' +
@@ -38,8 +39,10 @@ class Year {
       }
 
       calendar += '</table>';
-      $('#year').append('<div class="month"><h3 class="monthName">' + month.month + '</h3>' + calendar + '</div>');
+      yearView += '<div class="month"><h3 class="monthName">' + month.month + '</h3>' + calendar + '</div>';
     });
+
+    $('#year').html(yearView);
   }
 
 }
