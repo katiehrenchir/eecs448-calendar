@@ -15,6 +15,7 @@ This project is currently maintained by [Sharynne Azhar][1], [Erin Coots][2], [A
 
 ## Resources
 - [Documentation][9]
+- [Response Object Example][12]
 
 #### This project is powered by:
 - [Bootstrap][5]
@@ -36,3 +37,4 @@ This project is currently maintained by [Sharynne Azhar][1], [Erin Coots][2], [A
 [9]: http://people.eecs.ku.edu/~sazhar/eecs448-calendar/documentation/jsdoc/index.html
 [10]: https://nodejs.org/en/
 [11]: http://usejsdoc.org/index.html
+[12]: http://people.eecs.ku.edu/~sazhar/eecs448-calendar/api/client.php
