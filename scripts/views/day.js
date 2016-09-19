@@ -78,7 +78,13 @@ class Day {
   * Populates the daily calendar view with list of events
   */
   populateDayCalendar(month, date)  {
-    let calendar = '<table class="day_container">';
+    let calendar = '<div class="panel panel-default" style="background-color: #FFF">' +
+                   '<div class="panel-heading" style="background-color: #FFF">' +
+                   '<a id= "prv_btn_day" class="btn btn-danger" style="float:left;" onclick="calendar.dayView.showPrevDay()">PREV</a>' +
+                   '<a id= "nxt_btn_day" class="btn btn-danger" style="float:right;" onclick="calendar.dayView.showNextDay()">NEXT</a>' +
+                   '<a id= "cur_btn_day" class="btn btn-danger" style="float:right; margin-right:50px" onclick="calendar.dayView.showCurrentDay()">TODAY</a>' +
+                   '<h3 class="monthName" align="center">' + month.month + ' ' + date + '</h3>' +
+                   '<ul class="list-group">';
     let currDate = currentDate.toISOString().slice(0,10);
 
     $.ajax({
@@ -87,27 +93,44 @@ class Day {
       dataType: 'json',
       success: function(data) {
         $.each(data, function(index, event) {
-          let cDate = new Date(date);
-          let sDate = new Date(event.start_date);
-          let eDate = new Date(event.end_date);
-          let isInRange = new Day().checkDate(cDate, sDate, eDate);
-
-          if (currDate >= event.start_date && currDate <= event.end_date) {
-            let evnt = '<h3>' + event.event_name + '</h3><p>' + event.event_desc + '</p><p>' + event.start_date + ' - ' + event.end_date + '</p';
-            calendar += '<tr>' + evnt + '</tr>';
-          } else {
-            console.log("No events on this day");
+          let currDate = currentDate.toISOString().slice(0,10);
+          if (currDate >= event.start_date) {
+            $('#day .list-group').append(
+              '<li id="' + event.event_id + '" class="list-group-item">' +
+              '<div class="">' + event.event_name + '</div>' +
+              '<div class="">' + event.event_desc + '</div>' +
+              '</li>'
+            );
+            if (event.start_date != '0000-00-00') {
+              $('#' + event.event_id).append(
+                '<div class="">' +
+                moment(event.start_date, "YYYY-MM-DD").format("ddd, MMM D YYYY") +
+                '</div>'
+              );
+            }
+            if (event.end_date != '0000-00-00') {
+              $('#' + event.event_id).append(
+                '<div class="">' +
+                moment(event.end_date, "YYYY-MM-DD").format("ddd, MMM D YYYY") +
+                '</div>');
+            }
+            $('#' + event.event_id).append(
+              '<div class="">' +
+              moment(event.start_time, "HH-mm-ss").format("h:mm A") +
+              '</div>');
+            if (event.start_time != event.end_time) {
+              $('#' + event.event_id).append(
+                '<div class="">' +
+                moment(event.end_time, "HH-mm-ss").format("h:mm A") +
+                '</div>');
+            }
+            $('#' + event.event_id).append('<button class="btn btn-primary btn-sm" onclick="editEvent(' + event.event_id + ')">Edit Event</button>');
+            $('#' + event.event_id).append('<button class="btn btn-primary btn-sm" onclick="new Form().deleteEvent(' + event.event_id + ')">Delete Event</button>');
           }
         });
-
-        calendar += '</table>';
-        $('#day').html('<div class="day"><h3 class="monthName" align="center">' + month.month + ' ' + date + '</h3>' + calendar + '</div>');
-        $('#day .day').prepend(
-          '<a id= "prv_btn_day" class="btn btn-danger" style="float:left;" onclick="calendar.dayView.showPrevDay()">PREV</a>',
-          '<a id= "nxt_btn_day" class="btn btn-danger" style="float:right;" onclick="calendar.dayView.showNextDay()">NEXT</a>',
-          '<a id= "cur_btn_day" class="btn btn-danger" style="float:right; margin-right:50px" onclick="calendar.dayView.showCurrentDay()">TODAY</a>'
-        );
       }
     });
+    calendar += '</ul></div>';
+    $('#day').html(calendar);
   }
 }

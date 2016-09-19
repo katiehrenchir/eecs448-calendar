@@ -42,7 +42,8 @@ class Form {
       type: 'POST',
       data: "eventId=" + eventId,
       success: function(data, status, xhr) {
-        console.log(data);
+        alert('Record deleted');
+        location.reload();
       }
     })
   }
@@ -70,7 +71,8 @@ class Form {
       type: 'POST',
       data: data,
       success: function(data, status, xhr) {
-        console.log(data);
+        alert('Record edited');
+        location.reload();
       }
     })
   }
