@@ -100,14 +100,14 @@ class Day {
           }
         });
       }
+	  
+	  calendar += '</table>';
+		$('#day').html('<div class="day"><h3 class="monthName" align="center">' + month.month + ' ' + date + '</h3>' + calendar + '</div>');
+		$('#day .day').prepend(
+		'<a id= "prv_btn_day" class="btn btn-danger" style="float:left;" onclick="calendar.dayView.showPrevDay()">PREV</a>',
+		'<a id= "nxt_btn_day" class="btn btn-danger" style="float:right;" onclick="calendar.dayView.showNextDay()">NEXT</a>',
+		'<a id= "cur_btn_day" class="btn btn-danger" style="float:right; margin-right:50px" onclick="calendar.dayView.showCurrentDay()">TODAY</a>'
+		);
     });
-	
-	calendar += '</table>';
-	$('#day').html('<div class="day"><h3 class="monthName" align="center">' + month.month + ' ' + date + '</h3>' + calendar + '</div>');
-	$('#day .day').prepend(
-	'<a id= "prv_btn_day" class="btn btn-danger" style="float:left;" onclick="calendar.dayView.showPrevDay()">PREV</a>',
-	'<a id= "nxt_btn_day" class="btn btn-danger" style="float:right;" onclick="calendar.dayView.showNextDay()">NEXT</a>',
-	'<a id= "cur_btn_day" class="btn btn-danger" style="float:right; margin-right:50px" onclick="calendar.dayView.showCurrentDay()">TODAY</a>'
-	);
   }
 }
