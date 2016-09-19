@@ -1,5 +1,67 @@
 /** Class representing the day */
 class Day {
+	
+  constructor(){
+    this.currDayNum = currentDate.getDate();
+    this.currMonthNum = currentDate.getMonth()+1;
+  }
+
+  /*
+  /Displays the next day, as long as it's not after May 31, 2017
+  */
+  showNextDay() {
+	if(this.currMonthNum != 5 && this.currDayNum != 31) {
+		this.currDayNum += 1;
+		if(months[this.currMonthNum].days < this.currDayNum){
+			if(this.currMonthNum == 12){
+				this.currMonthNum = 1;
+			}
+			else{
+				this.currMonthNum += 1;
+			}
+			this.currDayNum = 1;
+		}
+    	this.populateDayCalendar(months[this.currMonthNum], this.currDayNum);
+    	if (this.currMonthNum == 5 && this.currDayNum == 31) {
+			document.getElementById("nxt_btn_day").className = "btn btn-danger disabled";
+		}
+    }
+  }
+
+  /*
+  /Displays the previous day,as long as it's not before Aug 1, 2016
+  */
+  showPrevDay() {
+     if (this.currMonthNum != 8 && this.currDayNum != 1) {
+		this.currDayNum -= 1;
+		if(this.currDayNum == 0){
+			if(this.currMonthNum == 1){
+				this.currMonthNum = 12;
+			}
+			else{
+				this.currMonthNum -= 1;
+			}
+			this.currDayNum = 31;
+		}
+    	this.populateDayCalendar(months[this.currMonthNum], this.currDayNum);
+    	if (this.currMonthNum == 8 && this.currDayNum == 1) {
+			document.getElementById("prv_btn_day").className = "btn btn-danger disabled";
+		}
+    }
+  }
+  
+  /**
+  * Displays the current date's day view
+  */
+  showCurrentDay() {
+	let currentMonth = months.filter(function(m) {
+      return m.numeric === currentDate.getMonth() + 1;
+    })[0];
+    this.populateDayCalendar(currentMonth, currentDate.getDate());
+    this.currDayNum = currentDate.getDate();
+    this.currMonthNum = currentDate.getMonth()+1;
+  }
+  
   /**
   * Checks if a date is in range
   * @author http://stackoverflow.com/questions/24246092/checking-if-a-date-falls-between-a-range-of-dates
@@ -37,10 +99,15 @@ class Day {
             console.log("No events on this day");
           }
         });
-
-        calendar += '</table>';
-        $('#day').html('<div class="day"><h3 class="monthName" align="center">' + month.month + ' ' + date + '</h3>' + calendar + '</div>');
       }
     });
+	
+	calendar += '</table>';
+	$('#day').html('<div class="day"><h3 class="monthName" align="center">' + month.month + ' ' + date + '</h3>' + calendar + '</div>');
+	$('#day .day').prepend(
+	'<a id= "prv_btn_day" class="btn btn-danger" style="float:left;" onclick="calendar.dayView.showPrevDay()">PREV</a>',
+	'<a id= "nxt_btn_day" class="btn btn-danger" style="float:right;" onclick="calendar.dayView.showNextDay()">NEXT</a>',
+	'<a id= "cur_btn_day" class="btn btn-danger" style="float:right; margin-right:50px" onclick="calendar.dayView.showCurrentDay()">TODAY</a>'
+	);
   }
 }

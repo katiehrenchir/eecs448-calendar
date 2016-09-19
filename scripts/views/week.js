@@ -61,7 +61,7 @@ class Week {
   }
   
   /**
-  * Displays the current date's month
+  * Displays the current date's week
   */
   showCurrentWeek() {
 	let currentMonth = months.filter(function(m) {
