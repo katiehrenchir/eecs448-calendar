@@ -43,7 +43,6 @@ class Form {
       data: "eventId=" + eventId,
       success: function(data, status, xhr) {
         alert('Record deleted');
-        location.reload();
       }
     })
   }
@@ -72,7 +71,6 @@ class Form {
       data: data,
       success: function(data, status, xhr) {
         alert('Record edited');
-        location.reload();
       }
     })
   }
