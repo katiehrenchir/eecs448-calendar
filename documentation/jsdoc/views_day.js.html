@@ -23,7 +23,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Agenda.html">Agenda</a><ul class='methods'><li data-type='method'><a href="Agenda.html#showAgenda">showAgenda</a></li></ul></li><li><a href="Calendar.html">Calendar</a><ul class='methods'><li data-type='method'><a href="Calendar.html#changeView">changeView</a></li><li data-type='method'><a href="Calendar.html#createCalendar">createCalendar</a></li><li data-type='method'><a href="Calendar.html#init">init</a></li></ul></li><li><a href="Day.html">Day</a><ul class='methods'><li data-type='method'><a href="Day.html#checkDate">checkDate</a></li><li data-type='method'><a href="Day.html#populateDayCalendar">populateDayCalendar</a></li></ul></li><li><a href="Form.html">Form</a><ul class='methods'><li data-type='method'><a href="Form.html#createEvent">createEvent</a></li><li data-type='method'><a href="Form.html#deleteEvent">deleteEvent</a></li><li data-type='method'><a href="Form.html#editEvent">editEvent</a></li></ul></li><li><a href="Month.html">Month</a><ul class='methods'><li data-type='method'><a href="Month.html#getMonth">getMonth</a></li><li data-type='method'><a href="Month.html#populateMonthCalendar">populateMonthCalendar</a></li><li data-type='method'><a href="Month.html#showCurrentMonth">showCurrentMonth</a></li><li data-type='method'><a href="Month.html#showNextMonth">showNextMonth</a></li><li data-type='method'><a href="Month.html#showPrevMonth">showPrevMonth</a></li></ul></li><li><a href="Week.html">Week</a><ul class='methods'><li data-type='method'><a href="Week.html#getNextMonth">getNextMonth</a></li><li data-type='method'><a href="Week.html#getPrevMonth">getPrevMonth</a></li><li data-type='method'><a href="Week.html#populateWeekCalendar">populateWeekCalendar</a></li><li data-type='method'><a href="Week.html#showCurrentWeek">showCurrentWeek</a></li><li data-type='method'><a href="Week.html#showNextWeek">showNextWeek</a></li><li data-type='method'><a href="Week.html#showPrevWeek">showPrevWeek</a></li></ul></li><li><a href="Year.html">Year</a><ul class='methods'><li data-type='method'><a href="Year.html#populateYearCalendar">populateYearCalendar</a></li></ul></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Agenda.html">Agenda</a><ul class='methods'><li data-type='method'><a href="Agenda.html#showAgenda">showAgenda</a></li></ul></li><li><a href="Calendar.html">Calendar</a><ul class='methods'><li data-type='method'><a href="Calendar.html#changeView">changeView</a></li><li data-type='method'><a href="Calendar.html#createCalendar">createCalendar</a></li><li data-type='method'><a href="Calendar.html#init">init</a></li></ul></li><li><a href="Day.html">Day</a><ul class='methods'><li data-type='method'><a href="Day.html#checkDate">checkDate</a></li><li data-type='method'><a href="Day.html#populateDayCalendar">populateDayCalendar</a></li><li data-type='method'><a href="Day.html#showCurrentDay">showCurrentDay</a></li></ul></li><li><a href="Form.html">Form</a><ul class='methods'><li data-type='method'><a href="Form.html#createEvent">createEvent</a></li><li data-type='method'><a href="Form.html#deleteEvent">deleteEvent</a></li><li data-type='method'><a href="Form.html#editEvent">editEvent</a></li></ul></li><li><a href="Month.html">Month</a><ul class='methods'><li data-type='method'><a href="Month.html#getMonth">getMonth</a></li><li data-type='method'><a href="Month.html#populateMonthCalendar">populateMonthCalendar</a></li><li data-type='method'><a href="Month.html#showCurrentMonth">showCurrentMonth</a></li><li data-type='method'><a href="Month.html#showNextMonth">showNextMonth</a></li><li data-type='method'><a href="Month.html#showPrevMonth">showPrevMonth</a></li></ul></li><li><a href="Week.html">Week</a><ul class='methods'><li data-type='method'><a href="Week.html#getNextMonth">getNextMonth</a></li><li data-type='method'><a href="Week.html#getPrevMonth">getPrevMonth</a></li><li data-type='method'><a href="Week.html#populateWeekCalendar">populateWeekCalendar</a></li><li data-type='method'><a href="Week.html#showCurrentWeek">showCurrentWeek</a></li><li data-type='method'><a href="Week.html#showNextWeek">showNextWeek</a></li><li data-type='method'><a href="Week.html#showPrevWeek">showPrevWeek</a></li></ul></li><li><a href="Year.html">Year</a><ul class='methods'><li data-type='method'><a href="Year.html#populateYearCalendar">populateYearCalendar</a></li></ul></li></ul>
 </nav>
 
 <div id="main">
@@ -40,6 +40,68 @@
         <article>
             <pre class="prettyprint source linenums"><code>/** Class representing the day */
 class Day {
+
+  constructor(){
+    this.currDayNum = currentDate.getDate();
+    this.currMonthNum = currentDate.getMonth()+1;
+  }
+
+  /*
+  * Displays the next day, as long as it's not after May 31, 2017
+  */
+  showNextDay() {
+    if(this.currMonthNum != 5 &amp;&amp; this.currDayNum != 31) {
+      this.currDayNum += 1;
+      if(months[this.currMonthNum].days &lt; this.currDayNum){
+        if(this.currMonthNum == 12){
+          this.currMonthNum = 1;
+        }
+        else{
+          this.currMonthNum += 1;
+        }
+        this.currDayNum = 1;
+      }
+      this.populateDayCalendar(months[this.currMonthNum], this.currDayNum);
+      if (this.currMonthNum == 5 &amp;&amp; this.currDayNum == 31) {
+        document.getElementById("nxt_btn_day").className = "btn btn-danger disabled";
+      }
+    }
+  }
+
+  /*
+  * Displays the previous day,as long as it's not before Aug 1, 2016
+  */
+  showPrevDay() {
+    if (this.currMonthNum != 8 &amp;&amp; this.currDayNum != 1) {
+      this.currDayNum -= 1;
+      if(this.currDayNum == 0){
+        if(this.currMonthNum == 1){
+          this.currMonthNum = 12;
+        }
+        else{
+          this.currMonthNum -= 1;
+        }
+        this.currDayNum = 31;
+      }
+      this.populateDayCalendar(months[this.currMonthNum], this.currDayNum);
+      if (this.currMonthNum == 8 &amp;&amp; this.currDayNum == 1) {
+        document.getElementById("prv_btn_day").className = "btn btn-danger disabled";
+      }
+    }
+  }
+
+  /**
+  * Displays the current date's day view
+  */
+  showCurrentDay() {
+    let currentMonth = months.filter(function(m) {
+      return m.numeric === currentDate.getMonth() + 1;
+    })[0];
+    this.populateDayCalendar(currentMonth, currentDate.getDate());
+    this.currDayNum = currentDate.getDate();
+    this.currMonthNum = currentDate.getMonth()+1;
+  }
+
   /**
   * Checks if a date is in range
   * @author http://stackoverflow.com/questions/24246092/checking-if-a-date-falls-between-a-range-of-dates
@@ -80,6 +142,11 @@ class Day {
 
         calendar += '&lt;/table>';
         $('#day').html('&lt;div class="day">&lt;h3 class="monthName" align="center">' + month.month + ' ' + date + '&lt;/h3>' + calendar + '&lt;/div>');
+        $('#day .day').prepend(
+          '&lt;a id= "prv_btn_day" class="btn btn-danger" style="float:left;" onclick="calendar.dayView.showPrevDay()">PREV&lt;/a>',
+          '&lt;a id= "nxt_btn_day" class="btn btn-danger" style="float:right;" onclick="calendar.dayView.showNextDay()">NEXT&lt;/a>',
+          '&lt;a id= "cur_btn_day" class="btn btn-danger" style="float:right; margin-right:50px" onclick="calendar.dayView.showCurrentDay()">TODAY&lt;/a>'
+        );
       }
     });
   }
@@ -96,7 +163,7 @@ class Day {
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.1</a> on Sun Sep 18 2016 20:12:12 GMT-0500 (CDT) using the Minami theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.1</a> on Sun Sep 18 2016 22:24:01 GMT-0500 (CDT) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>
