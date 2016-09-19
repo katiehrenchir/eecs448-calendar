@@ -23,7 +23,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Agenda.html">Agenda</a><ul class='methods'><li data-type='method'><a href="Agenda.html#showAgenda">showAgenda</a></li></ul></li><li><a href="Calendar.html">Calendar</a><ul class='methods'><li data-type='method'><a href="Calendar.html#changeView">changeView</a></li><li data-type='method'><a href="Calendar.html#createCalendar">createCalendar</a></li><li data-type='method'><a href="Calendar.html#init">init</a></li></ul></li><li><a href="Day.html">Day</a><ul class='methods'><li data-type='method'><a href="Day.html#populateDayCalendar">populateDayCalendar</a></li></ul></li><li><a href="Form.html">Form</a><ul class='methods'><li data-type='method'><a href="Form.html#createEvent">createEvent</a></li><li data-type='method'><a href="Form.html#deleteEvent">deleteEvent</a></li><li data-type='method'><a href="Form.html#modifyEvent">modifyEvent</a></li></ul></li><li><a href="Month.html">Month</a><ul class='methods'><li data-type='method'><a href="Month.html#getMonth">getMonth</a></li><li data-type='method'><a href="Month.html#populateMonthCalendar">populateMonthCalendar</a></li><li data-type='method'><a href="Month.html#showNextMonth">showNextMonth</a></li><li data-type='method'><a href="Month.html#showPrevMonth">showPrevMonth</a></li></ul></li><li><a href="Week.html">Week</a><ul class='methods'><li data-type='method'><a href="Week.html#getNextMonth">getNextMonth</a></li><li data-type='method'><a href="Week.html#getPrevMonth">getPrevMonth</a></li><li data-type='method'><a href="Week.html#populateWeekCalendar">populateWeekCalendar</a></li><li data-type='method'><a href="Week.html#showNextWeek">showNextWeek</a></li><li data-type='method'><a href="Week.html#showPrevWeek">showPrevWeek</a></li></ul></li><li><a href="Year.html">Year</a><ul class='methods'><li data-type='method'><a href="Year.html#populateYearCalendar">populateYearCalendar</a></li></ul></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Agenda.html">Agenda</a><ul class='methods'><li data-type='method'><a href="Agenda.html#showAgenda">showAgenda</a></li></ul></li><li><a href="Calendar.html">Calendar</a><ul class='methods'><li data-type='method'><a href="Calendar.html#changeView">changeView</a></li><li data-type='method'><a href="Calendar.html#createCalendar">createCalendar</a></li><li data-type='method'><a href="Calendar.html#init">init</a></li></ul></li><li><a href="Day.html">Day</a><ul class='methods'><li data-type='method'><a href="Day.html#checkDate">checkDate</a></li><li data-type='method'><a href="Day.html#populateDayCalendar">populateDayCalendar</a></li></ul></li><li><a href="Form.html">Form</a><ul class='methods'><li data-type='method'><a href="Form.html#createEvent">createEvent</a></li><li data-type='method'><a href="Form.html#deleteEvent">deleteEvent</a></li><li data-type='method'><a href="Form.html#editEvent">editEvent</a></li></ul></li><li><a href="Month.html">Month</a><ul class='methods'><li data-type='method'><a href="Month.html#getMonth">getMonth</a></li><li data-type='method'><a href="Month.html#populateMonthCalendar">populateMonthCalendar</a></li><li data-type='method'><a href="Month.html#showCurrentMonth">showCurrentMonth</a></li><li data-type='method'><a href="Month.html#showNextMonth">showNextMonth</a></li><li data-type='method'><a href="Month.html#showPrevMonth">showPrevMonth</a></li></ul></li><li><a href="Week.html">Week</a><ul class='methods'><li data-type='method'><a href="Week.html#getNextMonth">getNextMonth</a></li><li data-type='method'><a href="Week.html#getPrevMonth">getPrevMonth</a></li><li data-type='method'><a href="Week.html#populateWeekCalendar">populateWeekCalendar</a></li><li data-type='method'><a href="Week.html#showCurrentWeek">showCurrentWeek</a></li><li data-type='method'><a href="Week.html#showNextWeek">showNextWeek</a></li><li data-type='method'><a href="Week.html#showPrevWeek">showPrevWeek</a></li></ul></li><li><a href="Year.html">Year</a><ul class='methods'><li data-type='method'><a href="Year.html#populateYearCalendar">populateYearCalendar</a></li></ul></li></ul>
 </nav>
 
 <div id="main">
@@ -46,7 +46,7 @@ class Agenda {
   showAgenda() {
     let agenda = '&lt;div class="panel panel-default" style="background-color: #FFF">' +
                  '&lt;div class="panel-heading" style="background-color: #FFF">' +
-                 '&lt;h2 class="text-left">Agenda&lt;/h2>&lt;/div>' +
+                 '&lt;h2 class="text-left">Upcoming Events&lt;/h2>&lt;/div>' +
                  '&lt;ul class="list-group">';
     $.ajax({
       url: 'api/dbSetup.php',
@@ -54,36 +54,39 @@ class Agenda {
       dataType: 'json',
       success: function(data) {
         $.each(data, function(index, event) {
-          if (event.start_date >= currentDate.toISOString().slice(0,10)) {
+          let currDate = currentDate.toISOString().slice(0,10);
+          if (currDate >= event.start_date) {
             $('#agenda .list-group').append(
-              '&lt;li class="list-group-item ' + event.event_id + '">' +
+              '&lt;li id="' + event.event_id + '" class="list-group-item">' +
               '&lt;div class="">' + event.event_name + '&lt;/div>' +
               '&lt;div class="">' + event.event_desc + '&lt;/div>' +
               '&lt;/li>'
             );
             if (event.start_date != '0000-00-00') {
-              $('.' + event.event_id).append(
+              $('#' + event.event_id).append(
                 '&lt;div class="">' +
                 moment(event.start_date, "YYYY-MM-DD").format("ddd, MMM D YYYY") +
                 '&lt;/div>'
               );
             }
             if (event.end_date != '0000-00-00') {
-              $('.' + event.event_id).append(
+              $('#' + event.event_id).append(
                 '&lt;div class="">' +
                 moment(event.end_date, "YYYY-MM-DD").format("ddd, MMM D YYYY") +
                 '&lt;/div>');
             }
-            $('.' + event.event_id).append(
+            $('#' + event.event_id).append(
               '&lt;div class="">' +
               moment(event.start_time, "HH-mm-ss").format("h:mm A") +
               '&lt;/div>');
             if (event.start_time != event.end_time) {
-              $('.' + event.event_id).append(
+              $('#' + event.event_id).append(
                 '&lt;div class="">' +
                 moment(event.end_time, "HH-mm-ss").format("h:mm A") +
                 '&lt;/div>');
             }
+            $('#' + event.event_id).append('&lt;button class="btn btn-primary btn-sm" onclick="editEvent(' + event.event_id + ')">Edit Event&lt;/button>');
+            $('#' + event.event_id).append('&lt;button class="btn btn-primary btn-sm" onclick="new Form().deleteEvent(' + event.event_id + ')">Delete Event&lt;/button>');
           }
         });
       }
@@ -104,7 +107,7 @@ class Agenda {
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.1</a> on Sun Sep 18 2016 00:31:36 GMT-0500 (CDT) using the Minami theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.1</a> on Sun Sep 18 2016 20:12:12 GMT-0500 (CDT) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>

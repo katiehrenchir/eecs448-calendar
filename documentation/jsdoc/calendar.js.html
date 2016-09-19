@@ -23,7 +23,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Agenda.html">Agenda</a><ul class='methods'><li data-type='method'><a href="Agenda.html#showAgenda">showAgenda</a></li></ul></li><li><a href="Calendar.html">Calendar</a><ul class='methods'><li data-type='method'><a href="Calendar.html#changeView">changeView</a></li><li data-type='method'><a href="Calendar.html#createCalendar">createCalendar</a></li><li data-type='method'><a href="Calendar.html#init">init</a></li></ul></li><li><a href="Day.html">Day</a><ul class='methods'><li data-type='method'><a href="Day.html#populateDayCalendar">populateDayCalendar</a></li></ul></li><li><a href="Form.html">Form</a><ul class='methods'><li data-type='method'><a href="Form.html#createEvent">createEvent</a></li><li data-type='method'><a href="Form.html#deleteEvent">deleteEvent</a></li><li data-type='method'><a href="Form.html#modifyEvent">modifyEvent</a></li></ul></li><li><a href="Month.html">Month</a><ul class='methods'><li data-type='method'><a href="Month.html#getMonth">getMonth</a></li><li data-type='method'><a href="Month.html#populateMonthCalendar">populateMonthCalendar</a></li><li data-type='method'><a href="Month.html#showNextMonth">showNextMonth</a></li><li data-type='method'><a href="Month.html#showPrevMonth">showPrevMonth</a></li></ul></li><li><a href="Week.html">Week</a><ul class='methods'><li data-type='method'><a href="Week.html#getNextMonth">getNextMonth</a></li><li data-type='method'><a href="Week.html#getPrevMonth">getPrevMonth</a></li><li data-type='method'><a href="Week.html#populateWeekCalendar">populateWeekCalendar</a></li><li data-type='method'><a href="Week.html#showNextWeek">showNextWeek</a></li><li data-type='method'><a href="Week.html#showPrevWeek">showPrevWeek</a></li></ul></li><li><a href="Year.html">Year</a><ul class='methods'><li data-type='method'><a href="Year.html#populateYearCalendar">populateYearCalendar</a></li></ul></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Agenda.html">Agenda</a><ul class='methods'><li data-type='method'><a href="Agenda.html#showAgenda">showAgenda</a></li></ul></li><li><a href="Calendar.html">Calendar</a><ul class='methods'><li data-type='method'><a href="Calendar.html#changeView">changeView</a></li><li data-type='method'><a href="Calendar.html#createCalendar">createCalendar</a></li><li data-type='method'><a href="Calendar.html#init">init</a></li></ul></li><li><a href="Day.html">Day</a><ul class='methods'><li data-type='method'><a href="Day.html#checkDate">checkDate</a></li><li data-type='method'><a href="Day.html#populateDayCalendar">populateDayCalendar</a></li></ul></li><li><a href="Form.html">Form</a><ul class='methods'><li data-type='method'><a href="Form.html#createEvent">createEvent</a></li><li data-type='method'><a href="Form.html#deleteEvent">deleteEvent</a></li><li data-type='method'><a href="Form.html#editEvent">editEvent</a></li></ul></li><li><a href="Month.html">Month</a><ul class='methods'><li data-type='method'><a href="Month.html#getMonth">getMonth</a></li><li data-type='method'><a href="Month.html#populateMonthCalendar">populateMonthCalendar</a></li><li data-type='method'><a href="Month.html#showCurrentMonth">showCurrentMonth</a></li><li data-type='method'><a href="Month.html#showNextMonth">showNextMonth</a></li><li data-type='method'><a href="Month.html#showPrevMonth">showPrevMonth</a></li></ul></li><li><a href="Week.html">Week</a><ul class='methods'><li data-type='method'><a href="Week.html#getNextMonth">getNextMonth</a></li><li data-type='method'><a href="Week.html#getPrevMonth">getPrevMonth</a></li><li data-type='method'><a href="Week.html#populateWeekCalendar">populateWeekCalendar</a></li><li data-type='method'><a href="Week.html#showCurrentWeek">showCurrentWeek</a></li><li data-type='method'><a href="Week.html#showNextWeek">showNextWeek</a></li><li data-type='method'><a href="Week.html#showPrevWeek">showPrevWeek</a></li></ul></li><li><a href="Year.html">Year</a><ul class='methods'><li data-type='method'><a href="Year.html#populateYearCalendar">populateYearCalendar</a></li></ul></li></ul>
 </nav>
 
 <div id="main">
@@ -38,35 +38,7 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>var test_event = [
-{   event_id: "1" ,
-    title: "Testing" ,
-    description: "This is just a test" ,
-    startDate: "2016-09-17" ,
-    endDate: "2016-09-17" ,
-    startTime: "21:10:00" ,
-    endTime: "21:20:00"
-},
-{   event_id: "2" ,
-    title: "Testing" ,
-    description: "This is just a test" ,
-    startDate: "2016-09-17" ,
-    endDate: "2016-09-17" ,
-    startTime: "22:10:00" ,
-    endTime: "22:20:00"
-},
-{   event_id: "3" ,
-    title: "Testing" ,
-    description: "This is just a test" ,
-    startDate: "2016-09-17" ,
-    endDate: "2016-09-17" ,
-    startTime: "23:10:00" ,
-    endTime: "23:20:00"
-}
-];
-
-let event_num = 3;
-let selectedDate = currentDate;
+            <pre class="prettyprint source linenums"><code>let selectedDate = currentDate;
 let displayedMonth = 0;
 
 /** Class representing a calendar. */
@@ -79,49 +51,39 @@ class Calendar {
     this.monthView = new Month();
     this.weekView = new Week();
     this.dayView = new Day();
+
+    this.current_date = currentDate.getDate();
+    this.current_dayOfWeek = currentDate.getDay();
+    this.current_month = months.filter(function(m) {
+      return m.numeric === currentDate.getMonth() + 1;
+    })[0];
   }
 
   /**
   * Initializes the calendar views. Default view - Yearly
   */
   init() {
-    let current_date = currentDate.getDate();
-    let current_dayOfWeek = currentDate.getDay();
-    let current_month = months.filter(function(m) {
-      return m.numeric === currentDate.getMonth() + 1;
-    })[0];
 
     displayedMonth = this.monthView.getMonth();
 
     this.weekView.displayedWeek = {
-      mnth: current_month,
-      dt: current_date,
-      dy: current_dayOfWeek
+      mnth: this.current_month,
+      dt: this.current_date,
+      dy: this.current_dayOfWeek
     };
 
     this.createCalendar('year');
     this.yearView.populateYearCalendar();
 
     this.createCalendar('month');
-    this.monthView.populateMonthCalendar(current_month);
-    $('#month').hide();
-
     this.createCalendar('week');
-    this.weekView.populateWeekCalendar(current_month, current_date, current_dayOfWeek);
-    $('#week').hide();
-
     this.createCalendar('day');
-    this.dayView.populateDayCalendar(current_month, current_date);
-    $('#day').hide();
-
     this.createCalendar('agenda');
-    this.agendaView.showAgenda();
-    $('#agenda').hide();
 
     // Set default date in create event form
     $('input[type="date"]').val(moment().format('YYYY-MM-DD'));
 
-    if (current_month.numeric > 5) {
+    if (this.current_month.numeric > 5) {
       let current_year = 2016;
     }
     else {
@@ -142,38 +104,29 @@ class Calendar {
   * @param {String} view - The view type to display
   */
   changeView(view) {
-	  //if(view == 'today'){
-		//if(this.currentView == 'month'){
-			//$("#" + this.currentView).hide();
-			//$("#" + 'month').show();
-			//this.currentView = 'month';
-		//}
-		//else if(this.currentView == 'week'){
-			//$("#" + this.currentView).hide();
-			//$("#" + 'week').show();
-			//this.currentView = 'week';
-		//}
-		//else if(this.currentView == 'day'){
-			//$("#" + this.currentView).hide();
-			//$("#" + 'day').show();
-			//this.currentView = 'day';
-		//}
-		//else{}
-	  //}
-	  //else{
-	    // $("#" + this.currentView).hide();
-	    // $("#" + view).show();
-	    // this.currentView = view;
-	  //}
-
     $("#" + this.currentView).hide();
+    switch (view) {
+      case 'year':
+        this.yearView.populateYearCalendar();
+        break;
+      case 'month':
+        this.monthView.populateMonthCalendar(this.current_month);
+        break;
+      case 'week':
+        this.weekView.populateWeekCalendar(this.current_month, this.current_date, this.current_dayOfWeek);
+        break;
+      case 'day':
+        this.dayView.populateDayCalendar(this.current_month, this.current_date);
+        break;
+      case 'agenda':
+        this.agendaView.showAgenda();
+        break;
+    }
     $("#" + view).show();
     this.currentView = view;
   }
 
 }
-
-var events = ["Test1", "Test2", "Test3", "Test4", "Test5"];
 </code></pre>
         </article>
     </section>
@@ -186,7 +139,7 @@ var events = ["Test1", "Test2", "Test3", "Test4", "Test5"];
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.1</a> on Sun Sep 18 2016 00:31:36 GMT-0500 (CDT) using the Minami theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.1</a> on Sun Sep 18 2016 20:12:12 GMT-0500 (CDT) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>

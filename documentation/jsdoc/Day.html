@@ -23,7 +23,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Agenda.html">Agenda</a><ul class='methods'><li data-type='method'><a href="Agenda.html#showAgenda">showAgenda</a></li></ul></li><li><a href="Calendar.html">Calendar</a><ul class='methods'><li data-type='method'><a href="Calendar.html#changeView">changeView</a></li><li data-type='method'><a href="Calendar.html#createCalendar">createCalendar</a></li><li data-type='method'><a href="Calendar.html#init">init</a></li></ul></li><li><a href="Day.html">Day</a><ul class='methods'><li data-type='method'><a href="Day.html#populateDayCalendar">populateDayCalendar</a></li></ul></li><li><a href="Form.html">Form</a><ul class='methods'><li data-type='method'><a href="Form.html#createEvent">createEvent</a></li><li data-type='method'><a href="Form.html#deleteEvent">deleteEvent</a></li><li data-type='method'><a href="Form.html#modifyEvent">modifyEvent</a></li></ul></li><li><a href="Month.html">Month</a><ul class='methods'><li data-type='method'><a href="Month.html#getMonth">getMonth</a></li><li data-type='method'><a href="Month.html#populateMonthCalendar">populateMonthCalendar</a></li><li data-type='method'><a href="Month.html#showNextMonth">showNextMonth</a></li><li data-type='method'><a href="Month.html#showPrevMonth">showPrevMonth</a></li></ul></li><li><a href="Week.html">Week</a><ul class='methods'><li data-type='method'><a href="Week.html#getNextMonth">getNextMonth</a></li><li data-type='method'><a href="Week.html#getPrevMonth">getPrevMonth</a></li><li data-type='method'><a href="Week.html#populateWeekCalendar">populateWeekCalendar</a></li><li data-type='method'><a href="Week.html#showNextWeek">showNextWeek</a></li><li data-type='method'><a href="Week.html#showPrevWeek">showPrevWeek</a></li></ul></li><li><a href="Year.html">Year</a><ul class='methods'><li data-type='method'><a href="Year.html#populateYearCalendar">populateYearCalendar</a></li></ul></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Agenda.html">Agenda</a><ul class='methods'><li data-type='method'><a href="Agenda.html#showAgenda">showAgenda</a></li></ul></li><li><a href="Calendar.html">Calendar</a><ul class='methods'><li data-type='method'><a href="Calendar.html#changeView">changeView</a></li><li data-type='method'><a href="Calendar.html#createCalendar">createCalendar</a></li><li data-type='method'><a href="Calendar.html#init">init</a></li></ul></li><li><a href="Day.html">Day</a><ul class='methods'><li data-type='method'><a href="Day.html#checkDate">checkDate</a></li><li data-type='method'><a href="Day.html#populateDayCalendar">populateDayCalendar</a></li></ul></li><li><a href="Form.html">Form</a><ul class='methods'><li data-type='method'><a href="Form.html#createEvent">createEvent</a></li><li data-type='method'><a href="Form.html#deleteEvent">deleteEvent</a></li><li data-type='method'><a href="Form.html#editEvent">editEvent</a></li></ul></li><li><a href="Month.html">Month</a><ul class='methods'><li data-type='method'><a href="Month.html#getMonth">getMonth</a></li><li data-type='method'><a href="Month.html#populateMonthCalendar">populateMonthCalendar</a></li><li data-type='method'><a href="Month.html#showCurrentMonth">showCurrentMonth</a></li><li data-type='method'><a href="Month.html#showNextMonth">showNextMonth</a></li><li data-type='method'><a href="Month.html#showPrevMonth">showPrevMonth</a></li></ul></li><li><a href="Week.html">Week</a><ul class='methods'><li data-type='method'><a href="Week.html#getNextMonth">getNextMonth</a></li><li data-type='method'><a href="Week.html#getPrevMonth">getPrevMonth</a></li><li data-type='method'><a href="Week.html#populateWeekCalendar">populateWeekCalendar</a></li><li data-type='method'><a href="Week.html#showCurrentWeek">showCurrentWeek</a></li><li data-type='method'><a href="Week.html#showNextWeek">showNextWeek</a></li><li data-type='method'><a href="Week.html#showPrevWeek">showPrevWeek</a></li></ul></li><li><a href="Year.html">Year</a><ul class='methods'><li data-type='method'><a href="Year.html#populateYearCalendar">populateYearCalendar</a></li></ul></li></ul>
 </nav>
 
 <div id="main">
@@ -154,6 +154,212 @@
 
     
 
+    <h4 class="name" id="checkDate"><span class="type-signature"></span>checkDate<span class="signature">(currDate, startDate, endDate)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Checks if a date is in range
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>currDate</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Date</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The current date specified</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>startDate</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Date</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The starting date range</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>endDate</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Date</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The ending date range</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>http://stackoverflow.com/questions/24246092/checking-if-a-date-falls-between-a-range-of-dates</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="views_day.js.html">views/day.js</a>, <a href="views_day.js.html#line11">line 11</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    True if the date is in range, false otherwise
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
     <h4 class="name" id="populateDayCalendar"><span class="type-signature"></span>populateDayCalendar<span class="signature">()</span><span class="type-signature"></span></h4>
 
     
@@ -205,7 +411,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="views_day.js.html">views/day.js</a>, <a href="views_day.js.html#line6">line 6</a>
+        <a href="views_day.js.html">views/day.js</a>, <a href="views_day.js.html#line18">line 18</a>
     </li></ul></dd>
     
 
@@ -249,7 +455,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.1</a> on Sun Sep 18 2016 00:31:36 GMT-0500 (CDT) using the Minami theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.1</a> on Sun Sep 18 2016 20:12:12 GMT-0500 (CDT) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>
