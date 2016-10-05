@@ -4,10 +4,10 @@
   // Database information
   //----------------------------------------------------------------------
   $server = 'mysql.eecs.ku.edu';
-  $username = 'sazhar';
-  $password = 'dVBaGrGUnJ24e6uJ';
+  $username = 'athomas';
+  $password = 'Password123!';
 
-  $db = 'sazhar';
+  $db = 'athomas';
   $table = 'events';
 
   //----------------------------------------------------------------------
