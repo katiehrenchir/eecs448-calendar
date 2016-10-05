@@ -53,7 +53,7 @@
     </div>
 
     <!-- Create Event modal -->
-    <div id="create" class="modal fade">
+   <div id="create" class="modal fade">
       <div class="modal-content">
         <div class="modal-header">
           <span class="close" data-dismiss="modal">&times;</span>
@@ -78,6 +78,64 @@
             <div class="form-group">
               <label for="eventDesc" class="control-label">Description</label>
               <textarea class="form-control" rows="5" id="eventDesc"></textarea>
+            </div>
+             <div class="form-group form-inline">
+              <label for="reDate" class="control-label">Recurring Based on Date</label>
+              <select name="reDate">
+                <option value=0>None</option>
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+                <option value=4>4</option>
+                <option value=5>5</option>
+                <option value=6>6</option>
+                <option value=7>7</option>
+                <option value=8>8</option>
+                <option value=9>9</option>
+                <option value=10>10</option>
+                <option value=11>11</option>
+                <option value=12>12</option>
+                <option value=13>13</option>
+                <option value=14>14</option>
+                <option value=15>15</option>
+                <option value=16>16</option>
+                <option value=17>17</option>
+                <option value=18>18</option>
+                <option value=19>19</option>
+                <option value=21>21</option>
+                <option value=22>22</option>
+                <option value=23>23</option>
+                <option value=24>24</option>
+                <option value=25>25</option>
+                <option value=26>26</option>
+                <option value=27>27</option>
+                <option value=28>28</option>
+                <option value=29>29</option>
+                <option value=30>30</option>
+                <option value=31>31</option>
+              </select>
+            </div>
+            <div class="form-group form-inline">
+              <label for="reWeek" class="control-label">Recurring Based on Day of the Week</label>
+              <select name="reWeek">
+                 <option value=0>None</option>
+              	<option value=1>Monday</option>
+                <option value=2>Tuesday</option>
+                <option value=3>Wednesday</option>
+                <option value=4>Thursday</option>
+                <option value=5>Friday</option>
+                <option value=6>Saturday</option>
+                <option value=6>Sunday</option>
+              </select>
+            </div>
+             <div class="form-group form-inline">
+              <label for="reWeekly" class="control-label">Other Recurring Options</label>
+              <select name="reWeekly">
+                <option value=0>None</option>
+              	<option value=1>Weekly</option>
+                <option value=2>Biweekly</option>
+                <option value=3>Monthly</option>
+              </select>
             </div>
             <input type="submit" value="Create" class="btn btn-primary btn-block">
           </form>
