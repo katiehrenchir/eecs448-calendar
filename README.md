@@ -30,21 +30,21 @@ It is currently maintained by [Yehan Li][13], [Mac Crider][14], [Katie Hrenchir]
 ### see google doc for description of each task
 - [ ] Bugs
 	- [ ] Prev and Next Buttons in Day view
-	-[ ] Set today
-	-[ ] Edit event  
-	-[ ] Create event
+	- [ ] Set today
+	- [ ] Edit event  
+	- [ ] Create event
 
--[ ] New functionalities 
-	-[ ] Multi-day events
-	-[ ] Recurring events
-		-[x] weekly
-		-[x] bi weekly
-		-[x] monthly
-		-[x] monthly by date
-		-[x] weekly by day of the week
+- [ ] New functionalities 
+	- [ ] Multi-day events
+	- [ ] Recurring events
+		- [x] weekly
+		- [x] bi weekly
+		- [x] monthly
+		- [x] monthly by date
+		- [x] weekly by day of the week
 	-[ ] Events within time frames
-		-[x] events connected to time frame
-		-[ ] overlapping events
+		- [x] events connected to time frame
+		- [ ] overlapping events
  
 
 
