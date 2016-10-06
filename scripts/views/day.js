@@ -94,8 +94,41 @@ class Day {
       success: function(data) {
         $.each(data, function(index, event) {
           let currDate = currentDate.toISOString().slice(0,10);
-          if (currDate >= event.start_date) {
+          if (currDate <= event.start_date) {
             $('#day .list-group').append(
+              '<li id="' + event.event_id + '" class="list-group-item">' +
+              '<div class="">' + event.event_name + '</div>' +
+              '<div class="">' + event.event_desc + '</div>' +
+              '</li>'
+            );
+            if (event.start_date != '0000-00-00') {
+              $('#' + event.event_id).append(
+                '<div class="">' +
+                moment(event.start_date, "YYYY-MM-DD").format("ddd, MMM D YYYY") +
+                '</div>'
+              );
+            }
+            if (event.end_date != '0000-00-00') {
+              $('#' + event.event_id).append(
+                '<div class="">' +
+                moment(event.end_date, "YYYY-MM-DD").format("ddd, MMM D YYYY") +
+                '</div>');
+            }
+            $('#' + event.event_id).append(
+              '<div class="">' +
+              moment(event.start_time, "HH-mm-ss").format("h:mm A") +
+              '</div>');
+            if (event.start_time != event.end_time) {
+              $('#' + event.event_id).append(
+                '<div class="">' +
+                moment(event.end_time, "HH-mm-ss").format("h:mm A") +
+                '</div>');
+            }
+            $('#' + event.event_id).append('<button class="btn btn-primary btn-sm" onclick="editEvent(' + event.event_id + ')">Edit Event</button>');
+            $('#' + event.event_id).append('<button class="btn btn-primary btn-sm" onclick="new Form().deleteEvent(' + event.event_id + ')">Delete Event</button>');
+          }
+          else {
+          	$('#day .list-group').append(
               '<li id="' + event.event_id + '" class="list-group-item">' +
               '<div class="">' + event.event_name + '</div>' +
               '<div class="">' + event.event_desc + '</div>' +
