@@ -27,7 +27,7 @@ It is currently maintained by [Yehan Li][13], [Mac Crider][14], [Katie Hrenchir]
 - [TutorialsPoint PHP & MySQL][8]
 
 ## TO DO
-### see google doc for description of each task
+### See Google Doc for description of each task
 - [ ] Bugs
 	- [ ] Prev and Next Buttons in Day view
 	- [ ] Set today
@@ -42,7 +42,7 @@ It is currently maintained by [Yehan Li][13], [Mac Crider][14], [Katie Hrenchir]
 		- [x] monthly
 		- [x] monthly by date
 		- [x] weekly by day of the week
-	-[ ] Events within time frames
+	- [ ] Events within time frames
 		- [x] events connected to time frame
 		- [ ] overlapping events
  
