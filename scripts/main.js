@@ -7,20 +7,7 @@ function changeView(view) {
   calendar.changeView(view);
 }
 
-$('#set form').submit(function(e) {
-	let day = $('select[name="day"]').val();
-	let month = $('select[name="month"]').val();
-	let year = $('select[name="year"]').val();
-	if(( year == 2016 && month < 7 ) || ( year == 2017 && month > 4 )){
-		alert("The month you selected is not available for the year you selected");
-	}let currentView = 'year';
 
-const calendar = new Calendar();
-const form = new Form();
-
-function changeView(view) {
-  calendar.changeView(view);
-}
 
 $('#set form').submit(function(e) {
 	let day = $('select[name="day"]').val();
