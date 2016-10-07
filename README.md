@@ -40,8 +40,8 @@ It is currently maintained by [Yehan Li][13], [Mac Crider][14], [Katie Hrenchir]
 		- [x] weekly
 		- [x] bi weekly
 		- [x] monthly
-		- [x] monthly by date
-		- [x] weekly by day of the week
+		- [ ] monthly by date
+		- [ ] weekly by day of the week
 	- [ ] Events within time frames
 		- [x] events connected to time frame
 		- [ ] overlapping events

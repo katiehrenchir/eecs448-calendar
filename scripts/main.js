@@ -54,6 +54,8 @@ $('#create form').submit(function(e) {
   var Ejump=0;
   var start=0;
   var end=0;
+
+	//recurring weekly
   if(reWeekly==1)
   {
 	 while(endDate.getMonth()!="5"&& endDate.getFullYear()<2018)
@@ -134,6 +136,8 @@ $('#create form').submit(function(e) {
 	  }
 	  
   }
+
+	//recurring bi weekly
   else if(reWeekly==2)
  {
  	while(endDate.getMonth()!="5"&& endDate.getFullYear()<2018)
@@ -188,10 +192,45 @@ $('#create form').submit(function(e) {
 	  
 		  
  }
+
+//recurring monthly (quad weekly?) 
+//ex. the first monday of every month
  else if(reWeekly==3)
  {
-	 
+	let date = {
+			"start": $('input[name="startDate"]').val(),
+			"end": $('input[name="endDate"]').val(),
+	};
+
+	let time = {
+	"start": $('input[name="startTime"]').val(),
+	"end": $('input[name="endTime"]').val()
+	};
+	alert( dayOfWeek( $('input[name="startDate"]').val() ) );
+
+
+	//get the day of the week
+		
+
+	 //if( month <= number of months) {
+		//find the start day of this month
+
+
+		//add the weeks 
+		//ex date = 7 * number of weeks
+
+		//add days until it's the right day of the week
+		//check if the date acquired is over the number of days in this month
+		//if so, print an error message to the user
+
+
+		//create the event
+		form.createEvent(eventName, eventDesc, date, time);
+
+	//}
  }
+
+//not recurring based on weeks
  else
  {
  	alert("reWeekly=0!");
@@ -208,6 +247,15 @@ $('#create form').submit(function(e) {
 	  form.createEvent(eventName, eventDesc, date, time);
  }
 });
+
+//determines the day of the week for a date passed in
+function dayOfWeek(date){
+	//parses the month and date
+	var month = date.substring(5,7);
+	var day = date.substring(8,10);
+ 
+}
+
 
 function editEvent(id) {
   $('#edit').modal('toggle');
