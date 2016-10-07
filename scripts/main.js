@@ -46,6 +46,8 @@ $('#create form').submit(function(e) {
   var endDate = parseDate($('input[name="endDate"]').val());
   var startDate = parseDate($('input[name="startDate"]').val());
   var reWeekly = $('select[name="reWeekly"]').val();
+  var reWeek= $('select[name="reWeek"]').val();
+  var reDate= $('select[name="reDate"]').val();
   var diffTime= Math.abs(endDate.getDate() - startDate.getDate());
   var diffDays= Math.ceil(diffTime/(1000*3600*24));
   var Sremain=0;
@@ -56,8 +58,109 @@ $('#create form').submit(function(e) {
   var end=0;
 
 	//recurring weekly
+if(reDate!=0)
+  {  
+  	  start = startDate.toISOString().substring(0, 10);
+	  end= endDate.toISOString().substring(0, 10);
+	  let date = {
+					start,
+					end
+	  };
+	  let time = {
+		"start": $('input[name="startTime"]').val(),
+		"end": $('input[name="endTime"]').val()
+	  };
+	  form.createEvent(eventName, eventDesc, date, time);
+  	while(endDate.getFullYear()<2018)
+  	{
+  	 
+  		if(startDate.getMonth()+1==0 ||startDate.getMonth()+1==2 || startDate.getMonth()+1==4 || startDate.getMonth()+1==6 || startDate.getMonth()+1==7 ||startDate.getMonth()+1==9 || startDate.getMonth()+1==11)
+  		{
+  			alert("31 days");
+			startDate.setMonth(startDate.getMonth()+1);
+			endDate.setMonth(endDate.getMonth()+1);
+			startDate.setDate(reDate);
+			endDate.setDate(reDate);		
+			   start = startDate.toISOString().substring(0, 10);
+				end = endDate.toISOString().substring(0, 10);
+			  let date = {
+					start,
+					end
+			  };
+			  let time = {
+				"start": $('input[name="startTime"]').val(),
+				"end": $('input[name="endTime"]').val()
+			  };
+			  form.createEvent(eventName, eventDesc, date, time);
+		}
+		else if(startDate.getMonth()+1==1) 
+		{
+			if(reDate>28)
+			{
+				startDate.setMonth(startDate.getMonth()+1);
+				endDate.setMonth(endDate.getMonth()+1);	
+			}
+			else 
+			{
+			startDate.setMonth(startDate.getMonth()+1);
+			endDate.setMonth(endDate.getMonth()+1);	
+			startDate.setDate(reDate);
+			endDate.setDate(reDate);		
+			   start = startDate.toISOString().substring(0, 10);
+				end = endDate.toISOString().substring(0, 10);
+			  let date = {
+					start,
+					end
+			  };
+			  let time = {
+				"start": $('input[name="startTime"]').val(),
+				"end": $('input[name="endTime"]').val()
+			  };
+			  form.createEvent(eventName, eventDesc, date, time);
+			}
+		}
+		else
+		{
+			
+			if(reDate>30)
+			{
+				startDate.setMonth(startDate.getMonth()+1);
+				endDate.setMonth(endDate.getMonth()+1);	
+			}
+			else
+		   {
+				startDate.setMonth(startDate.getMonth()+1);
+				endDate.setMonth(endDate.getMonth()+1);
+				startDate.setDate(reDate);
+				endDate.setDate(reDate);			
+			 	  start = startDate.toISOString().substring(0, 10);
+					end = endDate.toISOString().substring(0, 10);
+			 	 let date = {
+						start,
+						end
+				  };
+				  let time = {
+					"start": $('input[name="startTime"]').val(),
+					"end": $('input[name="endTime"]').val()
+			 	 };
+			  form.createEvent(eventName, eventDesc, date, time);
+		   }
+	}
+ }
+}
   if(reWeekly==1)
   {
+	  start = startDate.toISOString().substring(0, 10);
+	  end= endDate.toISOString().substring(0, 10);
+	  let date = {
+					start,
+					end
+	  };
+	  let time = {
+		"start": $('input[name="startTime"]').val(),
+		"end": $('input[name="endTime"]').val()
+	  };
+	  form.createEvent(eventName, eventDesc, date, time);
 	 while(endDate.getMonth()!="5"&& endDate.getFullYear()<2018)
 	 {
 		  if(endDate.getDate() + 7 + diffDays <= daysInMonth(endDate.getMonth(),endDate.getFullYear()))
@@ -140,6 +243,17 @@ $('#create form').submit(function(e) {
 	//recurring bi weekly
   else if(reWeekly==2)
  {
+	 start = startDate.toISOString().substring(0, 10);
+	  end= endDate.toISOString().substring(0, 10);
+	  let date = {
+					start,
+					end
+	  };
+	  let time = {
+		"start": $('input[name="startTime"]').val(),
+		"end": $('input[name="endTime"]').val()
+	  };
+	  form.createEvent(eventName, eventDesc, date, time);
  	while(endDate.getMonth()!="5"&& endDate.getFullYear()<2018)
 	  {
 	  	
