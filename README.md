@@ -53,6 +53,7 @@ It is currently maintained by [Yehan Li][13], [Mac Crider][14], [Katie Hrenchir]
 	- [x] [Use case diagram][17]
 	- [ ] State diagram
 	- [ ] Class diagram
+- [ ] [Powerpoint presentation][18]
  
 
 
@@ -73,3 +74,4 @@ It is currently maintained by [Yehan Li][13], [Mac Crider][14], [Katie Hrenchir]
 [15]: https://github.com/katiehrenchir
 [16]: https://github.com/athoma35
 [17]: https://www.gliffy.com/go/share/sxeeietn5l7dskj98j8c
+[18]: https://docs.google.com/presentation/d/1GBB32DcERaA_XULjjFI0zDkwHPyXx6EWmfzPKJUnaTo/edit?usp=sharing
