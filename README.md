@@ -1,7 +1,7 @@
 # Calendar
 Class Project: A calendar web app for the 2016-2017 academic year
 
-The goal of this project is to create a calendar for the 2016-2017 academic year. Users are allowed to view the calendar in years, months, weeks, or days. Events can also be created and modify as they wish.
+The goal of this project is to create a calendar for the 2016-2017 academic year. Users are able to view the calendar in years, months, weeks, or days. Events can also be created and modified as they wish, with several options available for recurring events.
 
 ## The Team
 This project was created by [Sharynne Azhar][1], [Erin Coots][2], [Ashli Mosiman][3], and [Parthvi Patel][4].
@@ -37,20 +37,20 @@ It is currently maintained by [Yehan Li][13], [Mac Crider][14], [Katie Hrenchir]
 
 - [ ] New functionalities 
 	- [x] Multi-day events
-	- [ ] Recurring events
+	- [x] Recurring events
 		- [x] weekly
 		- [x] bi weekly
 		- [x] monthly
 		- [x] monthly by date
 		- [x] weekly by day of the week
-		- [ ] move code to separate file (main is getting very cluttered)
+		- [ ] move recurring event code to separate file (main is getting very cluttered)
 	- [ ] Events within time frames
 		- [x] events connected to time frame
 		- [ ] overlapping events noticeable
 		- [ ] events ordered by time in one-day view
 
 - [ ] UML Diagrams
-	- [ ] Use case diagram
+	- [x] [Use case diagram][17]
 	- [ ] State diagram
 	- [ ] Class diagram
  
@@ -72,3 +72,4 @@ It is currently maintained by [Yehan Li][13], [Mac Crider][14], [Katie Hrenchir]
 [14]: https://github.com/cridermac
 [15]: https://github.com/katiehrenchir
 [16]: https://github.com/athoma35
+[17]: https://www.gliffy.com/go/share/sxeeietn5l7dskj98j8c
