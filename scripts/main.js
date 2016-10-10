@@ -1,5 +1,6 @@
 let currentView = 'year';
 
+
 const calendar = new Calendar();
 const form = new Form();
 
@@ -320,7 +321,7 @@ if(reDate!=0)
 	"start": $('input[name="startTime"]').val(),
 	"end": $('input[name="endTime"]').val()
 	};
-	alert( dayOfWeek( $('input[name="startDate"]').val() ) );
+	dayOfWeek( $('input[name="startDate"]').val() ) ;
 
 
 	//get the day of the week
@@ -365,8 +366,26 @@ if(reDate!=0)
 //determines the day of the week for a date passed in
 function dayOfWeek(date){
 	//parses the month and date
-	var month = date.substring(5,7);
 	var day = date.substring(8,10);
+
+	//compares the month number to the index of the months array
+	//that stores the info for this particular month in the calendarInfo.js
+	var month = date.substring(5,7);
+	var monthIndex;
+	for(var i = 0; i <10; i++) {
+		if(months[i].numeric == month){
+			monthIndex = i;
+		}
+	}
+
+	//gets the week number
+	// ex October 12 is the second Wednesday in October
+	var weekNum = Math.ceil(day/7);
+
+	//gets the day of the week of the first day of the month, uses it to 
+	//find the day of the week for the current date
+	var dayOfWeekOfFirstDay = months[monthIndex].firstDay;
+	var dayOfTheWeek = (day - (weekNum * 7) ) + dayOfWeekOfFirstDay -1;
  
 }
 

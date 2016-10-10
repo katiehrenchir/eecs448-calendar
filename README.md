@@ -29,10 +29,10 @@ It is currently maintained by [Yehan Li][13], [Mac Crider][14], [Katie Hrenchir]
 ## TO DO
 ### See Google Doc for description of each task
 - [ ] Bugs
-	- [ ] Prev and Next Buttons in Day view
-	- [ ] Set today
-	- [ ] Edit event  
-	- [ ] Create event
+	- [ ] Prev and Next Buttons in Day view default to May
+	- [ ] Set today has no effect
+	- [ ] Edit event does not populate event info 
+	- [ ] New recurring events don't appear on Upcoming Events view
 
 - [ ] New functionalities 
 	- [ ] Multi-day events
@@ -45,6 +45,10 @@ It is currently maintained by [Yehan Li][13], [Mac Crider][14], [Katie Hrenchir]
 	- [ ] Events within time frames
 		- [x] events connected to time frame
 		- [ ] overlapping events
+- [ ] UML Diagrams
+	- [ ] Use case diagram
+	- [ ] State diagram
+	- [ ] Class diagram
  
 
 
