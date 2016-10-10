@@ -58,7 +58,10 @@ $('#create form').submit(function(e) {
   var start=0;
   var end=0;
 
-	//recurring weekly
+
+
+
+//recurring weekly, biweekly, or monthly
 if(reDate!=0)
   {  
   	  start = startDate.toISOString().substring(0, 10);
@@ -345,7 +348,6 @@ if(reDate!=0)
 		//find the day of the week that the month starts on
 		startDayOfWeek = months[monthIndex].firstDay;
 		
-		alert(dayOfTheWeek);
 		//finds the week multiplier
 		if(dayOfTheWeek >= startDayOfWeek ) {
 			multiplier = recurWeekNum -1;
@@ -353,16 +355,13 @@ if(reDate!=0)
 			multiplier = recurWeekNum;
 		}	
 
-		alert(dayOfTheWeek);
 		//calculates the desired date
 		desiredDate= dayOfTheWeek + 1 - startDayOfWeek + (multiplier * 7);
 		desiredEndDate = desiredDate - recurDayDiff;
-		alert( months[monthIndex].month + desiredDate);
-		//alert(desiredDate > months[monthIndex].days );
 
 		//if date impossible, print error message, otherwise add event
 		if(desiredDate > months[monthIndex].days) {
-			alert(dayOfTheWeek);
+
 			var dayOfWeekName;
 			if(dayOfTheWeek == 0 ) { dayOfWeekName="Sundays";
 			} else if( dayOfTheWeek == 1 ) { dayOfWeekName="Mondays";
@@ -393,6 +392,108 @@ if(reDate!=0)
 	}
  }
 
+//recurring by a day of the week
+else if(reWeek != 7) {
+
+	let time = {
+		"start": $('input[name="startTime"]').val(),
+		"end": $('input[name="endTime"]').val()
+	};
+
+	//get the current day of the week based on start date
+	var dayOfTheWeek1 = dayOfWeek( $('input[name="startDate"]').val() ) ;
+
+	//get the date
+	var curDay = ( $('input[name="startDate"]').val() ) .substring(8,10);
+	var expectedDiff = ( $('input[name="startDate"]').val() ) .substring(8,10) - curDay;
+
+	//gets the month index from the calendarInfo.js array
+	var curMonth = ($('input[name="startDate"]').val()).substring(5,7);
+	var monthIndex1;
+
+	var reWeekOptions = document.getElementById("reWeek1");
+	var dayArray = [];
+	for ( var i = 0; i < 8; i++) {
+		if(reWeekOptions.options[i].selected) {
+			dayArray.push(reWeekOptions.options[i].value);
+		}
+	}
+
+	var desiredDayOfWeek;
+	var daysAdded;
+	var newDate;
+	var first;
+	var startD, endD;
+	for( var k = 0; k < dayArray.length; k++) {
+		desiredDayOfWeek = dayArray[k];
+		first = true;
+		//console.log("-----desired day: " + desiredDayOfWeek);
+		//console.log("day array length: " + dayArray.length);
+
+		curDay = ( $('input[name="startDate"]').val() ) .substring(8,10);
+		curMonth = ($('input[name="startDate"]').val()).substring(5,7);
+		for(var i = 0; i <10; i++) {
+			if(months[i].numeric == curMonth){
+				monthIndex1 = i;
+			}
+		}
+
+		dayOfTheWeek1 = dayOfWeek( $('input[name="startDate"]').val() ) ;
+		//console.log("current day " + curDay);
+		//console.log("current month" + curMonth);
+		//console.log(dayOfTheWeek1);
+
+		//queues up the next date on the right day of the week
+		newDate = parseInt(curDay);
+		if(desiredDayOfWeek > dayOfTheWeek1){
+			daysAdded =  desiredDayOfWeek - dayOfTheWeek1;
+		} else if(desiredDayOfWeek < dayOfTheWeek1) {
+			daysAdded =  desiredDayOfWeek - dayOfTheWeek1 + 7;
+		} else if(desiredDayOfWeek == dayOfTheWeek1) {
+			daysAdded = 0;
+		}
+		newDate += daysAdded;
+
+		//determines all the dates to be added
+		for(var j =0; monthIndex1 <=9; j++ ){
+
+			var year1;
+			if(monthIndex1 > 5 ){ year1=2017;
+			} else { year1=2016;	}
+
+			if(first){
+				startD = year1 +"-"+months[monthIndex1].numeric+"-"+newDate;
+				endD = year1 +"-"+months[monthIndex1].numeric+"-"+(parseInt(newDate) + expectedDiff);
+				//console.log(startD);
+				addEvent( eventName, eventDesc, startD, endD, time);
+				first = false;
+			}
+
+			newDate += 7; 
+
+			if(newDate <= months[monthIndex1].days ) {
+				startD = year1 +"-"+months[monthIndex1].numeric+"-"+newDate;
+				endD = year1 +"-"+months[monthIndex1].numeric+"-"+(parseInt(newDate) + expectedDiff);
+				//console.log(startD);
+				addEvent( eventName, eventDesc, startD, endD, time);
+				//add date
+
+			} else  {
+				//console.log("moving to new month");
+				newDate -= months[monthIndex1].days;
+				//console.log("new date: " + newDate);
+				monthIndex1++;
+				if(monthIndex1 != 10 ) {
+					startD = year1 +"-"+months[monthIndex1].numeric+"-"+newDate;
+					endD = year1 +"-"+months[monthIndex1].numeric+"-"+(parseInt(newDate) + expectedDiff);
+					addEvent( eventName, eventDesc, startD, endD, time);
+					//console.log(startD);
+				}						
+			}
+		}
+	}
+}
+
 //not recurring based on weeks
  else
  {
@@ -408,14 +509,25 @@ if(reDate!=0)
 		"end": $('input[name="endTime"]').val()
 	  };
 	  form.createEvent(eventName, eventDesc, date, time);
+
  }
 });
+
+function addEvent(name, desc, date1, date2, time){
+
+	let date = {
+			"start": date1,
+			"end": date2
+	};
+
+			form.createEvent(name, desc, date, time);
+
+}
 
 //determines the day of the week for a date passed in
 function dayOfWeek(date){
 	//parses the month and date
 	var day = date.substring(8,10);
-	alert(day + "is the day");
 
 	//compares the month number to the index of the months array
 	//that stores the info for this particular month in the calendarInfo.js
@@ -426,18 +538,14 @@ function dayOfWeek(date){
 			monthIndex = i;
 		}
 	}
-	alert(months[monthIndex].month+ "THIS IS THE MONTH");
 
 	//gets the week number
 	// ex October 12 is the second Wednesday in October
 	var weekNum = Math.ceil(day/7);
-	alert(weekNum + " week number ");
 
 	//gets the day of the week of the first day of the month, uses it to 
 	//find the day of the week for the current date
 	var dayOfWeekOfFirstDay = months[monthIndex].firstDay;
-	alert(dayOfWeekOfFirstDay + " day of week of first day");
-
 
 	if( (day - (weekNum-1)*7 - (7-dayOfWeekOfFirstDay) ) <= 0 ) {
 		multip = weekNum -1;
@@ -445,8 +553,6 @@ function dayOfWeek(date){
 		multip = weekNum;
 	}
 	var dayOfTheWeek = (day - (multip * 7) ) + dayOfWeekOfFirstDay -1;
-
-	alert("the day of the week is " + dayOfTheWeek);
 
 	return dayOfTheWeek;
  

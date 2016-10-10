@@ -49,7 +49,7 @@ const months = [
   }, {
     'month': 'May',
     'numeric': 5,
-    'days': 30,
+    'days': 31,
     'firstDay': 1
   }
 ];

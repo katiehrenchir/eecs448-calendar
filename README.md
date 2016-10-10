@@ -5,6 +5,7 @@ The goal of this project is to create a calendar for the 2016-2017 academic year
 
 ## The Team
 This project was created by [Sharynne Azhar][1], [Erin Coots][2], [Ashli Mosiman][3], and [Parthvi Patel][4].
+
 It is currently maintained by [Yehan Li][13], [Mac Crider][14], [Katie Hrenchir][15], and [Andrew Thomas][16].
 
 ## Contributing
@@ -35,16 +36,18 @@ It is currently maintained by [Yehan Li][13], [Mac Crider][14], [Katie Hrenchir]
 	- [ ] New recurring events don't appear on Upcoming Events view
 
 - [ ] New functionalities 
-	- [ ] Multi-day events
+	- [x] Multi-day events
 	- [ ] Recurring events
 		- [x] weekly
 		- [x] bi weekly
 		- [x] monthly
 		- [x] monthly by date
-		- [ ] weekly by day of the week
+		- [x] weekly by day of the week
+		- [ ] move code to separate file (main is getting very cluttered)
 	- [ ] Events within time frames
 		- [x] events connected to time frame
-		- [ ] overlapping events
+		- [ ] overlapping events noticeable
+		- [ ] events ordered by time in one-day view
 
 - [ ] UML Diagrams
 	- [ ] Use case diagram
