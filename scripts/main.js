@@ -312,37 +312,85 @@ if(reDate!=0)
 //ex. the first monday of every month
  else if(reWeekly==3)
  {
-	let date = {
-			"start": $('input[name="startDate"]').val(),
-			"end": $('input[name="endDate"]').val(),
-	};
-
 	let time = {
 	"start": $('input[name="startTime"]').val(),
 	"end": $('input[name="endTime"]').val()
 	};
-	dayOfWeek( $('input[name="startDate"]').val() ) ;
 
+	//get the desired day of the week on which the event will be repeated
+	var dayOfTheWeek = dayOfWeek( $('input[name="startDate"]').val() ) ;
+	alert(dayOfTheWeek);
 
-	//get the day of the week
+	//get the day of the week & week number we wish to repeat on
+	//also computes the difference between the start day and end day (for multi day events)
+	var recurDay = ( $('input[name="startDate"]').val() ) .substring(8,10);
+	var recurDayDiff = ( $('input[name="startDate"]').val() ) .substring(8,10) - recurDay;
+	var recurWeekNum = Math.ceil(recurDay/7);
+
+	//gets the month index from the calendarInfo.js array
+	var recurMonth = ($('input[name="startDate"]').val()).substring(5,7);
+	var monthIndex;
+	for(var i = 0; i <10; i++) {
+		if(months[i].numeric == recurMonth){
+			monthIndex = i;
+		}
+	}
+
+	var startDayOfWeek;
+	var multiplier;
+	var desiredDate;
+	var desiredEndDate;
+	for(monthIndex; monthIndex <= 9; monthIndex++) {
+
+		//find the day of the week that the month starts on
+		startDayOfWeek = months[monthIndex].firstDay;
 		
+		alert(dayOfTheWeek);
+		//finds the week multiplier
+		if(dayOfTheWeek >= startDayOfWeek ) {
+			multiplier = recurWeekNum -1;
+		} else {
+			multiplier = recurWeekNum;
+		}	
 
-	 //if( month <= number of months) {
-		//find the start day of this month
+		alert(dayOfTheWeek);
+		//calculates the desired date
+		desiredDate= dayOfTheWeek + 1 - startDayOfWeek + (multiplier * 7);
+		desiredEndDate = desiredDate - recurDayDiff;
+		alert( months[monthIndex].month + desiredDate);
+		//alert(desiredDate > months[monthIndex].days );
 
+		//if date impossible, print error message, otherwise add event
+		if(desiredDate > months[monthIndex].days) {
+			alert(dayOfTheWeek);
+			var dayOfWeekName;
+			if(dayOfTheWeek == 0 ) { dayOfWeekName="Sundays";
+			} else if( dayOfTheWeek == 1 ) { dayOfWeekName="Mondays";
+			} else if( dayOfTheWeek == 2 ) { dayOfWeekName="Tuesdays";
+			} else if( dayOfTheWeek == 3 ) { dayOfWeekName="Wednesdays";
+			} else if( dayOfTheWeek == 4 ) { dayOfWeekName="Thursdays";
+			} else if( dayOfTheWeek == 5 ) { dayOfWeekName="Fridays";
+			} else if( dayOfTheWeek == 6 ) { dayOfWeekName="Saturdays"; }
 
-		//add the weeks 
-		//ex date = 7 * number of weeks
+			alert("The pattern you have requested is not fully available because " + 
+					"there are fewer than " + recurWeekNum + " " + dayOfWeekName + 
+					" in " + months[monthIndex].month);
 
-		//add days until it's the right day of the week
-		//check if the date acquired is over the number of days in this month
-		//if so, print an error message to the user
+		} else {	
+			//change the date
+			var year;
+			if(monthIndex > 5 ){ year=2017;
+			} else { year=2016;	}
 
-
-		//create the event
-		form.createEvent(eventName, eventDesc, date, time);
-
-	//}
+			let date = {
+					"start": year+"-"+months[monthIndex].numeric+"-"+desiredDate,
+					"end": year+"-"+months[monthIndex].numeric+"-"+desiredEndDate,
+			};
+		
+			//create the event
+			form.createEvent(eventName, eventDesc, date, time);
+		}
+	}
  }
 
 //not recurring based on weeks
@@ -367,6 +415,7 @@ if(reDate!=0)
 function dayOfWeek(date){
 	//parses the month and date
 	var day = date.substring(8,10);
+	alert(day + "is the day");
 
 	//compares the month number to the index of the months array
 	//that stores the info for this particular month in the calendarInfo.js
@@ -377,15 +426,29 @@ function dayOfWeek(date){
 			monthIndex = i;
 		}
 	}
+	alert(months[monthIndex].month+ "THIS IS THE MONTH");
 
 	//gets the week number
 	// ex October 12 is the second Wednesday in October
 	var weekNum = Math.ceil(day/7);
+	alert(weekNum + " week number ");
 
 	//gets the day of the week of the first day of the month, uses it to 
 	//find the day of the week for the current date
 	var dayOfWeekOfFirstDay = months[monthIndex].firstDay;
-	var dayOfTheWeek = (day - (weekNum * 7) ) + dayOfWeekOfFirstDay -1;
+	alert(dayOfWeekOfFirstDay + " day of week of first day");
+
+
+	if( (day - (weekNum-1)*7 - (7-dayOfWeekOfFirstDay) ) <= 0 ) {
+		multip = weekNum -1;
+	} else {
+		multip = weekNum;
+	}
+	var dayOfTheWeek = (day - (multip * 7) ) + dayOfWeekOfFirstDay -1;
+
+	alert("the day of the week is " + dayOfTheWeek);
+
+	return dayOfTheWeek;
  
 }
 

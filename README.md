@@ -40,11 +40,12 @@ It is currently maintained by [Yehan Li][13], [Mac Crider][14], [Katie Hrenchir]
 		- [x] weekly
 		- [x] bi weekly
 		- [x] monthly
-		- [ ] monthly by date
+		- [x] monthly by date
 		- [ ] weekly by day of the week
 	- [ ] Events within time frames
 		- [x] events connected to time frame
 		- [ ] overlapping events
+
 - [ ] UML Diagrams
 	- [ ] Use case diagram
 	- [ ] State diagram
