@@ -10,6 +10,7 @@
 <body>
   <h2>Response:</h2>
   <pre id="response"></pre>
+  <pre id="dateResponse"></pre>
 
   <script>
     //----------------------------------------------------------------------
@@ -25,6 +26,20 @@
         }
       });
     });
+
+  /*  $(function()
+      {
+        $.ajax(
+          {
+            url: 'datebSetup.php',
+            data: '',
+            dataType: 'json',
+            success: function(data)
+            {
+              $('#dateResponse').html(JSON.stringify(data, null, ' '));
+            }
+          });
+      });*/
   </script>
 </body>
 </html>

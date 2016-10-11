@@ -1,4 +1,18 @@
-let currentDate = new Date();
+var currentDate = new Date();
+
+/*function setCurrDate()
+{
+  $.ajax(
+    {
+      url: 'api/datebSetup.php',
+      data: '',
+      dataType: 'json',
+      success: function(dateData)
+      {
+        alert(dateData.toString());
+      }
+    });
+}*/
 
 const months = [
   {
