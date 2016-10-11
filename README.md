@@ -3,6 +3,8 @@ Class Project: A calendar web app for the 2016-2017 academic year
 
 The goal of this project is to create a calendar for the 2016-2017 academic year. Users are able to view the calendar in years, months, weeks, or days. Events can also be created and modified as they wish, with several options available for recurring events.
 
+[Link to project][20]
+
 ## The Team
 This project was created by [Sharynne Azhar][1], [Erin Coots][2], [Ashli Mosiman][3], and [Parthvi Patel][4].
 
@@ -51,9 +53,9 @@ It is currently maintained by [Yehan Li][13], [Mac Crider][14], [Katie Hrenchir]
 
 - [ ] UML Diagrams
 	- [x] [Use case diagram][17]
-	- [x] [State diagram][19]
-	- [ ] Class diagram
-- [ ] [Powerpoint presentation][18]
+	- [ ] State diagram
+	- [x] [Class diagram][18]
+- [ ] [Powerpoint presentation][19]
  
 
 
@@ -65,7 +67,7 @@ It is currently maintained by [Yehan Li][13], [Mac Crider][14], [Katie Hrenchir]
 [6]: http://momentjs.com/
 [7]: http://javascriptissexy.com/oop-in-javascript-what-you-need-to-know/
 [8]: https://www.tutorialspoint.com/php/php_and_mysql.htm
-[9]: http://people.eecs.ku.edu/~sazhar/eecs448-calendar/documentation/jsdoc/index.html
+[9]: http://people.eecs.ku.edu/~khrenchi/eecs448-calendar/documentation/jsdoc/index.html
 [10]: https://nodejs.org/en/
 [11]: http://usejsdoc.org/index.html
 [12]: http://people.eecs.ku.edu/~sazhar/eecs448-calendar/api/client.php
@@ -74,5 +76,7 @@ It is currently maintained by [Yehan Li][13], [Mac Crider][14], [Katie Hrenchir]
 [15]: https://github.com/katiehrenchir
 [16]: https://github.com/athoma35
 [17]: https://www.gliffy.com/go/share/sxeeietn5l7dskj98j8c
-[18]: https://docs.google.com/presentation/d/1GBB32DcERaA_XULjjFI0zDkwHPyXx6EWmfzPKJUnaTo/edit?usp=sharing
-[19]: https://www.gliffy.com/go/html5/11275407
+[18]: https://www.gliffy.com/go/share/sysei22t05aoidstaqd8
+[19]: https://docs.google.com/presentation/d/1GBB32DcERaA_XULjjFI0zDkwHPyXx6EWmfzPKJUnaTo/edit?usp=sharing
+[20]: https://people.eecs.ku.edu/~khrenchi/eecs448-calendar/index.html
+
