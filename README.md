@@ -53,7 +53,7 @@ It is currently maintained by [Yehan Li][13], [Mac Crider][14], [Katie Hrenchir]
 
 - [ ] UML Diagrams
 	- [x] [Use case diagram][17]
-	- [x] State diagram [21]
+	- [x] [State diagram] [21]
 	- [x] [Class diagram][18]
 - [ ] [Powerpoint presentation][19]
  
