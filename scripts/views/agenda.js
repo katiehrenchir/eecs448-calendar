@@ -15,7 +15,7 @@ class Agenda {
       success: function(data) {
         $.each(data, function(index, event) {
           let currDate = currentDate.toISOString().slice(0,10);
-          if (currDate >= event.start_date) {
+          if (currDate <= event.start_date) {
             $('#agenda .list-group').append(
               '<li id="' + event.event_id + '" class="list-group-item">' +
               '<div class="">' + event.event_name + '</div>' +
