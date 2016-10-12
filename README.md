@@ -53,7 +53,7 @@ It is currently maintained by [Yehan Li][13], [Mac Crider][14], [Katie Hrenchir]
 
 - [ ] UML Diagrams
 	- [x] [Use case diagram][17]
-	- [ ] State diagram
+	- [x] State diagram [21]
 	- [x] [Class diagram][18]
 - [ ] [Powerpoint presentation][19]
  
@@ -79,4 +79,4 @@ It is currently maintained by [Yehan Li][13], [Mac Crider][14], [Katie Hrenchir]
 [18]: https://www.gliffy.com/go/share/sysei22t05aoidstaqd8
 [19]: https://docs.google.com/presentation/d/1GBB32DcERaA_XULjjFI0zDkwHPyXx6EWmfzPKJUnaTo/edit?usp=sharing
 [20]: https://people.eecs.ku.edu/~khrenchi/eecs448-calendar/index.html
-
+[21]: https://www.gliffy.com/go/html5/11275407
